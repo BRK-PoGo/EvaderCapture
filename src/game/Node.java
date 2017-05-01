@@ -1,21 +1,47 @@
 package game;
 
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 public class Node {
-	public String value = "";
-	public Rectangle rectangle;
+	private String value = "";//What's in this node? Default, nothing.
+	public Rectangle rectangle; //coordinates of the node + dimension
+	private ArrayList<Node> activeNeighbors = new ArrayList<Node>();
+	private ArrayList<Node> neighbors = new ArrayList<Node>();
 
 
-	public void addAdjacentNode(Node node) {
-		// TODO Auto-generated method stub
+	public void addNeighbor(Node node) {
+		if(node !=null){
+			neighbors.add(node);
+			activeNeighbors.add(node);
+		}else
+			System.err.println("NULL NODE");
 		
 	}
-
-
-	public void deleteAllAdjacentNodes() {
-		// TODO Auto-generated method stub
+	public void removeAllNeighbors() {
+		ArrayList<Node> all = new ArrayList<Node>();
+		for(Node node:activeNeighbors){
+			all.add(node);
+		}activeNeighbors.removeAll(all);
 		
 	}
-
+	public void restoreNeighbors() {
+		activeNeighbors = new ArrayList<Node>();
+		for(Node node:neighbors){
+			activeNeighbors.add(node);
+		}
+		
+	}
+	public ArrayList<Node> getNeighbors(){
+		return neighbors;
+	}
+	public ArrayList<Node> getActiveNeighbors() {
+		return activeNeighbors;
+	}
+	public void setValue(String string) {
+		value = string;
+	}public String getValue(){
+		return value;
+		
+	}
 }

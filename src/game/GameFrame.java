@@ -28,6 +28,7 @@ import java.awt.Insets;
 import java.awt.GridLayout;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
+import java.awt.FocusTraversalPolicy;
 
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
@@ -151,7 +152,7 @@ public class GameFrame extends JFrame {
 					.addContainerGap())
 		);
 		speedControl.setLayout(gl_speedControl);
-		speedControl.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblGameSpeed, lblX_1, lblX, lblX_3, lblX_2, slider, btnNewButton, btnX}));
+		speedControl.setFocusTraversalPolicy(new FocusTraversalPolicy(new Component[]{lblGameSpeed, lblX_1, lblX, lblX_3, lblX_2, slider, btnNewButton, btnX}));
 		}
 	private void makeAIMenu(JSplitPane splitPane) {
 		AIMenu = new JPanel();

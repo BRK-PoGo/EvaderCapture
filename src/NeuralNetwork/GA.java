@@ -87,11 +87,12 @@ public class GA {
 				if(distance(n,rep.get(i))<=Dt){
 					species.get(i).add(n);
 					break;
+				}else if(i>=rep.size()-1){
+					rep.add(n);
+					species.add(new ArrayList<Network>());
+					species.get(species.size()-1).add(n);
 				}
-					
 			}
-			rep.add(n);
-			species.get(rep.size()-1).add(n);
 		}
 	}
 }

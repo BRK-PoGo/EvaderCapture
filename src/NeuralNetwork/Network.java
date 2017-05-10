@@ -1,21 +1,33 @@
 package NeuralNetwork;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.wb.swing.Tools;
 
 public class Network {
-	ArrayList<Gene> genome = new ArrayList<Gene>();
-	ArrayList<Node> net;//net[i] is Neuron i.
-	ArrayList<Node> inputNodes;
-	ArrayList<Node> outputNodes;
+	private ArrayList<Gene> genome = new ArrayList<Gene>();
+	private ArrayList<Node> net;//net[i] is Neuron i.
+	private ArrayList<Node> inputNodes;
+	private ArrayList<Node> outputNodes;
 	private int inputs;//input layer size, inputs nodes are from net.get(0) to net.get(inputs).
 	private int outputs;//output layer size, output nodes are from net.get(inputs) to net.get(inputs + outputs) 
-	public Network(ArrayList<Gene> genome){
-		this.genome = genome;
+	public Network(int inputLayers,int outputLayers){
+		//randomly generated a basic Network
+		inputs = inputLayers;
+		outputs = outputLayers;
+		int k =0;
+		for(int i=0;i<inputs;i++){
+			for(int j=inputs; j<inputs+outputs;j++){
+				k++;
+				genome.add(new Gene(i,j,2*(Math.random()-0.5),k));
+			}
+		}
 		genomeDecoding();
 		
 	}
@@ -40,8 +52,8 @@ public class Network {
 			for(int i=0;i<s;i++){
 				line =  br.readLine();
 				splited = line.split("\\s+");
-				Gene g = new Gene(Integer.parseInt(splited[0]),Integer.parseInt(splited[1]),Integer.parseInt(splited[2]),Double.parseDouble(splited[3]));
-				if(splited[4].equals("0")){
+				Gene g = new Gene(Integer.parseInt(splited[0]),Integer.parseInt(splited[1]),Double.parseDouble(splited[2]),Integer.parseInt(splited[3]));
+				if(splited[4].equals("false")){
 					g.enableFlip();
 				}
 				genome.add(g);
@@ -136,5 +148,49 @@ public class Network {
 		return OBJ_best;
 		
 	}
-	
+	public void write(String file) {
+		BufferedWriter writer = null;
+        try {
+            //create a temporary file
+            String str = "./src/NeuralNetwork/NNFiles/"+file+".txt";
+            File logFile = new File(str);
+
+            // This will output the full path where the file will be written to...
+            //System.out.println(logFile.getCanonicalPath());
+
+            writer = new BufferedWriter(new FileWriter(logFile));
+            //write genes:
+            writer.write(genome.size()+" "+inputNodes.size()+" "+outputNodes.size());
+            for(int i=0;i<genome.size();i++){
+            	writer.newLine();
+            	writer.write(genome.get(i).toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Close the writer regardless of what happens...
+                writer.close();
+            } catch (Exception e) {
+            }
+        }
+	}
+	public ArrayList<Gene> getGenome() {
+		return genome;
+	}
+	public ArrayList<Node> getNet() {
+		return net;
+	}
+	public ArrayList<Node> getInputNodes() {
+		return inputNodes;
+	}
+	public ArrayList<Node> getOutputNodes() {
+		return outputNodes;
+	}
+	public int getInputs() {
+		return inputs;
+	}
+	public int getOutputs() {
+		return outputs;
+	}
 }

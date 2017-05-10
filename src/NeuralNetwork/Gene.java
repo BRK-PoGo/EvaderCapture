@@ -6,7 +6,7 @@ public class Gene {
 	private int outputNode;
 	private boolean enabled = true;
 	private int innovation;
-	public Gene(int inputNode, int outputNode, int innovation, double weight) {
+	public Gene(int inputNode, int outputNode, double weight, int innovation) {
 		this.inputNode = inputNode;
 		this.outputNode = outputNode;
 		this.innovation = innovation;
@@ -46,7 +46,7 @@ public class Gene {
 		this.weight = weight;
 	}
 	public String toString(){
-		String s = "in: "+inputNode+" out:" +outputNode+" W: "+weight+" innov: "+ innovation+" enabled: "+enabled;
+		String s = inputNode+" " +outputNode+"  "+weight+"   "+ innovation+"  "+enabled;
 		
 		return s;
 	}

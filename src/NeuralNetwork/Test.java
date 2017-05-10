@@ -5,11 +5,12 @@ import java.util.ArrayList;
 public class Test {
 
 	public static void main(String[] args) {
-		Network net = new Network("Test1");
-		double[] in = {100, 100};
-		double[] out = net.execute(in);
-		for(int i=0;i<out.length;i++){
-			System.out.println(out[i]);
+		GA ga = new GA(2, 2, 2);
+		System.out.println(ga.distance(ga.getPopulation().get(0), ga.getPopulation().get(1)));
+		int i=0;
+		for(Network n:ga.getPopulation()){
+			i++;
+			n.write("file"+i);
 		}
 		
 	}

@@ -12,8 +12,8 @@ public class Gene {
 		this.innovation = innovation;
 		this.weight = weight;
 	}
-	public void enableFlip(){
-		enabled = !enabled;	
+	public void setEnable(boolean b){
+		enabled = b;	
 	}
 	public int getInputNode() {
 		return inputNode;

@@ -15,17 +15,24 @@ public class Network {
 	private ArrayList<Node> net;//net[i] is Neuron i.
 	private ArrayList<Node> inputNodes;
 	private ArrayList<Node> outputNodes;
+	private double fitness = 0;
 	private int inputs;//input layer size, inputs nodes are from net.get(0) to net.get(inputs).
 	private int outputs;//output layer size, output nodes are from net.get(inputs) to net.get(inputs + outputs) 
+	private Specie specie = null;
+	private double adjFitness = 0;
+	private int inSpecieID;
+	
+	
+ 
 	public Network(int inputLayers,int outputLayers){
 		//randomly generated a basic Network
-		inputs = inputLayers;
+		inputs = inputLayers+1;
 		outputs = outputLayers;
 		int k =0;
 		for(int i=0;i<inputs;i++){
 			for(int j=inputs; j<inputs+outputs;j++){
 				k++;
-				genome.add(new Gene(i,j,2*(Math.random()-0.5),k));
+				addGene(new Gene(i,j,(2*(Math.random()-0.5))*GA.weightRange,k));
 			}
 		}
 		genomeDecoding();
@@ -54,9 +61,9 @@ public class Network {
 				splited = line.split("\\s+");
 				Gene g = new Gene(Integer.parseInt(splited[0]),Integer.parseInt(splited[1]),Double.parseDouble(splited[2]),Integer.parseInt(splited[3]));
 				if(splited[4].equals("false")){
-					g.enableFlip();
+					g.setEnable(false);
 				}
-				genome.add(g);
+				addGene(g);
 			}
 		} catch (IOException e) {
 			System.err.println("FILE INVALID");
@@ -70,12 +77,20 @@ public class Network {
 		}
 	    genomeDecoding();
 	}
+	public Network(int inputLayers,int outputLayers, ArrayList<Gene> genome) {
+		inputs = inputLayers;
+		outputs = outputLayers;
+		this.genome = genome;
+		genomeDecoding();
+	}
 	public void genomeDecoding() {
 		//this method update the changes made to the genome in the actual network, to be done also after initialization.
 			net = new ArrayList<Node>();
 	
 		for(Gene g:genome){
-			
+			if(g==null){
+				System.out.println("");
+			}
 			int in = g.getInputNode();
 			int out = g.getOutputNode();
 			if(net.size()<=in || net.size()<= out){//if array list is not long enough, expand it.
@@ -110,19 +125,23 @@ public class Network {
 		 * output of this method is the output layer, in double
 		**/
 		ArrayList<Node> toFire = new ArrayList<Node>();
-		if(input.length == inputNodes.size()){
-			for(int i=0;i<inputNodes.size();i++){//fire the input nodes.
+		ArrayList<Node> fired = new ArrayList<Node>();
+		if(input.length == inputNodes.size()-1){
+			for(int i=0;i<inputNodes.size()-1;i++){//fire the input nodes.
 				toFire = Tools.union(toFire, inputNodes.get(i).fire(input[i]));
 				//toFire.addAll(inputNodes.get(i).fire(input[i]));
 			}
+			toFire = Tools.union(toFire, inputNodes.get(inputNodes.size()-1).fire(1));//fire bias node
 		}else{
 			System.err.println("ERROR, Input dimentions missmatch");
 			System.exit(1);
 		}
 		while(!toFire.isEmpty()){
 			Node next = getNext(toFire);
-			toFire.remove(next);
-			toFire = Tools.union(toFire, next.fire());
+//			toFire.remove(next);
+			fired.add(next);
+			toFire = Tools.subtract(Tools.union(toFire, next.fire()),fired);
+			
 		}
 		double output[] = new double[outputs];
 		for(int i=0;i<outputs;i++){
@@ -165,6 +184,8 @@ public class Network {
             	writer.newLine();
             	writer.write(genome.get(i).toString());
             }
+            writer.newLine();
+            writer.write("Fitness: "+fitness);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -192,5 +213,48 @@ public class Network {
 	}
 	public int getOutputs() {
 		return outputs;
+	}
+	public Specie getSpecie() {
+		return specie;
+	}
+	public void setSpecie(Specie specie) {
+		this.specie = specie;
+	}
+	public void adjustFitness() {
+		// adjust the fitness based on the specie
+		if(specie.size()>0)
+			adjFitness  = fitness/specie.size();
+		else
+			adjFitness = 0;
+		
+	}
+	public double getFitness() {
+		return fitness;
+	}
+	public double getAdjFitness() {
+		return adjFitness;
+	}
+	public int getInSpecieID() {
+		return inSpecieID;
+	}
+	public void setInSpecieID(int inSpecieID) {
+		this.inSpecieID = inSpecieID;
+	}
+	public void setFitness(double fitness) {
+		this.fitness = fitness;
+	}
+	private void addGene(Gene gene) {
+		if(gene == null)
+			System.out.println("");
+		genome.add(gene);
+		
+	}
+	public void clearMemory(){
+		for(Node n:net){
+			n.getOutputValue();
+		}
+	}
+	public Network copy() {
+		return new Network(inputs, outputs, genome);
 	}
 }

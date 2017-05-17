@@ -28,7 +28,19 @@ public class Node {
 	}
 	public ArrayList<Node> fire(double d) {
 		increase(d);
-		return fire();
+		double out = inputValue;
+		inputValue = 0;
+		for(int i = 0;i<outputs.size();i++){
+			outputs.get(i).increase(out*(genes.get(i).getWeight()));
+		}
+		//return all outputs, expect output layer neurons.
+		ArrayList<Node> outp = new ArrayList<Node>();
+		for(Node n:outputs){
+			if(n.outputs.size()>0){
+				outp.add(n);
+			}
+		}
+		return outp;
 		
 	}
 	public void increase(double input){

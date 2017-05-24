@@ -12,4 +12,12 @@ public class Tools {
 
 	        return new ArrayList<T>(set);
 	    }
+	 public static <T>ArrayList<T> subtract(ArrayList<T> total, ArrayList<T> toSubtract) {
+			ArrayList<T> set = new ArrayList<T>();
+
+	        set.addAll(total);
+	        set.removeAll(toSubtract);
+			
+			return set;
+		}
 }

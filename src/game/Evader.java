@@ -6,6 +6,7 @@ public class Evader implements Entity {
 	private int speed;////moves in 100 frames
 	private int viewAngle;
 	private Algorithm alg;
+	private boolean isCaught = false;
 	
 	public Evader(Node node) {
 		this.node = node;
@@ -34,10 +35,18 @@ public class Evader implements Entity {
 	}
 	@Override
 	public void move() {
-		alg.move(this);
+		if (!isCaught) alg.move(this);
 		
 	}
 	public void setAlgorithm(Algorithm alg) {
 		this.alg = alg;
+	}
+	
+	public void setCapture(boolean isCaptured) {
+		this.isCaught = isCaptured;
+	}
+	
+	public boolean getCapture() {
+		return isCaught;
 	}
 }

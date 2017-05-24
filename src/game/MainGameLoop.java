@@ -1,7 +1,11 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import logic.LineOfSightChecker;
+import logic.Pair;
 
 
 public class MainGameLoop{
@@ -12,7 +16,7 @@ public class MainGameLoop{
 	private Graph graph;
 	private boolean isRunning=true;
 	private int count=0;
-	
+	private LineOfSightChecker checker = new LineOfSightChecker();
 
 	public MainGameLoop(GamePanel panel) {
 		gamePanel=panel;
@@ -28,6 +32,8 @@ public class MainGameLoop{
 		@Override
 		public void run()						//loop
 			{
+				boolean hasMoved = false;
+				boolean check = true;
 				if(count == 100)		//counting frames, for turn handling, from 1 to 100
 					count = 1;
 				else
@@ -36,17 +42,41 @@ public class MainGameLoop{
 					if(((int)100/ent.getSpeed())>=((double)100/ent.getSpeed())){
 						if(count%(100/ent.getSpeed())==0  ||  ((100%ent.getSpeed())!=0 && count%(100%ent.getSpeed())==0)){
 							ent.move();
+							hasMoved = true;
 						}
 					}else{
 						if(count%(100/ent.getSpeed())==0  &&  (count%(100/(100%ent.getSpeed()))!=0)){
 							ent.move();
+							hasMoved = true;
 						}
 					}
 				}
+				
+				//checks if all evaders have been captured ||
+				if (hasMoved) {
+					ArrayList<Pair> pairs = checker.checkEntities(graph);
+					
+					for (Pair pair : pairs) {
+						String entity1 = pair.getEntity1().getNode().getValue();
+						String entity2 = pair.getEntity2().getNode().getValue();
+						System.out.println(pair.getLineOfSight());
+						if(!entity1.equals(entity2) && pair.getLineOfSight()) {
+							if (entity1.equals("evader")) pair.getEntity1().setCapture(true);
+							else pair.getEntity2().setCapture(true);
+						}
+					}
+					check = true;
+					for (Evader evader : graph.getEvaders()) {
+						if (check && !evader.getCapture()) check = false;
+					}
+				}
+				
+				if (check) isRunning = false;
         		gamePanel.repaint();			//update panel
         		if (!isRunning)
         		{								//check
         			timer.cancel();				//exit loop
+        			System.out.println("game is done");
         		}
     		}
 	}

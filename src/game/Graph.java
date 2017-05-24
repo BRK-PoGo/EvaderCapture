@@ -10,6 +10,7 @@ public class Graph {
     public int size;//size of node
     private ArrayList<Node> nodes = new ArrayList<Node>();
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
+	private ArrayList<Evader> evaders = new ArrayList<Evader>();
 
     public Graph(int h, int w,int size){
     	this.size=size;
@@ -19,7 +20,7 @@ public class Graph {
          
         for(int i=0; i<h; i++) {
             for (int j=0; j<w; j++) {
-            	nodeGrid[i][j] = new Node();
+            	nodeGrid[i][j] = new Node(j, i);
                 nodeGrid[i][j].rectangle = new Rectangle(size*i,size*j, size, size);
                 addNode(nodeGrid[i][j]);// addd all nodes
             }
@@ -75,7 +76,9 @@ public class Graph {
 	}
 	public void addEvader(int i, int j) {
 		if(nodeGrid[i][j].getValue().equals("")){
-			addEntity(new Evader(nodeGrid[i][j]));
+			Evader temp = new Evader(nodeGrid[i][j]);
+			addEntity(temp);
+			evaders.add(temp);
 		}
 	}
 	public void addNode(Node node) {
@@ -87,5 +90,8 @@ public class Graph {
 	}
 	public ArrayList<Entity> getEntities() {
 		return entities;
+	}
+	public ArrayList<Evader> getEvaders() {
+		return evaders;
 	}
 }

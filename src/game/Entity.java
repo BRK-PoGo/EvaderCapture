@@ -8,5 +8,6 @@ public interface Entity {
 	public int getSpeed();
 	public void move();
 	void setAlgorithm(Algorithm alg);
-
+	public void setCapture(boolean isCaptured);
+	public boolean getCapture();
 }

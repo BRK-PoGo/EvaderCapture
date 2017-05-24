@@ -6,9 +6,15 @@ import java.util.ArrayList;
 public class Node {
 	private String value = "";//What's in this node? Default, nothing.
 	public Rectangle rectangle; //coordinates of the node + dimension
+	private int x;
+	private int y;
 	private ArrayList<Node> activeNeighbors = new ArrayList<Node>();
 	private ArrayList<Node> neighbors = new ArrayList<Node>();
 
+	public Node(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 
 	public void addNeighbor(Node node) {
 		if(node !=null){
@@ -40,8 +46,14 @@ public class Node {
 	}
 	public void setValue(String string) {
 		value = string;
-	}public String getValue(){
+	}
+	public String getValue(){
 		return value;
-		
+	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
 	}
 }

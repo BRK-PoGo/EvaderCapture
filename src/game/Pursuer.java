@@ -6,6 +6,7 @@ public class Pursuer implements Entity{
 	private int speed;//moves in 100 frames
 	private int viewAngle;
 	private Algorithm alg;
+	private boolean isCaught = false;
 
 	public Pursuer(Node node) {
 		this.node = node;
@@ -41,5 +42,13 @@ public class Pursuer implements Entity{
 	@Override
 	public void setAlgorithm(Algorithm alg) {
 		this.alg = alg;
+	}
+	@Override
+	public void setCapture(boolean isCaptured) {
+		this.isCaught = isCaptured;
+	}
+	
+	public boolean getCapture() {
+		return isCaught;
 	}
 }

@@ -44,6 +44,7 @@ public class Evader implements Entity {
 	
 	public void setCapture(boolean isCaptured) {
 		this.isCaught = isCaptured;
+		node.setValue("evaderCaptured");
 	}
 	
 	public boolean getCapture() {

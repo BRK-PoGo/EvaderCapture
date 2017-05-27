@@ -54,13 +54,14 @@ public class MainGameLoop{
 				
 				//checks if all evaders have been captured ||
 				if (hasMoved) {
+					System.out.println("NEW MOVES HAVE BEGUN");
 					ArrayList<Pair> pairs = checker.checkEntities(graph);
 					
 					for (Pair pair : pairs) {
 						String entity1 = pair.getEntity1().getNode().getValue();
 						String entity2 = pair.getEntity2().getNode().getValue();
 						System.out.println(pair.getLineOfSight());
-						if(!entity1.equals(entity2) && pair.getLineOfSight()) {
+						if(((entity1.equals("evader") && entity2.equals("pursuer")) || (entity2.equals("evader") && entity1.equals("pursuer"))) && pair.getLineOfSight()) {
 							if (entity1.equals("evader")) pair.getEntity1().setCapture(true);
 							else pair.getEntity2().setCapture(true);
 						}

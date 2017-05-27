@@ -33,6 +33,7 @@ public class RayTracer {
 			tmp = x0;
 			x0 = x1;
 			x1 = tmp;
+			x = x0;
 		}
 		for (int y = y0; y <= y1; y++) {
 			rayTrace.add(graph[y][x]);
@@ -64,6 +65,7 @@ public class RayTracer {
 			tmp = x0;
 			x0 = x1;
 			x1 = tmp;
+			y = y0;
 		}
 		for (int x = x0; x <= x1; x++) {
 			rayTrace.add(graph[y][x]);

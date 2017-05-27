@@ -82,6 +82,11 @@ public class GamePanel extends JPanel {
 	            		g.setColor(Color.red);
 	            		g.fillOval(graph.getNodeGrid()[i][j].rectangle.x+delta/2, graph.getNodeGrid()[i][j].rectangle.y+delta/2, graph.getNodeGrid()[i][j].rectangle.width-delta, graph.getNodeGrid()[i][j].rectangle.height-delta);
 	            		g.setColor(Color.gray);
+	            	} else if(graph.getNodeGrid()[i][j].getValue().equals("evaderCaptured")){
+	            		int delta = graph.getNodeGrid()[i][j].rectangle.height/5;
+	            		g.setColor(Color.green);
+	            		g.fillOval(graph.getNodeGrid()[i][j].rectangle.x+delta/2, graph.getNodeGrid()[i][j].rectangle.y+delta/2, graph.getNodeGrid()[i][j].rectangle.width-delta, graph.getNodeGrid()[i][j].rectangle.height-delta);
+	            		g.setColor(Color.gray);
 	            	}
 	            }
 			}

@@ -33,7 +33,7 @@ public class MainGameLoop{
 		public void run()						//loop
 			{
 				boolean hasMoved = false;
-				boolean check = true;
+				
 				if(count == 100)		//counting frames, for turn handling, from 1 to 100
 					count = 1;
 				else
@@ -54,6 +54,11 @@ public class MainGameLoop{
 				
 				//checks if all evaders have been captured ||
 				if (hasMoved) {
+<<<<<<< HEAD
+=======
+					boolean check = true;
+					System.out.println("NEW MOVES HAVE BEGUN");
+>>>>>>> 7eb7b5820208c028796edc4a5c6202dea27238ce
 					ArrayList<Pair> pairs = checker.checkEntities(graph);
 					
 					for (Pair pair : pairs) {
@@ -69,9 +74,10 @@ public class MainGameLoop{
 					for (Evader evader : graph.getEvaders()) {
 						if (check && !evader.getCapture()) check = false;
 					}
+					if (check) isRunning = false;
 				}
 				
-				if (check) isRunning = false;
+				
         		gamePanel.repaint();			//update panel
         		if (!isRunning)
         		{								//check

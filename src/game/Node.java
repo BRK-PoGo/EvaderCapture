@@ -27,10 +27,12 @@ public class Node {
 	public void removeAllNeighbors() {
 		ArrayList<Node> all = new ArrayList<Node>();
 		for(Node node:activeNeighbors){
+			node.activeNeighbors.remove(this);
 			all.add(node);
 		}activeNeighbors.removeAll(all);
 		
 	}
+
 	public void restoreNeighbors() {
 		activeNeighbors = new ArrayList<Node>();
 		for(Node node:neighbors){

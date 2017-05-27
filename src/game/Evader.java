@@ -22,6 +22,7 @@ public class Evader implements Entity {
 		return node;
 	}
 	public void moveToNode(Node node) {
+		this.node.setValue("");
 		this.node = node;
 		this.node.setValue("evader");
 	}

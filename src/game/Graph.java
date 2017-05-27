@@ -41,9 +41,6 @@ public class Graph {
 	public void addWall(int i, int j) {//i and j are coordinates
 		nodeGrid[i][j].removeAllNeighbors();
 		nodeGrid[i][j].setValue("wall");
-		
-		
-		
 	}
 	public void makeEmpty(int i, int j) {
 		//make node i j empty (i.e. no walls, no people.)

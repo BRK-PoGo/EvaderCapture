@@ -12,6 +12,12 @@ public class Pursuer implements Entity{
 		this.node = node;
 		node.setValue("pursuer");
 	}
+	public Pursuer(Node node, int sp, Algorithm alg) {
+		this.alg = alg;
+		this.node = node;
+		node.setValue("pursuer");
+		speed = sp;
+	}
 	@Override
 	public Node getNode() {
 		return node;

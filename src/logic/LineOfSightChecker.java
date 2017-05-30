@@ -28,7 +28,7 @@ public class LineOfSightChecker {
 					ArrayList<Node> rayTrace = tracer.getRayTrace(x0, x1, y0, y1, grid);
 					boolean isLineOfSight = true;
 					for(Node node : rayTrace) {
-						System.out.println(node.getValue());
+						System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
 						if (isLineOfSight && node.getValue().equals("wall")) {
 							isLineOfSight = false;
 						}

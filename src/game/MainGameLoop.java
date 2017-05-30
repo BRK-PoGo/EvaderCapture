@@ -56,6 +56,9 @@ public class MainGameLoop{
 				if (hasMoved) {
 					boolean check = true;
 					System.out.println("NEW MOVES HAVE BEGUN");
+					
+
+
 					ArrayList<Pair> pairs = checker.checkEntities(graph);
 					
 					for (Pair pair : pairs) {

@@ -51,7 +51,7 @@ public class MainGameLoop{
 						}
 					}
 				}
-				
+				//create algorithm
 				//checks if all evaders have been captured ||
 				if (hasMoved) {
 					ArrayList<Pair> pairs = checker.checkEntities(graph);

@@ -7,7 +7,7 @@ public class Evader implements Entity {
 	private int viewAngle;
 	private Algorithm alg;
 	private boolean isCaught = false;
-	
+
 	public Evader(Node node) {
 		this.node = node;
 		node.setValue("evader");
@@ -38,6 +38,7 @@ public class Evader implements Entity {
 		if (!isCaught) alg.move(this);
 		
 	}
+
 	public void setAlgorithm(Algorithm alg) {
 		this.alg = alg;
 	}

@@ -181,8 +181,9 @@ public class GameFrame extends JFrame {
 						ent.setViewAngle(Integer.parseInt(textField_1.getText()));
 						if(rdbtnRandomEvad.isSelected())///set algorithm
 							ent.setAlgorithm(new Random());
-						else if(rdbtnComandEvad.isSelected()){}
-							//add command
+						else if(rdbtnComandEvad.isSelected()){
+						}
+						//add command
 						
 					}else if(ent instanceof Pursuer){
 						ent.setSpeed(Integer.parseInt(textField_3.getText()));

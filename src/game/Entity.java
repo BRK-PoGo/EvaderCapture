@@ -10,4 +10,7 @@ public interface Entity {
 	void setAlgorithm(Algorithm alg);
 	public void setCapture(boolean isCaptured);
 	public boolean getCapture();
+	public int [][] getVisibility();
+	public void setVisibility(int [][] visibility);
+	public Boolean isPursuer(Entity e);
 }

@@ -52,6 +52,9 @@ public class MainGameLoop{
 					}
 				}
 				//create algorithm
+
+				//Set algorithm's graph to this graph
+
 				//checks if all evaders have been captured ||
 				if (hasMoved) {
 					boolean check = true;

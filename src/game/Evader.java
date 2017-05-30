@@ -6,6 +6,8 @@ public class Evader implements Entity {
 	private int speed;////moves in 100 frames
 	private Algorithm alg;
 	private boolean isCaught = false;
+	private int [][] visibilityMatrix;
+	private Boolean isPursuer = false;
 
 	public Evader(Node node) {
 		this.node = node;
@@ -56,5 +58,17 @@ public class Evader implements Entity {
 	public void setViewAngle(int parseInt) {
 		//Irrelevant
 		
+	}
+	@Override
+	public int[][] getVisibility() {
+		return visibilityMatrix;
+	}
+
+	@Override
+	public void setVisibility(int[][] visibility) {
+		this.visibilityMatrix=visibility;
+	}
+	public Boolean isPursuer(Entity e){
+		return isPursuer;
 	}
 }

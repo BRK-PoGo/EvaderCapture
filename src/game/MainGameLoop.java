@@ -54,11 +54,8 @@ public class MainGameLoop{
 				
 				//checks if all evaders have been captured ||
 				if (hasMoved) {
-<<<<<<< HEAD
-=======
 					boolean check = true;
 					System.out.println("NEW MOVES HAVE BEGUN");
->>>>>>> 7eb7b5820208c028796edc4a5c6202dea27238ce
 					ArrayList<Pair> pairs = checker.checkEntities(graph);
 					
 					for (Pair pair : pairs) {

@@ -7,7 +7,7 @@ public class Pursuer implements Entity{
 	private int viewAngle;
 	private Algorithm alg;
 	private boolean isCaught = false;
-	private int [][] visibilityMatrix;
+	private int [][] dirtyClearMatrix;
 	private boolean isPursuer = true;
 
 	public Pursuer(Node node) {
@@ -61,13 +61,13 @@ public class Pursuer implements Entity{
 	}
 
 	@Override
-	public int[][] getVisibility() {
-		return visibilityMatrix;
+	public int[][] getDirtyClean() {
+		return dirtyClearMatrix;
 	}
 
 	@Override
-	public void setVisibility(int[][] visibility) {
-		this.visibilityMatrix=visibility;
+	public void setDirtyClean(int[][] dirtyClearMatrix) {
+		this.dirtyClearMatrix=dirtyClearMatrix;
 	}
 	public Boolean isPursuer(Entity e){
 		return isPursuer;

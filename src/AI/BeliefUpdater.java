@@ -13,6 +13,8 @@ import java.util.ArrayList;
  * Created by Alexander on 30/05/2017.
  */
 public class BeliefUpdater implements Algorithm {
+	private final int DEPTH=2;
+	private int best = Integer.MIN_VALUE;
 
     //THis should only check on one entity
     private Graph currentState;
@@ -39,20 +41,29 @@ public class BeliefUpdater implements Algorithm {
     			}
     	}
     	int BestSum= Integer.MIN_VALUE;
-        ArrayList<Node> possMoves = entity.getNode().getActiveNeighbors();
-        for (int i = 0; i < possMoves.size(); i++) {
-            Node moveToCheck = possMoves.get(i);
+    	//get 1st level
+    	
+    	ArrayList<Node> possMoves = entity.getNode().getActiveNeighbors();
+       
+           
+       
+    }
+    
+	
+     
 
-            toCompare = new VisibilityChecker();
-            toCompare.checkEntitiesCurrent(currentState,moveToCheck);
-            evaluator=new SetEvaluator(toCompare);
-            evaluator.evaluateDirtyClean(entity);
-            if (evaluator.getSumOfDirtyClean() > BestSum) {
-                BestSum=evaluator.getSumOfDirtyClean();
-                bestMove=possMoves.get(i);
-            }
-        }
-        entity.moveToNode(bestMove);
+    private void recursive(Node n){
+    	
+    for (int i = 0; i < n.getActiveNeighbors().size(); i++) {   
+       toCompare = new VisibilityChecker();
+       toCompare.checkEntitiesCurrent(currentState,n.getActiveNeighbors().get(i));
+       evaluator=new SetEvaluator(toCompare);
+       evaluator.evaluateDirtyClean(entity);
+       if (evaluator.getSumOfDirtyClean() > BestSum) {
+	        BestSum=evaluator.getSumOfDirtyClean();
+	        bestMove=list.get(i);
+	   }
+     }
     }
     public void setCurrentState(Graph g){currentState=g;}
 

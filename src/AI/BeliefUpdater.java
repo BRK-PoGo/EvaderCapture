@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class BeliefUpdater implements Algorithm {
 
     //THis should only check on one entity
-    private double probIsEvIsThere;
     private Graph currentState;
     private int[][] cleanDirtyMatrix;
     private Node bestMove;
@@ -23,7 +22,9 @@ public class BeliefUpdater implements Algorithm {
     VisibilityChecker toCompare;
     SetEvaluator evaluator;
 
-
+    public BeliefUpdater(Graph g){
+    	currentState = g;    	
+    }
     @Override
     public void move(Entity entity) {
         //Current now contains an Arraylist of all visibilty matrices of all current entities

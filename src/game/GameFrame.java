@@ -27,6 +27,9 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.GridLayout;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import AI.BeliefUpdater;
+
 import java.awt.Component;
 
 @SuppressWarnings("serial")
@@ -183,7 +186,7 @@ public class GameFrame extends JFrame {
 							ent.setAlgorithm(new Random());
 						else if(rdbtnComandEvad.isSelected()){
 						}
-						//add command
+						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph));					
 						
 					}else if(ent instanceof Pursuer){
 						ent.setSpeed(Integer.parseInt(textField_3.getText()));
@@ -191,7 +194,7 @@ public class GameFrame extends JFrame {
 						if(randomPurs.isSelected())///set algorithm
 							ent.setAlgorithm(new Random());
 						else if(comandPurs.isSelected()){}
-							//add command
+						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph));					
 					}
 				}
 				AIMenu.setVisible(false);

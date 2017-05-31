@@ -21,8 +21,8 @@ public class VisibilityChecker {
 		int[][] visibilityMatrix = new int[grid.length][grid[0].length];
 
 		//for (int i = 0; i < toCheck.size(); i++) {
-		for (int j = 0; j < grid.length; j++) {
-			for (int k = 0; k < grid[0].length; k++) {
+		for (int j = 1; j < grid.length-1; j++) {
+			for (int k = 1; k < grid[0].length-1; k++) {
 				int x0 = nod.getX();
 				int y0 = nod.getY();
 				int x1 = grid[j][k].getX();

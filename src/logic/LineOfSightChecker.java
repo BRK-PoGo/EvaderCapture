@@ -33,6 +33,9 @@ public class LineOfSightChecker {
 							isLineOfSight = false;
 						}
 					}
+					if(isLineOfSight){
+						System.out.println("'");
+					}
 					System.out.println(isLineOfSight);
 					pairs.add(new Pair(currentEntity, ent, isLineOfSight));
 				}

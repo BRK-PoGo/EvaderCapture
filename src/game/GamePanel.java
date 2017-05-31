@@ -3,6 +3,9 @@ package game;
 import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
+
+import NeuralNetwork.Network;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -94,6 +97,10 @@ public class GamePanel extends JPanel {
 	}
 	public void setEdit(String edit) {
 		this.edit = edit;
+	}
+	public double getFitness(Network net) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

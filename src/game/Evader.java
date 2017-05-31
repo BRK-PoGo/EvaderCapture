@@ -54,21 +54,29 @@ public class Evader implements Entity {
 	public boolean getCapture() {
 		return isCaught;
 	}
-	@Override
 	public void setViewAngle(int parseInt) {
 		//Irrelevant
 		
 	}
-	@Override
+	
 	public int[][] getVisibility() {
 		return visibilityMatrix;
 	}
 
-	@Override
 	public void setVisibility(int[][] visibility) {
 		this.visibilityMatrix=visibility;
 	}
 	public Boolean isPursuer(Entity e){
 		return isPursuer;
+	}
+	@Override
+	public int[][] getDirtyClean() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setDirtyClean(int[][] dirtyClean) {
+		// TODO Auto-generated method stub
+		
 	}
 }

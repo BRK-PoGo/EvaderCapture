@@ -20,16 +20,17 @@ public class SetEvaluator {
         futureVisibility = future;
     }
 
-    public void evaluateDirtyClean(Entity entity){
-    	
+    public void evaluateDirtyClean(int [][] dirty){
+        dirtyClean=dirty;
         int[][] tmp = sumOf2D(futureVisibility.getVisibilityMatrix(), futureVisibility.getVisibilityMatrix());
-        int[][] toEvaluate = sumOf2D(tmp,entity.getDirtyClean());
+        int[][] toEvaluate = sumOf2D(tmp,dirtyClean);
         firstEvaluator(toEvaluate,0,0);
         cleanUp(toEvaluate);
         sumOfDirtyClean = sumOfElements(toEvaluate);
         dirtyClean=toEvaluate;
     }
     public int getSumOfDirtyClean(){return sumOfDirtyClean;}
+    public int [][] getDirtyClean(){return dirtyClean;}
 
 
     /*This method is the first evaluator. It looks for 1 values i.e. fields that could be seen before and cannot be seen

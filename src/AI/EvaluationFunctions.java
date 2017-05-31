@@ -1,6 +1,4 @@
-package TreeAI;
-
-import game.Node;
+package AI;
 
 /**
  * Created by Alexander on 30/05/2017.

@@ -21,12 +21,13 @@ public class SetEvaluator {
     }
 
     public void evaluateDirtyClean(Entity entity){
-            int[][] tmp = sumOf2D(futureVisibility.getVisibilityMatrix(), futureVisibility.getVisibilityMatrix());
-            int[][] toEvaluate = sumOf2D(tmp,entity.getDirtyClean());
-            firstEvaluator(toEvaluate,0,0);
-            cleanUp(toEvaluate);
-            sumOfDirtyClean = sumOfElements(toEvaluate);
-            dirtyClean=toEvaluate;
+    	
+        int[][] tmp = sumOf2D(futureVisibility.getVisibilityMatrix(), futureVisibility.getVisibilityMatrix());
+        int[][] toEvaluate = sumOf2D(tmp,entity.getDirtyClean());
+        firstEvaluator(toEvaluate,0,0);
+        cleanUp(toEvaluate);
+        sumOfDirtyClean = sumOfElements(toEvaluate);
+        dirtyClean=toEvaluate;
     }
     public int getSumOfDirtyClean(){return sumOfDirtyClean;}
 
@@ -111,10 +112,10 @@ public class SetEvaluator {
     /*This method sums two matrices*/
 
     public int [][] sumOf2D(int [][] sum1, int [][] sum2){
-        int [][] sum = new int [sum1.length][sum2[1].length];
+        int [][] sum = new int [sum1.length][sum2[0].length];
         if (sum1.length == sum2.length && sum1[1].length == sum2[0].length) {
             for (int i=0; i<sum1.length;i++){
-                for (int j=0; j<sum1[0].length;i++){
+                for (int j=0; j<sum1[0].length;j++){
                     sum[i][j]=sum1[i][j] + sum2[i][j];
                 }
         }

@@ -36,13 +36,13 @@ public class VisibilityChecker {
 						isLineOfSight = false;
 						//These are the locations of the non-visible nodes
 						visibilityMatrix[j][k] = 0;
+						visibilityMatrix[node.getX()][node.getY()] = -5;
 					}
 					//These are the locations of the visible
 					else {
 						visibilityMatrix[j][k] = 1;
 
 					}
-					visibilityMatrix[node.getX()][node.getY()] = -5;
 				}
 			}
 		}

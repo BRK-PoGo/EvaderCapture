@@ -12,7 +12,7 @@ public class RayTracer {
 		if (checkInputs(x0, x1, y0, y1, graph.length, graph[0].length)) {
 			if (x0 == x1) rayTrace = doHorizontal(x0, y0, y1, graph);
 			else if (y0 == y1) rayTrace = doVertical(y0, x0, x1, graph);
-			else if(x1 - x0 > y1 - y0) rayTrace = doShallow(x0, x1, y0, y1, graph);
+			else if(Math.abs(x1 - x0) > Math.abs(y1 - y0)) rayTrace = doShallow(x0, x1, y0, y1, graph);
 			else rayTrace = doSteep(x0, x1, y0, y1, graph);	
 		} else {
 			System.out.println("Invalid inputs");

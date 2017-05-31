@@ -19,12 +19,12 @@ public class VisibilityChecker {
 		RayTracer tracer = new RayTracer();
 		Node[][] grid = graph.getNodeGrid();
 		visibilityMatrix = new int[grid.length][grid[0].length];
-//		for(int i=0;i<visibilityMatrix.getNodeGrid().length;i++)
-//			for(int j=0;j<currentState.getNodeGrid()[0].length;j++){
-//				if(currentState.getNodeGrid()[i][j].getValue().equals("wall")){
-//					entity.getDirtyClean()[i][j]=-5;
-//				}
-//			}
+		for(int i=0;i<visibilityMatrix.length;i++)
+			for(int j=0;j<visibilityMatrix[0].length;j++){
+				if(grid[i][j].getValue().equals("wall")){
+					visibilityMatrix[i][j]=-5;
+				}
+			}
 		//for (int i = 0; i < toCheck.size(); i++) {
 		for (int j = 1; j < grid.length-1; j++) {
 			for (int k = 1; k < grid[0].length-1; k++) {
@@ -42,6 +42,7 @@ public class VisibilityChecker {
 						//These are the locations of the non-visible nodes
 						visibilityMatrix[j][k] = 0;
 						visibilityMatrix[node.getX()][node.getY()] = -5;
+						break;
 					}
 					//These are the locations of the visible
 					else {

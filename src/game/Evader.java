@@ -6,7 +6,7 @@ public class Evader implements Entity {
 	private int speed;////moves in 100 frames
 	private Algorithm alg;
 	private boolean isCaught = false;
-	private int [][] visibilityMatrix;
+	private int [][] dirtyCleanMatrix;
 	private Boolean isPursuer = false;
 
 	public Evader(Node node) {
@@ -58,25 +58,16 @@ public class Evader implements Entity {
 		//Irrelevant
 		
 	}
-	
-	public int[][] getVisibility() {
-		return visibilityMatrix;
-	}
-
-	public void setVisibility(int[][] visibility) {
-		this.visibilityMatrix=visibility;
-	}
 	public Boolean isPursuer(Entity e){
 		return isPursuer;
 	}
 	@Override
 	public int[][] getDirtyClean() {
-		// TODO Auto-generated method stub
-		return null;
+		return dirtyCleanMatrix;
 	}
 	@Override
-	public void setDirtyClean(int[][] dirtyClean) {
-		// TODO Auto-generated method stub
+	public void setDirtyClean(int[][] dirtyCleanMatrix) {
+		this.dirtyCleanMatrix = dirtyCleanMatrix;
 		
 	}
 }

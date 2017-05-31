@@ -30,6 +30,13 @@ public class BeliefUpdater implements Algorithm {
         //Current now contains an Arraylist of all visibilty matrices of all current entities
     	if (entity.getDirtyClean()==null){
     		entity.setDirtyClean(new int[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
+    		for(int i=0;i<currentState.getNodeGrid().length;i++)
+    			for(int j=0;j<currentState.getNodeGrid()[0].length;j++){
+    				if(currentState.getNodeGrid()[i][j].getValue().equals("wall")){
+    					entity.getDirtyClean()[i][j]=-5;
+    				}
+    		
+    			}
     	}
     	int BestSum= Integer.MIN_VALUE;
         ArrayList<Node> possMoves = entity.getNode().getActiveNeighbors();
@@ -43,7 +50,6 @@ public class BeliefUpdater implements Algorithm {
             if (evaluator.getSumOfDirtyClean() > BestSum) {
                 BestSum=evaluator.getSumOfDirtyClean();
                 bestMove=possMoves.get(i);
-           
             }
         }
         entity.moveToNode(bestMove);

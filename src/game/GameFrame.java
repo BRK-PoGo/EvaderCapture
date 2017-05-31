@@ -185,16 +185,17 @@ public class GameFrame extends JFrame {
 						if(rdbtnRandomEvad.isSelected())///set algorithm
 							ent.setAlgorithm(new Random());
 						else if(rdbtnComandEvad.isSelected()){
-						}
 						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph));					
-						
+						}
 					}else if(ent instanceof Pursuer){
 						ent.setSpeed(Integer.parseInt(textField_3.getText()));
 						ent.setViewAngle(Integer.parseInt(textField_2.getText()));
-						if(randomPurs.isSelected())///set algorithm
+						if(randomPurs.isSelected()){///set algorithm
 							ent.setAlgorithm(new Random());
-						else if(comandPurs.isSelected()){}
-						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph));					
+						}
+						else if(comandPurs.isSelected()){
+						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph));	
+						}
 					}
 				}
 				AIMenu.setVisible(false);

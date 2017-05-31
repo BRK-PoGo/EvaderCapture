@@ -18,8 +18,13 @@ public class VisibilityChecker {
 		//ArrayList<Entity> toCheck = graph.getEntities();
 		RayTracer tracer = new RayTracer();
 		Node[][] grid = graph.getNodeGrid();
-		int[][] visibilityMatrix = new int[grid.length][grid[0].length];
-
+		visibilityMatrix = new int[grid.length][grid[0].length];
+//		for(int i=0;i<visibilityMatrix.getNodeGrid().length;i++)
+//			for(int j=0;j<currentState.getNodeGrid()[0].length;j++){
+//				if(currentState.getNodeGrid()[i][j].getValue().equals("wall")){
+//					entity.getDirtyClean()[i][j]=-5;
+//				}
+//			}
 		//for (int i = 0; i < toCheck.size(); i++) {
 		for (int j = 1; j < grid.length-1; j++) {
 			for (int k = 1; k < grid[0].length-1; k++) {

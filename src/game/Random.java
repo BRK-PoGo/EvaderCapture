@@ -6,12 +6,23 @@ public class Random implements Algorithm{
 	@Override
 	public void move(Entity entity) {
 		java.util.Random r = new java.util.Random();
-		if(entity.getNode().getActiveNeighbors().size()<=0){
-			System.out.println("");
-			
-		}
+		
 		int random = (int) Math.floor(r.nextInt(entity.getNode().getActiveNeighbors().size()));
 		Node node = entity.getNode().getActiveNeighbors().get((int)random);
+		if(node.getValue()=="")
+			entity.moveToNode(node);
+		else {
+			recursiveMove(entity,0);
+		}
+		
+	}
+	public void move(Entity entity,Node nodeNoGo) {
+		java.util.Random r = new java.util.Random();
+		Node node;
+		do{
+		int random = (int) Math.floor(r.nextInt(entity.getNode().getActiveNeighbors().size()));
+		node = entity.getNode().getActiveNeighbors().get((int)random);
+		}while(node == nodeNoGo);
 		if(node.getValue()=="")
 			entity.moveToNode(node);
 		else {

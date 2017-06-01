@@ -3,6 +3,7 @@ import game.Algorithm;
 import game.Entity;
 import game.Graph;
 import game.Node;
+import game.Random;
 
 import java.util.ArrayList;
 /* I am a bit confused about the structure of the code. Shouldn't the algorithm perform on the game or the entities
@@ -15,12 +16,14 @@ import java.util.ArrayList;
 public class BeliefUpdater implements Algorithm {
 
     //THis should only check on one entity
+	private Node previousMove = null;
     private Graph currentState;
     private Node bestMove;
     private int [][]bestDirtyClean;
 
     VisibilityChecker toCompare;
     SetEvaluator evaluator;
+	private boolean firtsIteration=true;
 
     public BeliefUpdater(Graph g){
         currentState = g;
@@ -53,8 +56,42 @@ public class BeliefUpdater implements Algorithm {
                 bestMove=possMoves.get(i);
             }
         }
-        entity.moveToNode(bestMove);
         entity.setDirtyClean(bestDirtyClean);
+        System.out.println("");
+        System.out.println("Before moving");
+        System.out.println("x: "+entity.getNode().getY()+" y: "+entity.getNode().getX());
+        System.out.println("");
+        System.out.println("Prevously:");
+        if(previousMove != null)
+        	System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
+        if(firtsIteration){
+        System.out.println("");}
+        if(previousMove==null || bestMove != previousMove){
+        	previousMove = entity.getNode();
+        	entity.moveToNode(bestMove);
+        }
+        else{
+        	
+        	
+            Node temp = entity.getNode();
+            Random r = new Random();
+            r.move(entity,previousMove);
+            previousMove = temp;
+        }
+        if(previousMove == null){
+        	previousMove= entity.getNode(); //update previous
+        	firtsIteration=false;
+        } 
+        System.out.println("");
+        System.out.println("After moving");
+        System.out.println("x: "+entity.getNode().getY()+" y: "+entity.getNode().getX());
+        System.out.println("PreviousMove:");
+        System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
+        System.out.println("");
+        System.out.println("");
+        System.out.println("-------------------------------------------------");
+
+
     }
     public void setCurrentState(Graph g){currentState=g;}
 

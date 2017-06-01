@@ -36,7 +36,7 @@ public class VisibilityChecker {
 				boolean isLineOfSight = true;
 
 				for (Node node : rayTrace) {
-					System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
+					//System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
 					if (isLineOfSight && node.getValue().equals("wall")) {
 						isLineOfSight = false;
 						//These are the locations of the non-visible nodes

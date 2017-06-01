@@ -55,7 +55,7 @@ public class MainGameLoop{
 
 				//Set algorithm's graph to this graph
 
-				//checks if all evaders have been captured ||
+				//checks if all evaders have been captured || Written by Tom
 				if (hasMoved) {
 					boolean check = true;
 					System.out.println("NEW MOVES HAVE BEGUN");

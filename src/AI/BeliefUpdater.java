@@ -3,6 +3,7 @@ import game.Algorithm;
 import game.Entity;
 import game.Graph;
 import game.Node;
+import game.Random;
 
 import java.util.ArrayList;
 /* I am a bit confused about the structure of the code. Shouldn't the algorithm perform on the game or the entities
@@ -13,57 +14,84 @@ import java.util.ArrayList;
  * Created by Alexander on 30/05/2017.
  */
 public class BeliefUpdater implements Algorithm {
-	private final int DEPTH=2;
-	private int best = Integer.MIN_VALUE;
 
     //THis should only check on one entity
+	private Node previousMove = null;
     private Graph currentState;
-    private int[][] cleanDirtyMatrix;
     private Node bestMove;
+    private int [][]bestDirtyClean;
 
     VisibilityChecker toCompare;
     SetEvaluator evaluator;
+	private boolean firtsIteration=true;
 
     public BeliefUpdater(Graph g){
-    	currentState = g;    	
+        currentState = g;
     }
     @Override
     public void move(Entity entity) {
         //Current now contains an Arraylist of all visibilty matrices of all current entities
-    	if (entity.getDirtyClean()==null){
-    		entity.setDirtyClean(new int[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
-    		for(int i=0;i<currentState.getNodeGrid().length;i++)
-    			for(int j=0;j<currentState.getNodeGrid()[0].length;j++){
-    				if(currentState.getNodeGrid()[i][j].getValue().equals("wall")){
-    					entity.getDirtyClean()[i][j]=-5;
-    				}
-    		
-    			}
-    	}
-    	int BestSum= Integer.MIN_VALUE;
-    	//get 1st level
-    	
-    	ArrayList<Node> possMoves = entity.getNode().getActiveNeighbors();
-       
-           
-       
-    }
-    
-	
-     
+        if (entity.getDirtyClean()==null){
+            entity.setDirtyClean(new int[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
+            for(int i=0;i<currentState.getNodeGrid().length;i++)
+                for(int j=0;j<currentState.getNodeGrid()[0].length;j++){
+                    if(currentState.getNodeGrid()[i][j].getValue().equals("wall")){
+                        entity.getDirtyClean()[i][j]=-5;
+                    }
 
-    private void recursive(Node n){
-    	
-    for (int i = 0; i < n.getActiveNeighbors().size(); i++) {   
-       toCompare = new VisibilityChecker();
-       toCompare.checkEntitiesCurrent(currentState,n.getActiveNeighbors().get(i));
-       evaluator=new SetEvaluator(toCompare);
-       evaluator.evaluateDirtyClean(entity);
-       if (evaluator.getSumOfDirtyClean() > BestSum) {
-	        BestSum=evaluator.getSumOfDirtyClean();
-	        bestMove=list.get(i);
-	   }
-     }
+                }
+        }
+        int BestSum= Integer.MIN_VALUE;
+        ArrayList<Node> possMoves = entity.getNode().getActiveNeighbors();
+        for (int i = 0; i < possMoves.size(); i++) {
+            Node moveToCheck = possMoves.get(i);
+
+            toCompare = new VisibilityChecker();
+            toCompare.checkEntitiesCurrent(currentState,moveToCheck);
+            evaluator=new SetEvaluator(toCompare);
+            evaluator.evaluateDirtyClean(entity.getDirtyClean());
+            if (evaluator.getSumOfDirtyClean() >= BestSum) {
+                BestSum=evaluator.getSumOfDirtyClean();
+                bestDirtyClean=evaluator.getDirtyClean();
+                bestMove=possMoves.get(i);
+            }
+        }
+        entity.setDirtyClean(bestDirtyClean);
+        System.out.println("");
+        System.out.println("Before moving");
+        System.out.println("x: "+entity.getNode().getY()+" y: "+entity.getNode().getX());
+        System.out.println("");
+        System.out.println("Prevously:");
+        if(previousMove != null)
+        	System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
+        if(firtsIteration){
+        System.out.println("");}
+        if(previousMove==null || bestMove != previousMove){
+        	previousMove = entity.getNode();
+        	entity.moveToNode(bestMove);
+        }
+        else{
+        	
+        	
+            Node temp = entity.getNode();
+            Random r = new Random();
+            r.move(entity,previousMove);
+            previousMove = temp;
+        }
+        if(previousMove == null){
+        	previousMove= entity.getNode(); //update previous
+        	firtsIteration=false;
+        } 
+        System.out.println("");
+        System.out.println("After moving");
+        System.out.println("x: "+entity.getNode().getY()+" y: "+entity.getNode().getX());
+        System.out.println("PreviousMove:");
+        System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
+        System.out.println("");
+        System.out.println("");
+        System.out.println("-------------------------------------------------");
+
+
     }
     public void setCurrentState(Graph g){currentState=g;}
 
@@ -71,8 +99,8 @@ public class BeliefUpdater implements Algorithm {
         int sum = 0;
         for (int i = 0; i<matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-            	if(matrix[i][j]>0)
-            		sum+=matrix[i][j];
+                if(matrix[i][j]>0)
+                    sum+=matrix[i][j];
 
             }
         }

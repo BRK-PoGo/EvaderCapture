@@ -45,6 +45,11 @@ public class RayTracer { // Written by Tom
 				error -= 1;
 			} else if (error >= 0.5 && x1 > x0) {
 				x += 1;
+				if(y>=graph.length )
+					System.out.println("Y");
+				else if(x>=graph[0].length)
+					System.out.println("X");
+
 				rayTrace.add(graph[y][x]);
 				error -= 1;
 			}

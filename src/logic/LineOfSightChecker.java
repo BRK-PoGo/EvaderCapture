@@ -28,15 +28,15 @@ public class LineOfSightChecker { // Written by Tom
 					ArrayList<Node> rayTrace = tracer.getRayTrace(x0, x1, y0, y1, grid);
 					boolean isLineOfSight = true;
 					for(Node node : rayTrace) {
-						System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
+					//	System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
 						if (isLineOfSight && node.getValue().equals("wall")) {
 							isLineOfSight = false;
 						}
 					}
 					if(isLineOfSight){
-						System.out.println("'");
+					//	System.out.println("'");
 					}
-					System.out.println(isLineOfSight);
+				//	System.out.println(isLineOfSight);
 					pairs.add(new Pair(currentEntity, ent, isLineOfSight));
 				}
 			}

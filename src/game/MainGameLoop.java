@@ -6,6 +6,7 @@ import java.util.TimerTask;
 
 import logic.LineOfSightChecker;
 import logic.Pair;
+import logic.RadiusChecker;
 
 
 public class MainGameLoop{
@@ -17,6 +18,7 @@ public class MainGameLoop{
 	private boolean isRunning=true;
 	private int count=0;
 	private LineOfSightChecker checker = new LineOfSightChecker();
+	private RadiusChecker radChecker = new RadiusChecker();
 
 	public MainGameLoop(GamePanel panel) {
 		gamePanel=panel;
@@ -58,19 +60,24 @@ public class MainGameLoop{
 				//checks if all evaders have been captured || Written by Tom
 				if (hasMoved) {
 					boolean check = true;
-					System.out.println("NEW MOVES HAVE BEGUN");
 					
-
-
 					ArrayList<Pair> pairs = checker.checkEntities(graph);
 					
 					for (Pair pair : pairs) {
-						String entity1 = pair.getEntity1().getNode().getValue();
-						String entity2 = pair.getEntity2().getNode().getValue();
-						System.out.println(pair.getLineOfSight());
+						Entity e1 = pair.getEntity1();
+						Entity e2 = pair.getEntity2();
+						//System.out.println(pair.getLineOfSight());
+						/*
 						if(!entity1.equals(entity2) && pair.getLineOfSight()) {
 							if (entity1.equals("evader")) pair.getEntity1().setCapture(true);
 							else pair.getEntity2().setCapture(true);
+						}
+						*/
+						if ((e1.getNode().getValue().equals("evader") && e2.getNode().getValue().equals("pursuer")) || (e1.getNode().getValue().equals("pursuer") && e2.getNode().getValue().equals("evader"))) {
+							if (pair.getLineOfSight() && radChecker.RadiusCheck(e1.getNode().getX(), e2.getNode().getX(), e1.getNode().getY(), e2.getNode().getY(), e1.getRadius())) {
+								if (e1.equals("evader")) e1.setCapture(true);
+								else e2.setCapture(true);
+							}
 						}
 					}
 					check = true;

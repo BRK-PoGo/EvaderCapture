@@ -13,4 +13,6 @@ public interface Entity {
 	public int [][] getDirtyClean();
 	public void setDirtyClean(int [][] dirtyClean);
 	public Boolean isPursuer(Entity e);
+	public int getRadius();
+	public int getAngle();
 }

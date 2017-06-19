@@ -10,8 +10,8 @@ public interface Entity {
 	void setAlgorithm(Algorithm alg);
 	public void setCapture(boolean isCaptured);
 	public boolean getCapture();
-	public int [][] getDirtyClean();
-	public void setDirtyClean(int [][] dirtyClean);
+	public double [][] getDirtyClean();
+	public void setDirtyClean(double [][] dirtyClean);
 	public Boolean isPursuer(Entity e);
 	public int getRadius();
 	public int getAngle();

@@ -10,7 +10,7 @@ public class Pursuer implements Entity{
 	private int viewAngle;
 	private Algorithm alg;
 	private boolean isCaught = false;
-	private int [][] dirtyClearMatrix;
+	private double [][] dirtyClearMatrix;
 	private boolean isPursuer = true;
 	private final int SIGHT_RAD = 10;
 	private final int SIGHT_ANG = 360;
@@ -73,13 +73,13 @@ public class Pursuer implements Entity{
 	}
 
 	@Override
-	public int[][] getDirtyClean() {
+	public double[][] getDirtyClean() {
 		return dirtyClearMatrix;
 	}
 
 	
-	public void setDirtyClean(int[][] dirtyClearMatrix) {
-		this.dirtyClearMatrix=dirtyClearMatrix;
+	public void setDirtyClean(double[][] ds) {
+		this.dirtyClearMatrix=ds;
 	}
 	public Boolean isPursuer(Entity e){
 		return isPursuer;

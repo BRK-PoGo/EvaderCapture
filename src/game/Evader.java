@@ -9,7 +9,7 @@ public class Evader implements Entity {
 	private int speed;////moves in 100 frames
 	private Algorithm alg;
 	private boolean isCaught = false;
-	private int [][] dirtyCleanMatrix;
+	private double [][] dirtyCleanMatrix;
 	private Boolean isPursuer = false;
 	private final int SIGHT_RAD = 10;
 	private final int SIGHT_ANG = 360;
@@ -75,12 +75,12 @@ public class Evader implements Entity {
 		return isPursuer;
 	}
 	@Override
-	public int[][] getDirtyClean() {
+	public double[][] getDirtyClean() {
 		return dirtyCleanMatrix;
 	}
 	
-	public void setDirtyClean(int[][] dirtyCleanMatrix) {
-		this.dirtyCleanMatrix = dirtyCleanMatrix;
+	public void setDirtyClean(double[][] ds) {
+		this.dirtyCleanMatrix = ds;
 		
 	}
 	@Override

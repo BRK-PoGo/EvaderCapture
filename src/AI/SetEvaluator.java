@@ -13,24 +13,24 @@ public class SetEvaluator {
 
     private VisibilityChecker currentVisibility;
     private VisibilityChecker futureVisibility;
-    private int [][] dirtyClean;
-    private int sumOfDirtyClean;
+    private double [][] dirtyClean;
+    private double sumOfDirtyClean;
 
     public SetEvaluator (VisibilityChecker future){
         futureVisibility = future;
     }
 
-    public void evaluateDirtyClean(int [][] dirty){
+    public void evaluateDirtyClean(double [][] dirty){
         dirtyClean=dirty;
-        int[][] tmp = sumOf2D(futureVisibility.getVisibilityMatrix(), futureVisibility.getVisibilityMatrix());
-        int[][] toEvaluate = sumOf2D(tmp,dirtyClean);
+        double[][] tmp = sumOf2D(futureVisibility.getVisibilityMatrix(), futureVisibility.getVisibilityMatrix());
+        double[][] toEvaluate = sumOf2D(tmp,dirtyClean);
         firstEvaluator(toEvaluate,0,0);
         cleanUp(toEvaluate);
         sumOfDirtyClean = sumOfElements(toEvaluate);
         dirtyClean=toEvaluate;
     }
-    public int getSumOfDirtyClean(){return sumOfDirtyClean;}
-    public int [][] getDirtyClean(){return dirtyClean;}
+    public double getSumOfDirtyClean(){return sumOfDirtyClean;}
+    public double [][] getDirtyClean(){return dirtyClean;}
 
 
     /*This method is the first evaluator. It looks for 1 values i.e. fields that could be seen before and cannot be seen
@@ -38,7 +38,7 @@ public class SetEvaluator {
     this check on its neighbours
      */
 
-    public void firstEvaluator (int [][] toEvaluate,int i, int j){
+    public void firstEvaluator (double [][] toEvaluate,int i, int j){
         for (int k=i; k<toEvaluate.length; k++){
             for (int l=j; l <toEvaluate[0].length;l++){
                 if (toEvaluate[k][l] == 1){
@@ -67,7 +67,7 @@ public class SetEvaluator {
 
     /*This method checks the neighbours of the firstEvaluator and checks the neighbours of what it sets to 0 too
      */
-    public void secondEvaluator (int [][] toEvaluate,int i, int j) {
+    public void secondEvaluator (double [][] toEvaluate,int i, int j) {
         for (int k = i; k < toEvaluate.length; k++) {
             for (int l = j; l < toEvaluate[0].length; l++) {
                 if (k+1<toEvaluate.length && toEvaluate[k + 1][l] == 1 ) {
@@ -97,7 +97,7 @@ public class SetEvaluator {
      Dirty nodes have value 0, clean have value 1, walls have value -5
       */
 
-     public void cleanUp (int [][] toClean){
+     public void cleanUp (double [][] toClean){
         for (int i = 0; i<toClean.length; i++){
             for (int j = 0; j<toClean[0].length; j++){
                 if(toClean[i][j]>0){
@@ -112,8 +112,8 @@ public class SetEvaluator {
 
     /*This method sums two matrices*/
 
-    public int [][] sumOf2D(int [][] sum1, int [][] sum2){
-        int [][] sum = new int [sum1.length][sum2[0].length];
+    public double [][] sumOf2D(double [][] sum1, double [][] sum2){
+        double [][] sum = new double [sum1.length][sum2[0].length];
         if (sum1.length == sum2.length && sum1[1].length == sum2[0].length) {
             for (int i=0; i<sum1.length;i++){
                 for (int j=0; j<sum1[0].length;j++){
@@ -124,7 +124,7 @@ public class SetEvaluator {
         }
         return sum;
     }
-    public int sumOfElements (int [][] matrix){
+    public double sumOfElements (double [][] matrix){
         int sum = 0;
         for (int i = 0; i<matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {

@@ -6,7 +6,7 @@ public interface Entity {
 	public void setSpeed(int parseInt);
 	public void setViewAngle(int parseInt);
 	public int getSpeed();
-	public void move();
+	public void move(Graph graph);
 	void setAlgorithm(Algorithm alg);
 	public void setCapture(boolean isCaptured);
 	public boolean getCapture();

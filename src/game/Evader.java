@@ -32,6 +32,16 @@ public class Evader implements Entity {
 		this.node.setValue("");
 		this.node = node;
 		this.node.setValue("evader");
+		if (this.getDirtyClean()==null){
+            this.setDirtyClean(new double[graph.getNodeGrid().length][graph.getNodeGrid()[0].length]);
+            for(int i=0;i<graph.getNodeGrid().length;i++)
+                for(int j=0;j<graph.getNodeGrid()[0].length;j++){
+                    if(graph.getNodeGrid()[i][j].getValue().equals("wall")){
+                        this.getDirtyClean()[i][j]=-5;
+                    }
+
+                }
+        }
 		VisibilityChecker toCompare;
 		SetEvaluator evaluator;
 		toCompare = new VisibilityChecker();

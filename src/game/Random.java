@@ -2,6 +2,11 @@ package game;
 
 
 public class Random implements Algorithm{
+	private Graph graph;
+	
+	public Random(Graph graph){
+		this.graph = graph;
+	}
 
 	@Override
 	public void move(Entity entity) {
@@ -10,7 +15,7 @@ public class Random implements Algorithm{
 		int random = (int) Math.floor(r.nextInt(entity.getNode().getActiveNeighbors().size()));
 		Node node = entity.getNode().getActiveNeighbors().get((int)random);
 		if(node.getValue()=="")
-			entity.moveToNode(node);
+			entity.moveToNode(node, graph);
 		else {
 			recursiveMove(entity,0);
 		}
@@ -24,7 +29,7 @@ public class Random implements Algorithm{
 		node = entity.getNode().getActiveNeighbors().get((int)random);
 		}while(node == nodeNoGo );
 		if(node.getValue()=="")
-			entity.moveToNode(node);
+			entity.moveToNode(node,graph);
 		else {
 			recursiveMove(entity,0);
 		}
@@ -34,7 +39,7 @@ public class Random implements Algorithm{
 		int random = (int) Math.floor(Math.random()*entity.getNode().getActiveNeighbors().size());
 		Node node = entity.getNode().getActiveNeighbors().get((int)random);
 		if(node.getValue()=="")
-			entity.moveToNode(node);
+			entity.moveToNode(node,graph);
 		else if (counter<6){
 			System.err.println(counter);
 			counter++;

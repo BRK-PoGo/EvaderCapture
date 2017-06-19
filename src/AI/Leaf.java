@@ -4,15 +4,15 @@ import game.Node;
 
 public class Leaf {
 	private Leaf parent = null;
- 	private Node finalNode;
+ 	private Node node;
  	private int[][] dirtyCleanMatrix;
   
- 	public Leaf(Node n, int[][] dCM){
-	  dirtyCleanMatrix = dCM;
-	  finalNode = n;
-  }public Leaf(Node n, int[][] dCM,Leaf parent){
-	  dirtyCleanMatrix = dCM;
-	  finalNode = n;
+ 	public Leaf(Node n, int[][] dirtyCleanMatrix){
+	  this.dirtyCleanMatrix = dirtyCleanMatrix;
+	  node = n;
+  }public Leaf(Node n, int[][] dirtyCleanMatrix,Leaf parent){
+	  this.dirtyCleanMatrix = dirtyCleanMatrix;
+	  node = n;
 	  this.parent = parent;
   }
 	public Leaf getParent() {
@@ -21,11 +21,11 @@ public class Leaf {
 	public void setParent(Leaf parent) {
 		this.parent = parent;
 	}
-	public Node getFinalNode() {
-		return finalNode;
+	public Node getNode() {
+		return node;
 	}
-	public void setFinalNode(Node finalNode) {
-		this.finalNode = finalNode;
+	public void setNode(Node node) {
+		this.node = node;
 	}
 	public int[][] getDirtyCleanMatrix() {
 		return dirtyCleanMatrix;

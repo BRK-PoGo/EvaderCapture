@@ -1,5 +1,8 @@
 package game;
 
+import AI.SetEvaluator;
+import AI.VisibilityChecker;
+
 public class Pursuer implements Entity{
 
 	private Node node;
@@ -26,10 +29,17 @@ public class Pursuer implements Entity{
 	public Node getNode() {
 		return node;
 	}
-	public void moveToNode(Node node) {
+	public void moveToNode(Node node, Graph graph) {
 		this.node.setValue("");
 		this.node = node;
 		this.node.setValue("pursuer");
+		VisibilityChecker toCompare;
+		SetEvaluator evaluator;
+		toCompare = new VisibilityChecker();
+        toCompare.checkEntitiesCurrent(graph,node);
+        evaluator=new SetEvaluator(toCompare);
+        evaluator.evaluateDirtyClean(this.getDirtyClean());
+        this.setDirtyClean(evaluator.getDirtyClean());
 	}
 	@Override
 	public void setSpeed(int parseInt) {
@@ -67,7 +77,7 @@ public class Pursuer implements Entity{
 		return dirtyClearMatrix;
 	}
 
-	@Override
+	
 	public void setDirtyClean(int[][] dirtyClearMatrix) {
 		this.dirtyClearMatrix=dirtyClearMatrix;
 	}

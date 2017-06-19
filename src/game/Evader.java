@@ -1,5 +1,8 @@
 package game;
 
+import AI.SetEvaluator;
+import AI.VisibilityChecker;
+
 public class Evader implements Entity {
 
 	private Node node;
@@ -25,10 +28,18 @@ public class Evader implements Entity {
 	public Node getNode() {
 		return node;
 	}
-	public void moveToNode(Node node) {
+	public void moveToNode(Node node, Graph graph) {
 		this.node.setValue("");
 		this.node = node;
 		this.node.setValue("evader");
+		VisibilityChecker toCompare;
+		SetEvaluator evaluator;
+		toCompare = new VisibilityChecker();
+        toCompare.checkEntitiesCurrent(graph,node);
+        evaluator=new SetEvaluator(toCompare);
+        evaluator.evaluateDirtyClean(this.getDirtyClean());
+        this.setDirtyClean(evaluator.getDirtyClean());
+		
 	}
 	@Override
 	public void setSpeed(int parseInt) {
@@ -67,7 +78,7 @@ public class Evader implements Entity {
 	public int[][] getDirtyClean() {
 		return dirtyCleanMatrix;
 	}
-	@Override
+	
 	public void setDirtyClean(int[][] dirtyCleanMatrix) {
 		this.dirtyCleanMatrix = dirtyCleanMatrix;
 		

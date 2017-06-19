@@ -100,10 +100,10 @@ public class SetEvaluator {
      public void cleanUp (int [][] toClean){
         for (int i = 0; i<toClean.length; i++){
             for (int j = 0; j<toClean[0].length; j++){
-                if(toClean[i][j]==2||toClean[i][j]==3){
+                if(toClean[i][j]>0){
                     toClean[i][j]=1;
                 }
-                if (toClean[i][j]==-15){
+                if (toClean[i][j]<0){
                     toClean[i][j]=-5;
                 }
             }

@@ -57,15 +57,9 @@ public class BeliefUpdater implements Algorithm {
             }
         }
         entity.setDirtyClean(bestDirtyClean);
-        System.out.println("");
-        System.out.println("Before moving");
-        System.out.println("x: "+entity.getNode().getY()+" y: "+entity.getNode().getX());
-        System.out.println("");
-        System.out.println("Prevously:");
         if(previousMove != null)
         	System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
-        if(firtsIteration){
-        System.out.println("");}
+        
         if(previousMove==null || bestMove != previousMove){
         	previousMove = entity.getNode();
         	entity.moveToNode(bestMove);
@@ -80,17 +74,9 @@ public class BeliefUpdater implements Algorithm {
         }
         if(previousMove == null){
         	previousMove= entity.getNode(); //update previous
-        	firtsIteration=false;
+        	//firtsIteration=false;
         } 
-        System.out.println("");
-        System.out.println("After moving");
-        System.out.println("x: "+entity.getNode().getY()+" y: "+entity.getNode().getX());
-        System.out.println("PreviousMove:");
-        System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
-        System.out.println("");
-        System.out.println("");
-        System.out.println("-------------------------------------------------");
-
+        
 
     }
     public void setCurrentState(Graph g){currentState=g;}

@@ -22,7 +22,7 @@ public class Random implements Algorithm{
 		do{
 		int random = (int) Math.floor(r.nextInt(entity.getNode().getActiveNeighbors().size()));
 		node = entity.getNode().getActiveNeighbors().get((int)random);
-		}while(node == nodeNoGo);
+		}while(node == nodeNoGo );
 		if(node.getValue()=="")
 			entity.moveToNode(node);
 		else {
@@ -35,7 +35,8 @@ public class Random implements Algorithm{
 		Node node = entity.getNode().getActiveNeighbors().get((int)random);
 		if(node.getValue()=="")
 			entity.moveToNode(node);
-		else if (counter<100){
+		else if (counter<6){
+			System.err.println(counter);
 			counter++;
 			recursiveMove(entity,counter);
 		}

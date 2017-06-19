@@ -9,6 +9,8 @@ public class Pursuer implements Entity{
 	private boolean isCaught = false;
 	private int [][] dirtyClearMatrix;
 	private boolean isPursuer = true;
+	private final int SIGHT_RAD = 10;
+	private final int SIGHT_ANG = 360;
 
 	public Pursuer(Node node) {
 		this.node = node;
@@ -71,5 +73,13 @@ public class Pursuer implements Entity{
 	}
 	public Boolean isPursuer(Entity e){
 		return isPursuer;
+	}
+	@Override
+	public int getRadius() {
+		return SIGHT_RAD;
+	}
+	@Override
+	public int getAngle() {
+		return SIGHT_ANG;
 	}
 }

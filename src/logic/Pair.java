@@ -2,7 +2,7 @@ package logic;
 
 import game.Entity;
 
-public class Pair {
+public class Pair { // Written by Tom
 
 	private Entity entity1;
 	private Entity entity2;

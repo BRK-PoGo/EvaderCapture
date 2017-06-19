@@ -8,6 +8,8 @@ public class Evader implements Entity {
 	private boolean isCaught = false;
 	private int [][] dirtyCleanMatrix;
 	private Boolean isPursuer = false;
+	private final int SIGHT_RAD = 10;
+	private final int SIGHT_ANG = 360;
 
 	public Evader(Node node) {
 		this.node = node;
@@ -69,5 +71,13 @@ public class Evader implements Entity {
 	public void setDirtyClean(int[][] dirtyCleanMatrix) {
 		this.dirtyCleanMatrix = dirtyCleanMatrix;
 		
+	}
+	@Override
+	public int getRadius() {
+		return SIGHT_RAD;
+	}
+	@Override
+	public int getAngle() {
+		return SIGHT_ANG;
 	}
 }

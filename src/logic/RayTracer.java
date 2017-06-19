@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import game.Node;
 
 //There are some problems in the logic of the raytracer the other stuff should be fine
-public class RayTracer {
+public class RayTracer { // Written by Tom
 
 	public ArrayList<Node> getRayTrace(int x0, int x1, int y0, int y1, Node[][] graph) {
 		ArrayList<Node> rayTrace = null;
 		if (checkInputs(x0, x1, y0, y1, graph.length, graph[0].length)) {
 			if (x0 == x1) rayTrace = doHorizontal(x0, y0, y1, graph);
 			else if (y0 == y1) rayTrace = doVertical(y0, x0, x1, graph);
-			else if(Math.abs(x1 - x0) > Math.abs(y1 - y0)) rayTrace = doShallow(x0, x1, y0, y1, graph);
+			else if (Math.abs(x1 - x0) > Math.abs(y1 - y0)) rayTrace = doShallow(x0, x1, y0, y1, graph);
+			else if (Math.abs(x1 - x0) == Math.abs(y1 - y0)) rayTrace = doDiagonal(x0, x1, y0, y1, graph);
 			else rayTrace = doSteep(x0, x1, y0, y1, graph);	
 		} else {
 			System.out.println("Invalid inputs");
@@ -112,6 +113,33 @@ public class RayTracer {
 		for (int x = x0; x <= x1; x++) {
 			rayTrace.add(graph[y][x]);
 		}
+		return rayTrace;
+	}
+	
+	public ArrayList<Node> doDiagonal(int x0, int x1, int y0, int y1, Node[][] graph) {
+		ArrayList<Node> rayTrace = new ArrayList<>();
+		if (x0 > x1) {
+			int tmp = x0;
+			x0 = x1;
+			x1 = tmp;
+			tmp = y0;
+			y0 = y1;
+			y1 = tmp;
+		}
+		if (y0 < y1) {
+			for (int x = x0; x <= x1; x++) {
+				for (int y = y0; y <= y1; y++) {
+					rayTrace.add(graph[y][x]);
+				}
+			}
+		} else {
+			for (int x = x0; x <= x1; x++) {
+				for (int y = y0; y <= y1; y--) {
+					rayTrace.add(graph[y][x]);
+				}
+			}
+		}
+		
 		return rayTrace;
 	}
 	

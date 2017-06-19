@@ -6,7 +6,7 @@ import game.Entity;
 import game.Graph;
 import game.Node;
 
-public class LineOfSightChecker {
+public class LineOfSightChecker { // Written by Tom
 
 	private ArrayList<Entity> toCheck;
 	private ArrayList<Entity> checked = new ArrayList<>();

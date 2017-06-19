@@ -1,9 +1,14 @@
 package game;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 
 import logic.RadiusChecker;
 import logic.RayTracer;
+=======
+import AI.SetEvaluator;
+import AI.VisibilityChecker;
+>>>>>>> branch 'master' of https://github.com/BRK-PoGo/EvaderCapture.git
 
 public class Pursuer implements Entity{
 
@@ -12,7 +17,7 @@ public class Pursuer implements Entity{
 	private int viewAngle;
 	private Algorithm alg;
 	private boolean isCaught = false;
-	private int [][] dirtyClearMatrix;
+	private double [][] dirtyClearMatrix;
 	private boolean isPursuer = true;
 	private final int SIGHT_RAD = 5;
 	private final int SIGHT_ANG = 360;
@@ -33,10 +38,28 @@ public class Pursuer implements Entity{
 	public Node getNode() {
 		return node;
 	}
-	public void moveToNode(Node node) {
+	public void moveToNode(Node node, Graph graph) {
 		this.node.setValue("");
 		this.node = node;
 		this.node.setValue("pursuer");
+		if (this.getDirtyClean()==null){
+            this.setDirtyClean(new double[graph.getNodeGrid().length][graph.getNodeGrid()[0].length]);
+            for(int i=0;i<graph.getNodeGrid().length;i++)
+                for(int j=0;j<graph.getNodeGrid()[0].length;j++){
+                    if(graph.getNodeGrid()[i][j].getValue().equals("wall")){
+                        this.getDirtyClean()[i][j]=-5;
+                    }
+
+                }
+        }
+
+		VisibilityChecker toCompare;
+		SetEvaluator evaluator;
+		toCompare = new VisibilityChecker();
+        toCompare.checkEntitiesCurrent(graph,node);
+        evaluator=new SetEvaluator(toCompare);
+        evaluator.evaluateDirtyClean(this.getDirtyClean());
+        this.setDirtyClean(evaluator.getDirtyClean());
 	}
 	@Override
 	public void setSpeed(int parseInt) {
@@ -72,13 +95,13 @@ public class Pursuer implements Entity{
 	}
 
 	@Override
-	public int[][] getDirtyClean() {
+	public double[][] getDirtyClean() {
 		return dirtyClearMatrix;
 	}
 
-	@Override
-	public void setDirtyClean(int[][] dirtyClearMatrix) {
-		this.dirtyClearMatrix=dirtyClearMatrix;
+	
+	public void setDirtyClean(double[][] ds) {
+		this.dirtyClearMatrix=ds;
 	}
 	public Boolean isPursuer(Entity e){
 		return isPursuer;

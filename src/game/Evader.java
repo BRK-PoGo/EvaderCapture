@@ -1,12 +1,15 @@
 package game;
 
+import AI.SetEvaluator;
+import AI.VisibilityChecker;
+
 public class Evader implements Entity {
 
 	private Node node;
 	private int speed;////moves in 100 frames
 	private Algorithm alg;
 	private boolean isCaught = false;
-	private int [][] dirtyCleanMatrix;
+	private double [][] dirtyCleanMatrix;
 	private Boolean isPursuer = false;
 	private final int SIGHT_RAD = 10;
 	private final int SIGHT_ANG = 360;
@@ -25,10 +28,28 @@ public class Evader implements Entity {
 	public Node getNode() {
 		return node;
 	}
-	public void moveToNode(Node node) {
+	public void moveToNode(Node node, Graph graph) {
 		this.node.setValue("");
 		this.node = node;
 		this.node.setValue("evader");
+		if (this.getDirtyClean()==null){
+            this.setDirtyClean(new double[graph.getNodeGrid().length][graph.getNodeGrid()[0].length]);
+            for(int i=0;i<graph.getNodeGrid().length;i++)
+                for(int j=0;j<graph.getNodeGrid()[0].length;j++){
+                    if(graph.getNodeGrid()[i][j].getValue().equals("wall")){
+                        this.getDirtyClean()[i][j]=-5;
+                    }
+
+                }
+        }
+		VisibilityChecker toCompare;
+		SetEvaluator evaluator;
+		toCompare = new VisibilityChecker();
+        toCompare.checkEntitiesCurrent(graph,node);
+        evaluator=new SetEvaluator(toCompare);
+        evaluator.evaluateDirtyClean(this.getDirtyClean());
+        this.setDirtyClean(evaluator.getDirtyClean());
+		
 	}
 	@Override
 	public void setSpeed(int parseInt) {
@@ -64,12 +85,12 @@ public class Evader implements Entity {
 		return isPursuer;
 	}
 	@Override
-	public int[][] getDirtyClean() {
+	public double[][] getDirtyClean() {
 		return dirtyCleanMatrix;
 	}
-	@Override
-	public void setDirtyClean(int[][] dirtyCleanMatrix) {
-		this.dirtyCleanMatrix = dirtyCleanMatrix;
+	
+	public void setDirtyClean(double[][] ds) {
+		this.dirtyCleanMatrix = ds;
 		
 	}
 	@Override

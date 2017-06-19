@@ -183,7 +183,7 @@ public class GameFrame extends JFrame {
 						ent.setSpeed(Integer.parseInt(textField.getText()));
 						ent.setViewAngle(Integer.parseInt(textField_1.getText()));
 						if(rdbtnRandomEvad.isSelected())///set algorithm
-							ent.setAlgorithm(new Random());
+							ent.setAlgorithm(new Random(gamePanel.graph));
 						else if(rdbtnComandEvad.isSelected()){
 						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph));					
 						}
@@ -191,7 +191,7 @@ public class GameFrame extends JFrame {
 						ent.setSpeed(Integer.parseInt(textField_3.getText()));
 						ent.setViewAngle(Integer.parseInt(textField_2.getText()));
 						if(randomPurs.isSelected()){///set algorithm
-							ent.setAlgorithm(new Random());
+							ent.setAlgorithm(new Random(gamePanel.graph));
 						}
 						else if(comandPurs.isSelected()){
 						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph));	

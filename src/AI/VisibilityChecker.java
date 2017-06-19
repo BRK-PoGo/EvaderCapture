@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 
 public class VisibilityChecker {
 
-	private int [][] visibilityMatrix;
+	private double [][] visibilityMatrix;
 	
 	public void checkEntitiesCurrent(Graph graph, Node nod) {
 		//This method checks the visibility of one entities and stores them visibilityMatrix
@@ -18,7 +18,7 @@ public class VisibilityChecker {
 		//ArrayList<Entity> toCheck = graph.getEntities();
 		RayTracer tracer = new RayTracer();
 		Node[][] grid = graph.getNodeGrid();
-		visibilityMatrix = new int[grid.length][grid[0].length];
+		visibilityMatrix = new double[grid.length][grid[0].length];
 		for(int i=0;i<visibilityMatrix.length;i++)
 			for(int j=0;j<visibilityMatrix[0].length;j++){
 				if(grid[i][j].getValue().equals("wall")){
@@ -55,5 +55,5 @@ public class VisibilityChecker {
 		this.visibilityMatrix=visibilityMatrix;
 	}
 
-	public int [][] getVisibilityMatrix(){return visibilityMatrix;};
+	public double [][] getVisibilityMatrix(){return visibilityMatrix;};
 }

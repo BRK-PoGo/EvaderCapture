@@ -126,18 +126,11 @@ public class RayTracer { // Written by Tom
 			y0 = y1;
 			y1 = tmp;
 		}
-		if (y0 < y1) {
-			for (int x = x0; x <= x1; x++) {
-				for (int y = y0; y <= y1; y++) {
-					rayTrace.add(graph[y][x]);
-				}
-			}
-		} else {
-			for (int x = x0; x <= x1; x++) {
-				for (int y = y0; y <= y1; y--) {
-					rayTrace.add(graph[y][x]);
-				}
-			}
+		int y = y0;
+		for (int x = x0; x <= x1; x++) {
+			rayTrace.add(graph[y][x]);
+			if (y0 < y1) y++;
+			else y--;
 		}
 		
 		return rayTrace;

@@ -6,7 +6,7 @@ import game.Entity;
 import game.Graph;
 import game.Node;
 public class Tree {
-	private ArrayList<ArrayList<Leaf>> levels;
+	private ArrayList<ArrayList<Leaf>> levels = new ArrayList<ArrayList<Leaf>>();
 	private Graph graph;
 
 	public Tree(Entity startingEntity, Graph g, int depth) {
@@ -21,6 +21,7 @@ public class Tree {
 					levelI.add(new Leaf(n,null,l));
 				}
 			}
+			levels.add(levelI);
 		}
 	}
 

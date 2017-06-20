@@ -31,6 +31,8 @@ import org.eclipse.wb.swing.FocusTraversalOnArray;
 import AI.BeliefUpdater;
 
 import java.awt.Component;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
@@ -50,6 +52,8 @@ public class GameFrame extends JFrame {
 	private final Action action = new SwingAction();
 	private JPanel speedControl = new JPanel();
 	protected MainGameLoop gameLoop;
+	private JSpinner spinner_1;
+	private JSpinner spinner;
 
 	
 	/**
@@ -167,11 +171,11 @@ public class GameFrame extends JFrame {
 		JRadioButton rdbtnRandomEvad = new JRadioButton("Random");
 		buttonGroup_1.add(rdbtnRandomEvad);
 		rdbtnRandomEvad.setSelected(true);
-		JRadioButton rdbtnComandEvad = new JRadioButton("Comand");
+		JRadioButton rdbtnComandEvad = new JRadioButton("D-Clean");
 		buttonGroup_1.add(rdbtnComandEvad);
 		JRadioButton randomPurs = new JRadioButton("Random");
-		randomPurs.setSelected(true);
-		JRadioButton comandPurs = new JRadioButton("Comand");
+		JRadioButton comandPurs = new JRadioButton("D-Clea");
+		comandPurs.setSelected(true);
 
 
 
@@ -185,7 +189,7 @@ public class GameFrame extends JFrame {
 						if(rdbtnRandomEvad.isSelected())///set algorithm
 							ent.setAlgorithm(new Random(gamePanel.graph));
 						else if(rdbtnComandEvad.isSelected()){
-						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph));					
+						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph,(int)spinner.getValue()));					
 						}
 					}else if(ent instanceof Pursuer){
 						ent.setSpeed(Integer.parseInt(textField_3.getText()));
@@ -194,7 +198,7 @@ public class GameFrame extends JFrame {
 							ent.setAlgorithm(new Random(gamePanel.graph));
 						}
 						else if(comandPurs.isSelected()){
-						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph));	
+						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph, (int)spinner_1.getValue()));	
 						}
 					}
 				}
@@ -266,14 +270,11 @@ public class GameFrame extends JFrame {
 		
 		JLabel lblMovingAlgorithm = new JLabel("Moving Algorithm");
 		
-		JLabel lblComandOnlySingle = new JLabel("Comand only when");
-		
-		JLabel lblSingleEvader = new JLabel("single evader");
-		
-		JLabel lblComandsOnWasd = new JLabel("Comands on WASD");
+		spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
 		GroupLayout gl_Evader = new GroupLayout(Evader);
 		gl_Evader.setHorizontalGroup(
-			gl_Evader.createParallelGroup(Alignment.TRAILING)
+			gl_Evader.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_Evader.createSequentialGroup()
 					.addGroup(gl_Evader.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_Evader.createSequentialGroup()
@@ -299,18 +300,12 @@ public class GameFrame extends JFrame {
 					.addContainerGap(36, Short.MAX_VALUE))
 				.addGroup(gl_Evader.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(rdbtnComandEvad, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_Evader.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_Evader.createSequentialGroup()
+							.addGap(24)
+							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(rdbtnComandEvad, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(gl_Evader.createSequentialGroup()
-					.addComponent(lblComandOnlySingle)
-					.addContainerGap())
-				.addGroup(Alignment.LEADING, gl_Evader.createSequentialGroup()
-					.addComponent(lblComandsOnWasd, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-				.addGroup(Alignment.LEADING, gl_Evader.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblSingleEvader)
-					.addContainerGap(34, Short.MAX_VALUE))
 		);
 		gl_Evader.setVerticalGroup(
 			gl_Evader.createParallelGroup(Alignment.LEADING)
@@ -330,12 +325,8 @@ public class GameFrame extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(rdbtnComandEvad)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblComandOnlySingle)
-					.addGap(1)
-					.addComponent(lblSingleEvader)
-					.addGap(18)
-					.addComponent(lblComandsOnWasd, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(60, Short.MAX_VALUE))
+					.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(144, Short.MAX_VALUE))
 		);
 		Evader.setLayout(gl_Evader);
 		
@@ -354,10 +345,6 @@ public class GameFrame extends JFrame {
 		
 		buttonGroup.add(comandPurs);
 		
-		JLabel label_1 = new JLabel("Comand only when");
-		
-		JLabel lblSinglePursuer = new JLabel("single pursuer");
-		
 		textField_3 = new JTextField();
 		textField_3.setText("100");
 		textField_3.setHorizontalAlignment(SwingConstants.TRAILING);
@@ -367,10 +354,11 @@ public class GameFrame extends JFrame {
 		
 		JLabel label_4 = new JLabel("View Angle");
 		
-		JLabel lblComandsOnArrow = new JLabel("Comands on arrows");
+		spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
 		GroupLayout gl_pursuerPanel = new GroupLayout(pursuerPanel);
 		gl_pursuerPanel.setHorizontalGroup(
-			gl_pursuerPanel.createParallelGroup(Alignment.TRAILING)
+			gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_pursuerPanel.createSequentialGroup()
 					.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_pursuerPanel.createSequentialGroup()
@@ -385,7 +373,7 @@ public class GameFrame extends JFrame {
 									.addGap(10)
 									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
 								.addComponent(label_4))))
-					.addContainerGap(26, Short.MAX_VALUE))
+					.addContainerGap(31, Short.MAX_VALUE))
 				.addGroup(gl_pursuerPanel.createSequentialGroup()
 					.addContainerGap(19, Short.MAX_VALUE)
 					.addComponent(label)
@@ -393,21 +381,15 @@ public class GameFrame extends JFrame {
 				.addGroup(gl_pursuerPanel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(randomPurs)
-					.addContainerGap(31, Short.MAX_VALUE))
+					.addContainerGap(36, Short.MAX_VALUE))
 				.addGroup(gl_pursuerPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(comandPurs, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_pursuerPanel.createSequentialGroup()
+							.addGap(24)
+							.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(comandPurs, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(gl_pursuerPanel.createSequentialGroup()
-					.addComponent(label_1)
-					.addContainerGap())
-				.addGroup(Alignment.LEADING, gl_pursuerPanel.createSequentialGroup()
-					.addComponent(lblComandsOnArrow)
-					.addContainerGap(13, Short.MAX_VALUE))
-				.addGroup(Alignment.LEADING, gl_pursuerPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblSinglePursuer)
-					.addContainerGap(29, Short.MAX_VALUE))
 		);
 		gl_pursuerPanel.setVerticalGroup(
 			gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
@@ -427,12 +409,8 @@ public class GameFrame extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(comandPurs)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(label_1)
-					.addGap(1)
-					.addComponent(lblSinglePursuer)
-					.addGap(18)
-					.addComponent(lblComandsOnArrow, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(60, Short.MAX_VALUE))
+					.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(144, Short.MAX_VALUE))
 		);
 		pursuerPanel.setLayout(gl_pursuerPanel);
 		AIMenu.setLayout(gl_panel);

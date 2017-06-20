@@ -7,7 +7,7 @@ import game.Node;
 
 public class Leaf {
 	private Leaf parent = null;
-	private ArrayList<Leaf> children = null;
+	private ArrayList<Leaf> children = new ArrayList<Leaf>();
  	private Node node;
  	private double[][] dirtyCleanMatrix;
  	private double value = Double.MIN_VALUE;

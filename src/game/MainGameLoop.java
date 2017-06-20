@@ -43,12 +43,12 @@ public class MainGameLoop{
 				for(Entity ent:graph.getEntities()){//move entities
 					if(((int)100/ent.getSpeed())>=((double)100/ent.getSpeed())){
 						if(count%(100/ent.getSpeed())==0  ||  ((100%ent.getSpeed())!=0 && count%(100%ent.getSpeed())==0)){
-							ent.move();
+							ent.move(graph);
 							hasMoved = true;
 						}
 					}else{
 						if(count%(100/ent.getSpeed())==0  &&  (count%(100/(100%ent.getSpeed()))!=0)){
-							ent.move();
+							ent.move(graph);
 							hasMoved = true;
 						}
 					}
@@ -73,6 +73,11 @@ public class MainGameLoop{
 							}
 						}
 					}
+					/*
+					for (Evader evader : graph.getEvaders()) {
+						if (evader.getNode().getVision()) evader.setCapture(true);
+					}
+					*/
 					check = true;
 					for (Evader evader : graph.getEvaders()) {
 						if (check && !evader.getCapture()) check = false;

@@ -13,7 +13,7 @@ public class AngleChecker {
 		
 		double vectorAngle = Math.toDegrees(Math.acos(preArccos));
 		
-		if (vectorAngle <= (angle/2)) angleChecker = true;
+		if (vectorAngle <= angle) angleChecker = true;
 		
 		return angleChecker;
 	}

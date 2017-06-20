@@ -1,7 +1,14 @@
 package game;
 
+
+import java.util.ArrayList;
+
+import logic.RadiusChecker;
+import logic.RayTracer;
+
 import AI.SetEvaluator;
 import AI.VisibilityChecker;
+
 
 public class Pursuer implements Entity{
 
@@ -12,8 +19,11 @@ public class Pursuer implements Entity{
 	private boolean isCaught = false;
 	private double [][] dirtyClearMatrix;
 	private boolean isPursuer = true;
-	private final int SIGHT_RAD = 10;
+	private final int SIGHT_RAD = 5;
 	private final int SIGHT_ANG = 360;
+	private RadiusChecker radChecker = new RadiusChecker();
+	private RayTracer lineChecker = new RayTracer();
+	private String dir = "UP";
 
 	public Pursuer(Node node) {
 		this.node = node;
@@ -67,8 +77,10 @@ public class Pursuer implements Entity{
 		return speed;
 	}
 	@Override
-	public void move() {
+	public void move(Graph graph) {
+		resetVision(graph);
 		alg.move(this);
+		setVision(graph);
 	}
 	@Override
 	public void setAlgorithm(Algorithm alg) {
@@ -102,5 +114,29 @@ public class Pursuer implements Entity{
 	@Override
 	public int getAngle() {
 		return SIGHT_ANG;
+	}
+	
+	private void resetVision(Graph graph) {
+		Node[][] grid = graph.getNodeGrid();
+		for (int x = node.getX() - SIGHT_RAD; x <= node.getX() + SIGHT_RAD; x++) {
+			for (int y = node.getY() - SIGHT_RAD; y <= node.getY() + SIGHT_RAD; y++) {
+				if (x >= 0 && x < graph.getNodeGrid()[0].length && y >= 0 && y < graph.getNodeGrid().length) {
+					grid[y][x].setVision(false);
+				}
+			}
+		}
+	}
+	
+	private void setVision(Graph graph) {
+		
+		Node[][] grid = graph.getNodeGrid();
+		for (int x = node.getX() - SIGHT_RAD; x <= node.getX() + SIGHT_RAD; x++) {
+			for (int y = node.getY() - SIGHT_RAD; y <= node.getY() + SIGHT_RAD; y++) {
+				if (x >= 0 && x < graph.getNodeGrid()[0].length && y >= 0 && y < graph.getNodeGrid().length) {
+					grid[y][x].setVision(radChecker.RadiusCheck(node.getX(), x, node.getY(), y, SIGHT_RAD));
+				}
+			}
+		}
+		
 	}
 }

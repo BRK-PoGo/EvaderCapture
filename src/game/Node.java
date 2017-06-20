@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Node {
 	private String value = "";//What's in this node? Default, nothing.
+	private boolean inVision = false;
 	public Rectangle rectangle; //coordinates of the node + dimension
 	private int x;
 	private int y;
@@ -57,5 +58,11 @@ public class Node {
 	}
 	public int getY() {
 		return y;
+	}
+	public void setVision(boolean vision) {
+		this.inVision = vision;
+	}
+	public boolean getVision() {
+		return inVision;
 	}
 }

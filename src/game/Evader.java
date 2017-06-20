@@ -60,7 +60,7 @@ public class Evader implements Entity {
 		return speed;
 	}
 	@Override
-	public void move() {
+	public void move(Graph graph) {
 		if (!isCaught) alg.move(this);
 		
 	}

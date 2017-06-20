@@ -21,7 +21,7 @@ public class Pursuer implements Entity{
 	private double [][] dirtyClearMatrix;
 	private boolean isPursuer = true;
 	private final int SIGHT_RAD = 10;
-	private final int SIGHT_ANG = 180;
+	private final int SIGHT_ANG = 300;
 	private RadiusChecker radChecker = new RadiusChecker();
 	private AngleChecker angChecker = new AngleChecker();
 	private RayTracer lineChecker = new RayTracer();
@@ -63,6 +63,7 @@ public class Pursuer implements Entity{
         evaluator=new SetEvaluator(toCompare);
         evaluator.evaluateDirtyClean(this.getDirtyClean());
         this.setDirtyClean(evaluator.getDirtyClean());
+        graph.setDirtyClean(this.getDirtyClean());
 	}
 	@Override
 	public void setSpeed(int parseInt) {

@@ -91,4 +91,14 @@ public class Graph {
 	public ArrayList<Evader> getEvaders() {
 		return evaders;
 	}
+	public void setDirtyClean(double[][] dirtyClean) {
+		for(int i=0;i<nodeGrid.length;i++)
+		{
+			for(int j=0;j<nodeGrid[0].length;j++){
+				nodeGrid[i][j].setDirtyCleanValue(dirtyClean[i][j]);
+			}
+			
+		}
+		
+	}
 }

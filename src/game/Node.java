@@ -11,6 +11,7 @@ public class Node {
 	private int y;
 	private ArrayList<Node> activeNeighbors = new ArrayList<Node>();
 	private ArrayList<Node> neighbors = new ArrayList<Node>();
+	private double dirtyCleanValue;
 
 	public Node(int x, int y) {
 		this.x = x;
@@ -64,5 +65,13 @@ public class Node {
 	}
 	public boolean getVision() {
 		return inVision;
+	}
+
+	public double getDirtyCleanValue() {
+		return dirtyCleanValue;
+	}
+
+	public void setDirtyCleanValue(double dirtyCleanValue) {
+		this.dirtyCleanValue = dirtyCleanValue;
 	}
 }

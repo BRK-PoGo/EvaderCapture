@@ -66,7 +66,6 @@ public class GamePanel extends JPanel {
 		super.paintComponent(g);
 		//paint graph
 		if(graph != null ){
-			
 			g.setColor(Color.gray);
 			for(int i=0; i<graph.getNodeGrid().length; i++) {
 	            for (int j=0; j<graph.getNodeGrid()[i].length; j++) {
@@ -96,6 +95,12 @@ public class GamePanel extends JPanel {
 	            		g.fillOval(graph.getNodeGrid()[i][j].rectangle.x+delta/2, graph.getNodeGrid()[i][j].rectangle.y+delta/2, graph.getNodeGrid()[i][j].rectangle.width-delta, graph.getNodeGrid()[i][j].rectangle.height-delta);
 	            		g.setColor(Color.gray);
 	            	}
+	            	if(graph.getNodeGrid()[i][j].getValue().equals("wall"))
+	            		g.setColor(Color.white);
+	            	else
+	            		g.setColor(Color.black);
+	            	g.drawString(Double.toString(graph.getNodeGrid()[i][j].getDirtyCleanValue()), (int) (graph.getNodeGrid()[i][j].rectangle.x+( graph.getNodeGrid()[i][j].rectangle.height/10)),(int) ( graph.getNodeGrid()[i][j].rectangle.y+(( graph.getNodeGrid()[i][j].rectangle.width/1.5))));
+	            	g.setColor(Color.GRAY);
 	            }
 			}
 		}

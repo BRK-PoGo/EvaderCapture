@@ -1,10 +1,11 @@
 package game;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 
-public class Graph {
+public class Graph implements Serializable{
 
     private Node[][] nodeGrid;
     public int size;//size of node

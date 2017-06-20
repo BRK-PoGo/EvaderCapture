@@ -15,4 +15,6 @@ public interface Entity {
 	public Boolean isPursuer(Entity e);
 	public int getRadius();
 	public int getAngle();
+	public void setDir (String dir);
+	public String getDir();
 }

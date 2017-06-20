@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import logic.AngleChecker;
 import logic.LineOfSightChecker;
 import logic.Pair;
 import logic.RadiusChecker;
@@ -19,6 +20,7 @@ public class MainGameLoop{
 	private int count=0;
 	private LineOfSightChecker checker = new LineOfSightChecker();
 	private RadiusChecker radChecker = new RadiusChecker();
+	private AngleChecker angChecker = new AngleChecker();
 
 	public MainGameLoop(GamePanel panel) {
 		gamePanel=panel;
@@ -62,22 +64,46 @@ public class MainGameLoop{
 					boolean check = true;
 					
 					ArrayList<Pair> pairs = checker.checkEntities(graph);
-					
+					Entity evaderEnt = null;
+					Entity pursuerEnt = null;
 					for (Pair pair : pairs) {
-						Entity e1 = pair.getEntity1();
-						Entity e2 = pair.getEntity2();
-						if ((e1.getNode().getValue().equals("evader") && e2.getNode().getValue().equals("pursuer")) || (e1.getNode().getValue().equals("pursuer") && e2.getNode().getValue().equals("evader"))) {
-							if (pair.getLineOfSight()) {// && radChecker.RadiusCheck(e1.getNode().getX(), e2.getNode().getX(), e1.getNode().getY(), e2.getNode().getY(), e1.getRadius())) {
-								if (e1.getNode().getValue().equals("evader")) e1.setCapture(true);
-								else e2.setCapture(true);
+						if ((pair.getEntity1().getNode().getValue().equals("evader") && pair.getEntity2().getNode().getValue().equals("pursuer")) || (pair.getEntity1().getNode().getValue().equals("pursuer") && pair.getEntity2().getNode().getValue().equals("evader"))) {
+							if (pair.getEntity1().getNode().getValue().equals("evader")) {
+								evaderEnt = pair.getEntity1();
+								pursuerEnt = pair.getEntity2();
+							} else {
+								pursuerEnt = pair.getEntity1();
+								evaderEnt = pair.getEntity2();
+							}
+							if (pair.getLineOfSight() && radChecker.RadiusCheck(pursuerEnt.getNode().getX(), evaderEnt.getNode().getX(), pursuerEnt.getNode().getY(), evaderEnt.getNode().getY(), pursuerEnt.getRadius())) {
+								if (pursuerEnt.getDir().equals("UP")) {
+									int uI = 1;
+									int uJ = 0;
+									int vI = pursuerEnt.getNode().getX() - evaderEnt.getNode().getX();
+									int vJ = pursuerEnt.getNode().getY() - evaderEnt.getNode().getY();
+									if (angChecker.checkAngle(vI, vJ, uI, uJ, pursuerEnt.getAngle()/2)) evaderEnt.setCapture(true);
+								} else if (pursuerEnt.getDir().equals("DOWN")) {
+									int uI = -1;
+									int uJ = 0;
+									int vI = pursuerEnt.getNode().getX() - evaderEnt.getNode().getX();
+									int vJ = pursuerEnt.getNode().getY() - evaderEnt.getNode().getY();
+									if (angChecker.checkAngle(vI, vJ, uI, uJ, pursuerEnt.getAngle()/2)) evaderEnt.setCapture(true);
+								} else if (pursuerEnt.getDir().equals("LEFT")) {
+									int uI = 0;
+									int uJ = 1;
+									int vI = pursuerEnt.getNode().getX() - evaderEnt.getNode().getX();
+									int vJ = pursuerEnt.getNode().getY() - evaderEnt.getNode().getY();
+									if (angChecker.checkAngle(vI, vJ, uI, uJ, pursuerEnt.getAngle()/2)) evaderEnt.setCapture(true);
+								} else if (pursuerEnt.getDir().equals("LEFT")) {
+									int uI = 0;
+									int uJ = -1;
+									int vI = pursuerEnt.getNode().getX() - evaderEnt.getNode().getX();
+									int vJ = pursuerEnt.getNode().getY() - evaderEnt.getNode().getY();
+									if (angChecker.checkAngle(vI, vJ, uI, uJ, pursuerEnt.getAngle()/2)) evaderEnt.setCapture(true);
+								}
 							}
 						}
 					}
-					/*
-					for (Evader evader : graph.getEvaders()) {
-						if (evader.getNode().getVision()) evader.setCapture(true);
-					}
-					*/
 					check = true;
 					for (Evader evader : graph.getEvaders()) {
 						if (check && !evader.getCapture()) check = false;
@@ -87,12 +113,12 @@ public class MainGameLoop{
 				
 				
         		gamePanel.repaint();			//update panel
-        		if (!isRunning)
-        		{								//check
+        		if (!isRunning) {								//check
         			timer.cancel();				//exit loop
         			System.out.println("game is done");
         		}
     		}
+				
 	}
 }
  

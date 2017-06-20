@@ -13,6 +13,7 @@ public class Evader implements Entity {
 	private Boolean isPursuer = false;
 	private final int SIGHT_RAD = 10;
 	private final int SIGHT_ANG = 360;
+	private String dir = "UP";
 
 	public Evader(Node node) {
 		this.node = node;
@@ -100,5 +101,13 @@ public class Evader implements Entity {
 	@Override
 	public int getAngle() {
 		return SIGHT_ANG;
+	}
+	
+	public void setDir (String dir) {
+		this.dir = dir;
+	}
+	
+	public String getDir() {
+		return dir;
 	}
 }

@@ -63,6 +63,7 @@ public class Pursuer implements Entity{
         evaluator=new SetEvaluator(toCompare);
         evaluator.evaluateDirtyClean(this.getDirtyClean());
         this.setDirtyClean(evaluator.getDirtyClean());
+        graph.setDirtyClean(this.getDirtyClean());
 	}
 	@Override
 	public void setSpeed(int parseInt) {

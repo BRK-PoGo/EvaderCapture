@@ -22,12 +22,13 @@ public class BeliefUpdater implements Algorithm {
 
     VisibilityChecker toCompare;
     SetEvaluator evaluator;
+    int depth;
 
-    public BeliefUpdater(Graph g){
+    public BeliefUpdater(Graph g, int depth){
+    	this.depth = depth;
         currentState = g;
     }
-    @Override
-    public void move(Entity entity) {
+    public void moveOLD(Entity entity){
     	//move depth 1
         //Current now contains an Arraylist of all visibilty matrices of all current entities
         if (entity.getDirtyClean()==null){
@@ -76,7 +77,7 @@ public class BeliefUpdater implements Algorithm {
         
 
     }
-    public void move(Entity entity, int depth) {
+    public void move(Entity entity) {
     	//move depth "depth"
         //Current now contains an Arraylist of all visibilty matrices of all current entities
         if (entity.getDirtyClean()==null){

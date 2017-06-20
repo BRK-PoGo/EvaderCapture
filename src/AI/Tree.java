@@ -18,7 +18,8 @@ public class Tree {
 			ArrayList<Leaf> levelI = new ArrayList<Leaf>();
 			for(Leaf l:levels.get(i)){
 				for(Node n:l.getNode().getActiveNeighbors()){
-					levelI.add(new Leaf(n,null,l));
+					if(l.getParent()==null || n != l.getParent().getNode())
+						levelI.add(new Leaf(n,null,l));
 				}
 			}
 			levels.add(levelI);

@@ -109,7 +109,6 @@ public class GamePanel extends JPanel {
 		this.edit = edit;
 	}
 	public double getFitness(Network net) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

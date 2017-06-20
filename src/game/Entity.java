@@ -17,4 +17,5 @@ public interface Entity {
 	public int getAngle();
 	public void setDir (String dir);
 	public String getDir();
+	public void setViewSight(int parseInt);
 }

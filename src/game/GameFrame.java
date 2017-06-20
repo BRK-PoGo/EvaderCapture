@@ -44,16 +44,15 @@ public class GameFrame extends JFrame {
 	private JPanel AIMenu;
 	private JPanel menuDesigner;
 	private JTextField textField;
-	private JTextField textField_1;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textField_angle;
+	private JTextField textField_speed;
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 	private final Action action = new SwingAction();
 	private JPanel speedControl = new JPanel();
 	protected MainGameLoop gameLoop;
 	private JSpinner spinner_1;
-	private JSpinner spinner;
+	private JTextField textField_Sight;
 
 	
 	/**
@@ -168,32 +167,31 @@ public class GameFrame extends JFrame {
 		JLabel lblAiSettings = new JLabel("AI Settings:");
 		
 		JTabbedPane AIsettingPanel = new JTabbedPane(JTabbedPane.TOP);
-		JRadioButton rdbtnRandomEvad = new JRadioButton("Random");
+		JRadioButton rdbtnRandomEvad = new JRadioButton("Hide");
 		buttonGroup_1.add(rdbtnRandomEvad);
 		rdbtnRandomEvad.setSelected(true);
-		JRadioButton rdbtnComandEvad = new JRadioButton("D-Clean");
+		JRadioButton rdbtnComandEvad = new JRadioButton("Run");
 		buttonGroup_1.add(rdbtnComandEvad);
+
+
 		JRadioButton randomPurs = new JRadioButton("Random");
 		JRadioButton comandPurs = new JRadioButton("D-Clea");
 		comandPurs.setSelected(true);
-
-
-
 		JButton button = new JButton("Done");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		//here Start Game LOOP.
 				for(Entity ent:gamePanel.graph.getEntities()){
 					if(ent instanceof Evader){
 						ent.setSpeed(Integer.parseInt(textField.getText()));
-						ent.setViewAngle(Integer.parseInt(textField_1.getText()));
 						if(rdbtnRandomEvad.isSelected())///set algorithm
 							ent.setAlgorithm(new Random(gamePanel.graph));
 						else if(rdbtnComandEvad.isSelected()){
-						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph,(int)spinner.getValue()));					
+						ent.setAlgorithm(new Random(gamePanel.graph));				
 						}
 					}else if(ent instanceof Pursuer){
-						ent.setSpeed(Integer.parseInt(textField_3.getText()));
-						ent.setViewAngle(Integer.parseInt(textField_2.getText()));
+						ent.setSpeed(Integer.parseInt(textField_speed.getText()));
+						ent.setViewAngle(Integer.parseInt(textField_angle.getText()));
+						ent.setViewSight(Integer.parseInt(textField_Sight.getText()));
 						if(randomPurs.isSelected()){///set algorithm
 							ent.setAlgorithm(new Random(gamePanel.graph));
 						}
@@ -250,6 +248,102 @@ public class GameFrame extends JFrame {
 					.addGap(45))
 		);
 		
+		
+		JPanel pursuerPanel = new JPanel();
+		AIsettingPanel.addTab("Pursuer", null, pursuerPanel, null);
+		
+		textField_angle = new JTextField();
+		textField_angle.setText("360");
+		textField_angle.setHorizontalAlignment(SwingConstants.TRAILING);
+		textField_angle.setColumns(10);
+		
+		JLabel label = new JLabel("Moving Algorithm");
+		
+		buttonGroup.add(randomPurs);
+		
+		buttonGroup.add(comandPurs);
+		
+		textField_speed = new JTextField();
+		textField_speed.setText("100");
+		textField_speed.setHorizontalAlignment(SwingConstants.TRAILING);
+		textField_speed.setColumns(10);
+		
+		JLabel label_3 = new JLabel("Speed");
+		
+		JLabel label_4 = new JLabel("View Angle");
+		
+		spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
+		
+		JLabel lblSight = new JLabel("Sight");
+		
+		textField_Sight = new JTextField();
+		textField_Sight.setText("100");
+		textField_Sight.setHorizontalAlignment(SwingConstants.TRAILING);
+		textField_Sight.setColumns(10);
+		GroupLayout gl_pursuerPanel = new GroupLayout(pursuerPanel);
+		gl_pursuerPanel.setHorizontalGroup(
+			gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pursuerPanel.createSequentialGroup()
+					.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_pursuerPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(randomPurs))
+						.addGroup(gl_pursuerPanel.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_pursuerPanel.createSequentialGroup()
+									.addGap(24)
+									.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(comandPurs, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_pursuerPanel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(label))
+						.addGroup(gl_pursuerPanel.createSequentialGroup()
+							.addGap(24)
+							.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_4)
+								.addGroup(gl_pursuerPanel.createSequentialGroup()
+									.addGap(10)
+									.addComponent(textField_angle, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblSight, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_pursuerPanel.createSequentialGroup()
+									.addGap(10)
+									.addComponent(textField_Sight, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(gl_pursuerPanel.createSequentialGroup()
+							.addGap(32)
+							.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(textField_speed, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+								.addComponent(label_3))))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_pursuerPanel.setVerticalGroup(
+			gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_pursuerPanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(label_3)
+					.addGap(1)
+					.addComponent(textField_speed, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(12)
+					.addComponent(label_4)
+					.addGap(2)
+					.addComponent(textField_angle, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblSight)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textField_Sight, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(label)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(randomPurs)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(comandPurs)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(144, Short.MAX_VALUE))
+		);
+		pursuerPanel.setLayout(gl_pursuerPanel);
+		
 		JPanel Evader = new JPanel();
 		AIsettingPanel.addTab("Evader", null, Evader, null);
 		
@@ -260,18 +354,7 @@ public class GameFrame extends JFrame {
 		textField.setText("100");
 		textField.setColumns(10);
 		
-		JLabel lblViewAngle = new JLabel("View Angle");
-		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setText("360");
-		textField_1.setHorizontalAlignment(SwingConstants.TRAILING);
-		textField_1.setColumns(10);
-		
 		JLabel lblMovingAlgorithm = new JLabel("Moving Algorithm");
-		
-		spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
 		GroupLayout gl_Evader = new GroupLayout(Evader);
 		gl_Evader.setHorizontalGroup(
 			gl_Evader.createParallelGroup(Alignment.LEADING)
@@ -283,29 +366,16 @@ public class GameFrame extends JFrame {
 								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblSpeed)))
 						.addGroup(gl_Evader.createSequentialGroup()
-							.addGap(24)
-							.addGroup(gl_Evader.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_Evader.createSequentialGroup()
-									.addGap(10)
-									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblViewAngle))))
-					.addContainerGap(31, Short.MAX_VALUE))
-				.addGroup(gl_Evader.createSequentialGroup()
-					.addContainerGap(19, Short.MAX_VALUE)
+							.addContainerGap()
+							.addComponent(rdbtnRandomEvad))
+						.addGroup(gl_Evader.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(rdbtnComandEvad, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, gl_Evader.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(lblMovingAlgorithm)
 					.addContainerGap())
-				.addGroup(gl_Evader.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(rdbtnRandomEvad)
-					.addContainerGap(36, Short.MAX_VALUE))
-				.addGroup(gl_Evader.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_Evader.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_Evader.createSequentialGroup()
-							.addGap(24)
-							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(rdbtnComandEvad, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_Evader.setVerticalGroup(
 			gl_Evader.createParallelGroup(Alignment.LEADING)
@@ -314,105 +384,15 @@ public class GameFrame extends JFrame {
 					.addComponent(lblSpeed)
 					.addGap(12)
 					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblViewAngle)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(33)
+					.addGap(100)
 					.addComponent(lblMovingAlgorithm)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(rdbtnRandomEvad)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(rdbtnComandEvad)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(144, Short.MAX_VALUE))
+					.addContainerGap(175, Short.MAX_VALUE))
 		);
 		Evader.setLayout(gl_Evader);
-		
-		JPanel pursuerPanel = new JPanel();
-		AIsettingPanel.addTab("Pursuer", null, pursuerPanel, null);
-		
-		textField_2 = new JTextField();
-		textField_2.setText("360");
-		textField_2.setHorizontalAlignment(SwingConstants.TRAILING);
-		textField_2.setEditable(false);
-		textField_2.setColumns(10);
-		
-		JLabel label = new JLabel("Moving Algorithm");
-		
-		buttonGroup.add(randomPurs);
-		
-		buttonGroup.add(comandPurs);
-		
-		textField_3 = new JTextField();
-		textField_3.setText("100");
-		textField_3.setHorizontalAlignment(SwingConstants.TRAILING);
-		textField_3.setColumns(10);
-		
-		JLabel label_3 = new JLabel("Speed");
-		
-		JLabel label_4 = new JLabel("View Angle");
-		
-		spinner_1 = new JSpinner();
-		spinner_1.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
-		GroupLayout gl_pursuerPanel = new GroupLayout(pursuerPanel);
-		gl_pursuerPanel.setHorizontalGroup(
-			gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pursuerPanel.createSequentialGroup()
-					.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_pursuerPanel.createSequentialGroup()
-							.addGap(32)
-							.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
-								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(label_3)))
-						.addGroup(gl_pursuerPanel.createSequentialGroup()
-							.addGap(24)
-							.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_pursuerPanel.createSequentialGroup()
-									.addGap(10)
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-								.addComponent(label_4))))
-					.addContainerGap(31, Short.MAX_VALUE))
-				.addGroup(gl_pursuerPanel.createSequentialGroup()
-					.addContainerGap(19, Short.MAX_VALUE)
-					.addComponent(label)
-					.addContainerGap())
-				.addGroup(gl_pursuerPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(randomPurs)
-					.addContainerGap(36, Short.MAX_VALUE))
-				.addGroup(gl_pursuerPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_pursuerPanel.createSequentialGroup()
-							.addGap(24)
-							.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(comandPurs, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		gl_pursuerPanel.setVerticalGroup(
-			gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pursuerPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(label_3)
-					.addGap(12)
-					.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(label_4)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(33)
-					.addComponent(label)
-					.addGap(18)
-					.addComponent(randomPurs)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(comandPurs)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(144, Short.MAX_VALUE))
-		);
-		pursuerPanel.setLayout(gl_pursuerPanel);
 		AIMenu.setLayout(gl_panel);
 	}
 	public JPanel makeMenuDesigner() {
@@ -537,8 +517,8 @@ public class GameFrame extends JFrame {
 						//change 1st and last element in wall
 						if(gamePanel.graph.getNodeGrid()[0][i].getValue().equals(""))
 							gamePanel.graph.addWall(0, i);
-						if(gamePanel.graph.getNodeGrid()[gamePanel.graph.getNodeGrid().length-1][i].getValue().equals(""))  //fix here, perimeter BUG TODO
-							gamePanel.graph.addWall(gamePanel.graph.getNodeGrid()[i].length-1, i);			
+						if(gamePanel.graph.getNodeGrid()[gamePanel.graph.getNodeGrid().length-1][i].getValue().equals("")) 
+							gamePanel.graph.addWall(gamePanel.graph.getNodeGrid().length-1, i);			
 					}
 					repaint();
 				}

@@ -553,6 +553,18 @@ public class GameFrame extends JFrame {
 			}
 		});
 		
+		JButton btnSalve = new JButton("Save");
+		btnSalve.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		JButton btnLoad = new JButton("Load");
+		btnLoad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
 		
 		
 		GroupLayout gl_drawPanel = new GroupLayout(drawPanel);
@@ -563,7 +575,7 @@ public class GameFrame extends JFrame {
 					.addComponent(NodeSizeField, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(53, Short.MAX_VALUE))
 				.addGroup(gl_drawPanel.createSequentialGroup()
-					.addContainerGap(22, Short.MAX_VALUE)
+					.addContainerGap(24, Short.MAX_VALUE)
 					.addGroup(gl_drawPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_drawPanel.createSequentialGroup()
 							.addComponent(heigthField, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
@@ -581,27 +593,32 @@ public class GameFrame extends JFrame {
 					.addContainerGap(30, Short.MAX_VALUE))
 				.addGroup(gl_drawPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnPursu, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(btnPursu, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
 					.addGap(20))
 				.addGroup(gl_drawPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnEnd, GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+					.addComponent(btnEnd, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
 					.addGap(20))
 				.addGroup(gl_drawPanel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(btnPerimeter)
-					.addContainerGap(18, Short.MAX_VALUE))
+					.addContainerGap(20, Short.MAX_VALUE))
 				.addGroup(gl_drawPanel.createSequentialGroup()
 					.addComponent(actionLabel)
-					.addContainerGap(45, Short.MAX_VALUE))
+					.addContainerGap(47, Short.MAX_VALUE))
 				.addGroup(gl_drawPanel.createSequentialGroup()
 					.addGap(26)
 					.addComponent(btnDrawWall)
-					.addContainerGap(36, Short.MAX_VALUE))
+					.addContainerGap(38, Short.MAX_VALUE))
 				.addGroup(gl_drawPanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnNewMap)
-					.addContainerGap(22, Short.MAX_VALUE))
+					.addGap(24)
+					.addGroup(gl_drawPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_drawPanel.createSequentialGroup()
+							.addGap(10)
+							.addComponent(btnLoad))
+						.addComponent(btnSalve, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewMap))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_drawPanel.setVerticalGroup(
 			gl_drawPanel.createParallelGroup(Alignment.LEADING)
@@ -618,7 +635,7 @@ public class GameFrame extends JFrame {
 					.addComponent(btnEnd)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnDelete)
-					.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(lblNewLabel_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_drawPanel.createParallelGroup(Alignment.BASELINE)
@@ -630,7 +647,11 @@ public class GameFrame extends JFrame {
 					.addComponent(NodeSizeField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnNewMap)
-					.addGap(74))
+					.addGap(8)
+					.addComponent(btnSalve)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnLoad)
+					.addGap(11))
 		);
 		drawPanel.setLayout(gl_drawPanel);
 		

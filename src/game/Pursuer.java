@@ -1,14 +1,14 @@
 package game;
 
-<<<<<<< HEAD
+
 import java.util.ArrayList;
 
 import logic.RadiusChecker;
 import logic.RayTracer;
-=======
+
 import AI.SetEvaluator;
 import AI.VisibilityChecker;
->>>>>>> branch 'master' of https://github.com/BRK-PoGo/EvaderCapture.git
+
 
 public class Pursuer implements Entity{
 
@@ -23,6 +23,7 @@ public class Pursuer implements Entity{
 	private final int SIGHT_ANG = 360;
 	private RadiusChecker radChecker = new RadiusChecker();
 	private RayTracer lineChecker = new RayTracer();
+	private String dir = "UP";
 
 	public Pursuer(Node node) {
 		this.node = node;

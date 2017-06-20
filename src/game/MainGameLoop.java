@@ -67,7 +67,7 @@ public class MainGameLoop{
 						Entity e1 = pair.getEntity1();
 						Entity e2 = pair.getEntity2();
 						if ((e1.getNode().getValue().equals("evader") && e2.getNode().getValue().equals("pursuer")) || (e1.getNode().getValue().equals("pursuer") && e2.getNode().getValue().equals("evader"))) {
-							if (pair.getLineOfSight() && radChecker.RadiusCheck(e1.getNode().getX(), e2.getNode().getX(), e1.getNode().getY(), e2.getNode().getY(), e1.getRadius())) {
+							if (pair.getLineOfSight()) {// && radChecker.RadiusCheck(e1.getNode().getX(), e2.getNode().getX(), e1.getNode().getY(), e2.getNode().getY(), e1.getRadius())) {
 								if (e1.getNode().getValue().equals("evader")) e1.setCapture(true);
 								else e2.setCapture(true);
 							}

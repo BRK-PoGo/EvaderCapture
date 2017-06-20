@@ -3,6 +3,7 @@ package game;
 
 import java.util.ArrayList;
 
+import logic.AngleChecker;
 import logic.RadiusChecker;
 import logic.RayTracer;
 
@@ -19,9 +20,10 @@ public class Pursuer implements Entity{
 	private boolean isCaught = false;
 	private double [][] dirtyClearMatrix;
 	private boolean isPursuer = true;
-	private final int SIGHT_RAD = 5;
-	private final int SIGHT_ANG = 360;
+	private final int SIGHT_RAD = 10;
+	private final int SIGHT_ANG = 180;
 	private RadiusChecker radChecker = new RadiusChecker();
+	private AngleChecker angChecker = new AngleChecker();
 	private RayTracer lineChecker = new RayTracer();
 	private String dir = "UP";
 
@@ -133,10 +135,43 @@ public class Pursuer implements Entity{
 		for (int x = node.getX() - SIGHT_RAD; x <= node.getX() + SIGHT_RAD; x++) {
 			for (int y = node.getY() - SIGHT_RAD; y <= node.getY() + SIGHT_RAD; y++) {
 				if (x >= 0 && x < graph.getNodeGrid()[0].length && y >= 0 && y < graph.getNodeGrid().length) {
-					grid[y][x].setVision(radChecker.RadiusCheck(node.getX(), x, node.getY(), y, SIGHT_RAD));
+					if (radChecker.RadiusCheck(node.getX(), x, node.getY(), y, SIGHT_RAD)) {
+						if (dir.equals("UP")) {
+							int uI = 1;
+							int uJ = 0;
+							int vI = node.getX() - x;
+							int vJ = node.getY() - y;
+							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, SIGHT_ANG/2));
+						} else if (dir.equals("DOWN")) {
+							int uI = -1;
+							int uJ = 0;
+							int vI = node.getX() - x;
+							int vJ = node.getY() - y;
+							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, SIGHT_ANG/2));
+						} else if (dir.equals("LEFT")) {
+							int uI = 0;
+							int uJ = 1;
+							int vI = node.getX() - x;
+							int vJ = node.getY() - y;
+							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, SIGHT_ANG/2));
+						} else if (dir.equals("LEFT")) {
+							int uI = 0;
+							int uJ = -1;
+							int vI = node.getX() - x;
+							int vJ = node.getY() - y;
+							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, SIGHT_ANG/2));
+						}
+					}
 				}
 			}
 		}
-		
+	}
+	
+	public void setDir (String dir) {
+		this.dir = dir;
+	}
+	
+	public String getDir() {
+		return dir;
 	}
 }

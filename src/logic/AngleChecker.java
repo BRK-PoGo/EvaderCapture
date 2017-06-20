@@ -1,6 +1,12 @@
 package logic;
 
 public class AngleChecker {
+	
+	// Needed vectors for each direction
+	//UP: I = 1, J = 0;
+	//DOWN: I = -1, J = 0
+	//LEFT: I = 0, J = 1
+	//RIGHT: I = 0, J = -1
 
 	public boolean checkAngle(int vI, int vJ, int uI, int uJ, double angle) {
 		boolean angleChecker = false;

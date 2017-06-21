@@ -25,8 +25,8 @@ public class ProbSetEvaluator {
             dirtyClean=dirty;
             this.XPos=XPos;
             this.YPos=YPos;
-            countX=0;
-            countY=0;
+            countX=1;
+            countY=1;
             double[][] tmp = sumOf2D(futureVisibility.getVisibilityMatrix(), futureVisibility.getVisibilityMatrix());
             double[][] toEvaluate = sumOf2D(tmp,dirtyClean);
             firstEvaluator(toEvaluate,0,0);
@@ -65,15 +65,42 @@ public class ProbSetEvaluator {
                                 toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
 
                             }
-                            countX++;
-                            countY++;
                         }
                     }
                 }
+                firstEvaluator(toEvaluate,1, (toEvaluate[0].length-2));
             }
+
+            if (i <= XPos && j > YPos) {
+                for (int k = i; k <=countX; k++) {
+                    for (int l = (toEvaluate[0].length-2); l > YPos; l--) {
+                        if (toEvaluate[k][l] == 1) {
+                            //check if they  exist first
+                            if (k + 1 < toEvaluate.length && toEvaluate) {
+                                toEvaluate[j][k] = -0.25;
+                            }
+                            if (k - 1 > 0 && toEvaluate[k - 1][l] == 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+
+                            }
+                            if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] == 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+
+                            }
+                            if (l - 1 > 0 && toEvaluate[k][l - 1] == 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+
+                            }
+                        }
+                    }
+
+                }
+                firstEvaluator(toEvaluate, (toEvaluate.length-1),1);
+            }
+
             if (countX > XPos && countY <= YPos) {
-                for (int k = i; k < toEvaluate.length; k++) {
-                    for (int l = j; l < toEvaluate[0].length; l++) {
+                for (int k = i; k > XPos ; k--) {
+                    for (int l = j; l <= YPos; l++) {
                         if (toEvaluate[k][l] == 1) {
                             //check if they  exist first
                             if (k + 1 < toEvaluate.length && toEvaluate) {
@@ -95,35 +122,11 @@ public class ProbSetEvaluator {
                         }
                     }
                 }
+                firstEvaluator(toEvaluate,(toEvaluate.length-1),(toEvaluate[0].length-1));
             }
-            if (i < XPos && j < YPos) {
-                for (int k = i; k < toEvaluate.length; k++) {
-                    for (int l = j; l < toEvaluate[0].length; l++) {
-                        if (toEvaluate[k][l] == 1) {
-                            //check if they  exist first
-                            if (k + 1 < toEvaluate.length && toEvaluate) {
-                                toEvaluate[j][k] = -0.25;
-
-                            }
-                            if (k - 1 > 0 && toEvaluate[k - 1][l] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
-
-                            }
-                            if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
-
-                            }
-                            if (l - 1 > 0 && toEvaluate[k][l - 1] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
-
-                            }
-                        }
-                    }
-                }
-            }
-            if (i < XPos && j < YPos) {
-                for (int k = i; k < toEvaluate.length; k++) {
-                    for (int l = j; l < toEvaluate[0].length; l++) {
+            if (i > XPos && j > YPos) {
+                for (int k = i; k > XPos ; k--) {
+                    for (int l = j; l > YPos; l--) {
                         if (toEvaluate[k][l] == 1) {
                             //check if they  exist first
                             if (k + 1 < toEvaluate.length && toEvaluate) {

@@ -80,6 +80,8 @@ public class RayTracer { // Written by Tom
 			error += deltaerr;
 			if (error >= 0.5 && y1 < y0) {
 				y -= 1;
+				if(y<0)
+					System.out.println("Errororororo");
 				rayTrace.add(graph[y][x]);
 				error -= 1;
 			} else if (error >= 0.5 && y1 > y0) {

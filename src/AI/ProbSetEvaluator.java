@@ -45,9 +45,9 @@ public class ProbSetEvaluator {
 
         public void firstEvaluator (double [][] toEvaluate,int i, int j) {
             if (i <= XPos && j <= YPos) {
-                for (int k = i; k < XPos; k++) {
-                    for (int l = j; l < YPos; l++) {
-                        if (toEvaluate[k][l] <= 1) {
+                for (int k = i; k <= XPos; k++) {
+                    for (int l = j; l <= YPos; l++) {
+                        if (toEvaluate[k][l] <= 1 && toEvaluate[k][l] <= 0) {
                             //check if they  exist first
                             if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] > 0) {
                                 toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k + 1][l]);

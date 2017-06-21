@@ -33,6 +33,8 @@ import AI.BeliefUpdater;
 import java.awt.Component;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 @SuppressWarnings("serial")
 public class GameFrame extends JFrame {
@@ -53,7 +55,6 @@ public class GameFrame extends JFrame {
 	protected MainGameLoop gameLoop;
 	private JSpinner spinner_1;
 	private JTextField textField_Sight;
-
 	
 	/**
 	 * Create the frame.
@@ -84,6 +85,14 @@ public class GameFrame extends JFrame {
 		
 		JLabel lblGameSpeed = new JLabel("Game Speed");
 		JSlider slider = new JSlider();
+		slider.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				JSlider source = (JSlider)arg0.getSource();
+				if(source.getValueIsAdjusting())
+					setSpeedMultiplyer(source.getValue());
+			}
+
+		});
 		slider.setMaximum(300);
 		slider.setValue(100);
 		slider.setPaintLabels(true);
@@ -100,14 +109,27 @@ public class GameFrame extends JFrame {
 		JButton btnNewButton = new JButton("x1");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				gameLoop.resetFps();
 			}
 		});
 		
 		JButton btnX = new JButton("x10");
+		btnX.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gameLoop.setFps(gameLoop.getFPS()*10);
+			}
+		});
 		
 		JButton btnPause = new JButton("Pause");
 		btnPause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(gameLoop.isPaused()){
+					gameLoop.setPause(false);
+					btnPause.setText("Pause");
+				}else{
+					gameLoop.setPause(true);
+					btnPause.setText("Unpause");
+				}
 			}
 		});
 		GroupLayout gl_speedControl = new GroupLayout(speedControl);
@@ -115,8 +137,8 @@ public class GameFrame extends JFrame {
 			gl_speedControl.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_speedControl.createSequentialGroup()
 					.addGap(49)
-					.addComponent(btnPause, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-					.addGap(54)
+					.addComponent(btnPause, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+					.addGap(44)
 					.addComponent(lblGameSpeed, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_speedControl.createParallelGroup(Alignment.LEADING, false)
@@ -159,6 +181,9 @@ public class GameFrame extends JFrame {
 		speedControl.setLayout(gl_speedControl);
 		speedControl.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{lblGameSpeed, lblX_1, lblX, lblX_3, lblX_2, slider, btnNewButton, btnX}));
 		}
+	protected void setSpeedMultiplyer(int value) {
+		gameLoop.setMultiplyer(value);
+	}
 	private void makeAIMenu(JSplitPane splitPane) {
 		AIMenu = new JPanel();
 		
@@ -186,7 +211,7 @@ public class GameFrame extends JFrame {
 						if(rdbtnRandomEvad.isSelected())///set algorithm
 							ent.setAlgorithm(new Random(gamePanel.graph));
 						else if(rdbtnComandEvad.isSelected()){
-						ent.setAlgorithm(new Random(gamePanel.graph));				
+						ent.setAlgorithm(new Run(gamePanel.graph));				
 						}
 					}else if(ent instanceof Pursuer){
 						ent.setSpeed(Integer.parseInt(textField_speed.getText()));

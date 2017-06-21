@@ -13,6 +13,7 @@ import logic.RadiusChecker;
 public class MainGameLoop{
 	private static int BASE_FPS=4;
 	private  int fps= BASE_FPS;
+	private double multiplyer = 100;
 	private java.util.Timer timer;
 	private  GamePanel gamePanel;
 	private Graph graph;
@@ -21,6 +22,7 @@ public class MainGameLoop{
 	private LineOfSightChecker checker = new LineOfSightChecker();
 	private RadiusChecker radChecker = new RadiusChecker();
 	private AngleChecker angChecker = new AngleChecker();
+	private boolean pause = false;
 
 	public MainGameLoop(GamePanel panel) {
 		gamePanel=panel;
@@ -29,13 +31,13 @@ public class MainGameLoop{
 	}
 	public void gameLoop()
 	{
-		timer = new Timer();
-    	timer.schedule(new LoopyStuff(), 0, 1000 / fps); //new timer at 'fps' , the timing mechanism
+		newTimer();
 	}
 	class LoopyStuff extends TimerTask {
 		@Override
 		public void run()						//loop
 			{
+			if(!pause){
 				boolean hasMoved = false;
 				
 				if(count == 100)		//counting frames, for turn handling, from 1 to 100
@@ -117,8 +119,44 @@ public class MainGameLoop{
         			timer.cancel();				//exit loop
         			System.out.println("game is done");
         		}
+    		}else{//else if pause, avoid void loop
+    			try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+					System.err.println("ERROR, sleep unavaiable");
+				}
     		}
-				
+		}	
+	}
+	public void setPause(boolean pause) {
+		this.pause=pause;
+		
+	}
+	public boolean isPaused() {
+		return pause;
+	}
+	public void setFps(int fps){
+		this.fps=fps;
+		newTimer();
+		
+	}
+	public int getFPS(){
+		return fps;
+	}
+	public void resetFps() {
+		fps=BASE_FPS;
+		newTimer();
+	}
+	public void setMultiplyer(double multiplyer){
+		this.multiplyer=multiplyer;
+		newTimer();
+		
+	}
+	private void newTimer() {
+		timer = new Timer();
+    	timer.schedule(new LoopyStuff(), 0, 1000 / (int)(fps*(multiplyer/100))); //new timer at 'fps' , the timing mechanism
+		
 	}
 }
  

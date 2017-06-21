@@ -7,7 +7,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 public class Loader {
-	public Graph LoadGraph(JFrame parent) {
+	public Graph LoadGraph(GamePanel parent) {
 		Graph graph = null;
 		JFileChooser c = new JFileChooser();
 		int rVal = c.showOpenDialog(parent);

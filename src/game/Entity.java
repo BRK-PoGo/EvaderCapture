@@ -1,6 +1,8 @@
 package game;
 
-public interface Entity {
+import java.io.Serializable;
+
+public interface Entity extends Serializable{
 	public Node getNode();
 	public void moveToNode(Node node, Graph graph);
 	public void setSpeed(int parseInt);

@@ -47,109 +47,113 @@ public class ProbSetEvaluator {
             if (i <= XPos && j <= YPos) {
                 for (int k = i; k < XPos; k++) {
                     for (int l = j; l < YPos; l++) {
-                        if (toEvaluate[k][l] == 1) {
+                        if (toEvaluate[k][l] <= 1) {
                             //check if they  exist first
-                            if (k + 1 < toEvaluate.length && toEvaluate) {
-                                toEvaluate[j][k] = -0.25;
+                            if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k + 1][l]);
 
                             }
-                            if (k - 1 > 0 && toEvaluate[k - 1][l] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+                            if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k - 1][l]);
 
                             }
-                            if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+                            if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k][l + 1]);
 
                             }
-                            if (l - 1 > 0 && toEvaluate[k][l - 1] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+                            if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25 * toEvaluate[k][l - 1];
 
                             }
                         }
                     }
+                    firstEvaluator(toEvaluate, 1, (toEvaluate[0].length - 2));
                 }
-                firstEvaluator(toEvaluate,1, (toEvaluate[0].length-2));
             }
 
             if (i <= XPos && j > YPos) {
-                for (int k = i; k <=countX; k++) {
-                    for (int l = (toEvaluate[0].length-2); l > YPos; l--) {
-                        if (toEvaluate[k][l] == 1) {
+                for (int k = i; k <= countX; k++) {
+                    for (int l = (toEvaluate[0].length - 2); l > YPos; l--) {
+                        if (toEvaluate[k][l] <= 1) {
                             //check if they  exist first
-                            if (k + 1 < toEvaluate.length && toEvaluate) {
-                                toEvaluate[j][k] = -0.25;
-                            }
-                            if (k - 1 > 0 && toEvaluate[k - 1][l] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+                            if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k + 1][l]);
 
                             }
-                            if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+                            if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k - 1][l]);
 
                             }
-                            if (l - 1 > 0 && toEvaluate[k][l - 1] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+                            if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k][l + 1]);
+
+                            }
+                            if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25 * toEvaluate[k][l - 1];
 
                             }
                         }
                     }
 
                 }
-                firstEvaluator(toEvaluate, (toEvaluate.length-1),1);
+                firstEvaluator(toEvaluate, (toEvaluate.length - 1), 1);
             }
 
             if (countX > XPos && countY <= YPos) {
-                for (int k = i; k > XPos ; k--) {
+                for (int k = i; k > XPos; k--) {
                     for (int l = j; l <= YPos; l++) {
-                        if (toEvaluate[k][l] == 1) {
+                        if (toEvaluate[k][l] <= 1) {
                             //check if they  exist first
-                            if (k + 1 < toEvaluate.length && toEvaluate) {
-                                toEvaluate[j][k] = -0.25;
+                            if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k + 1][l]);
 
                             }
-                            if (k - 1 > 0 && toEvaluate[k - 1][l] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+                            if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k - 1][l]);
 
                             }
-                            if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+                            if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k][l + 1]);
 
                             }
-                            if (l - 1 > 0 && toEvaluate[k][l - 1] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
-
+                            if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25 * toEvaluate[k][l - 1];
                             }
                         }
                     }
+                    firstEvaluator(toEvaluate, (toEvaluate.length - 1), (toEvaluate[0].length - 1));
                 }
-                firstEvaluator(toEvaluate,(toEvaluate.length-1),(toEvaluate[0].length-1));
             }
+
             if (i > XPos && j > YPos) {
-                for (int k = i; k > XPos ; k--) {
+                for (int k = i; k > XPos; k--) {
                     for (int l = j; l > YPos; l--) {
-                        if (toEvaluate[k][l] == 1) {
+                        if (toEvaluate[k][l] <= 1) {
                             //check if they  exist first
-                            if (k + 1 < toEvaluate.length && toEvaluate) {
-                                toEvaluate[j][k] = -0.25;
+                            if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k + 1][l]);
 
                             }
-                            if (k - 1 > 0 && toEvaluate[k - 1][l] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+                            if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k - 1][l]);
 
                             }
-                            if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
+                            if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * toEvaluate[k][l + 1]);
 
                             }
-                            if (l - 1 > 0 && toEvaluate[k][l - 1] == 0) {
-                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25;
-
+                            if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] > 0) {
+                                toEvaluate[j][k] = toEvaluate[j][k] - 0.25 * toEvaluate[k][l - 1];
                             }
                         }
                     }
                 }
+                cleanUp(toEvaluate);
             }
         }
+
+
+
 
 
         /*This method checks the neighbours of the firstEvaluator and checks the neighbours of what it sets to 0 too
@@ -160,15 +164,13 @@ public class ProbSetEvaluator {
      Dirty nodes have value 0, clean have value 1, walls have value -5
       */
 
-        public void cleanUp (double [][] toClean){
-            for (int i = 0; i<toClean.length; i++){
+        public void cleanUp(double [][] toClean){
+            for (int i  = 0; i<toClean.length; i++){
                 for (int j = 0; j<toClean[0].length; j++){
-                    if(toClean[i][j]>0){
+                    if(toClean[i][j]>=1){
                         toClean[i][j]=1;
                     }
-                    if (toClean[i][j]<0){
-                        toClean[i][j]=-5;
-                    }
+
                 }
             }
         }

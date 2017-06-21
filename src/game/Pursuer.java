@@ -11,7 +11,7 @@ import AI.SetEvaluator;
 import AI.VisibilityChecker;
 
 
-public class Pursuer implements Entity{
+public class Pursuer implements Entity {
 
 	private Node node;
 	private int speed;//moves in 100 frames

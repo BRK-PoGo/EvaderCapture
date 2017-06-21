@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 
 
-public class Graph implements Serializable{
+public class Graph {
 
     private Node[][] nodeGrid;
     public int size;//size of node

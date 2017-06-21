@@ -561,12 +561,17 @@ public class GameFrame extends JFrame {
 		JButton btnSalve = new JButton("Save");
 		btnSalve.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				Saver saver = new Saver();
+				saver.saveGraph(gamePanel, gamePanel.graph);
 			}
 		});
 		
 		JButton btnLoad = new JButton("Load");
 		btnLoad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Loader loader = new Loader();
+				gamePanel.graph = loader.LoadGraph(gamePanel);
+				gamePanel.repaint();
 			}
 		});
 		

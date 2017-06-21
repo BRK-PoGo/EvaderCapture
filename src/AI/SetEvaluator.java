@@ -103,7 +103,7 @@ public class SetEvaluator {
                 if(toClean[i][j]>0){
                     toClean[i][j]=1;
                 }
-                if (toClean[i][j]<0){
+                if (toClean[i][j]<=-5){
                     toClean[i][j]=-5;
                 }
             }

@@ -30,18 +30,21 @@ public class VisibilityChecker {
 			for (int k = 1; k < grid[0].length-1; k++) {
 				int x0 = nod.getX();
 				int y0 = nod.getY();
-				int x1 = grid[j][k].getX();
-				int y1 = grid[j][k].getY();
+				int x1 = k;
+				int y1 = j;
+if(tracer.getRayTrace(x0, x1, y0, y1, grid) == null)
+	System.out.println("ERRORO111");
 				ArrayList<Node> rayTrace = tracer.getRayTrace(x0, x1, y0, y1, grid);
 				boolean isLineOfSight = true;
-
+if(rayTrace == null)
+	System.out.println("ERROROR");
 				for (Node node : rayTrace) {
 					//System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
 					if (isLineOfSight && node.getValue().equals("wall")) {
 						isLineOfSight = false;
 						//These are the locations of the non-visible nodes
 						visibilityMatrix[j][k] = 0;
-						visibilityMatrix[node.getX()][node.getY()] = -5;
+//						visibilityMatrix[node.getX()][node.getY()] = -5;
 						break;
 					}
 					//These are the locations of the visible

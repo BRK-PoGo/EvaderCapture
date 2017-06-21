@@ -20,8 +20,7 @@ public class Pursuer implements Entity {
 	private boolean isCaught = false;
 	private double [][] dirtyClearMatrix;
 	private boolean isPursuer = true;
-	private final int SIGHT_RAD = 10;
-	private final int SIGHT_ANG = 90;
+	private  int SIGHT_RAD;
 	private RadiusChecker radChecker = new RadiusChecker();
 	private AngleChecker angChecker = new AngleChecker();
 	private RayTracer lineChecker = new RayTracer();
@@ -31,7 +30,7 @@ public class Pursuer implements Entity {
 		this.node = node;
 		node.setValue("pursuer");
 	}
-	public Pursuer(Node node, int sp, Algorithm alg) {
+	public Pursuer(Node node, int sp,int rad, int ang, Algorithm alg) {
 		this.alg = alg;
 		this.node = node;
 		node.setValue("pursuer");
@@ -116,7 +115,7 @@ public class Pursuer implements Entity {
 	}
 	@Override
 	public int getAngle() {
-		return SIGHT_ANG;
+		return viewAngle;
 	}
 	
 	private void resetVision(Graph graph) {
@@ -131,6 +130,7 @@ public class Pursuer implements Entity {
 	}
 	
 	private void setVision(Graph graph) {
+		//TODO Fix, its a mess
 		
 		Node[][] grid = graph.getNodeGrid();
 		for (int x = node.getX() - SIGHT_RAD; x <= node.getX() + SIGHT_RAD; x++) {
@@ -142,25 +142,25 @@ public class Pursuer implements Entity {
 							int uJ = 0;
 							int vI = node.getX() - x;
 							int vJ = node.getY() - y;
-							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, SIGHT_ANG/2));
+							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, viewAngle/2));
 						} else if (dir.equals("DOWN")) {
 							int uI = -1;
 							int uJ = 0;
 							int vI = node.getX() - x;
 							int vJ = node.getY() - y;
-							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, SIGHT_ANG/2));
+							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, viewAngle/2));
 						} else if (dir.equals("LEFT")) {
 							int uI = 0;
 							int uJ = 1;
 							int vI = node.getX() - x;
 							int vJ = node.getY() - y;
-							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, SIGHT_ANG/2));
+							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, viewAngle/2));
 						} else if (dir.equals("LEFT")) {
 							int uI = 0;
 							int uJ = -1;
 							int vI = node.getX() - x;
 							int vJ = node.getY() - y;
-							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, SIGHT_ANG/2));
+							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, viewAngle/2));
 						}
 					}
 				}
@@ -174,5 +174,10 @@ public class Pursuer implements Entity {
 	
 	public String getDir() {
 		return dir;
+	}
+	@Override
+	public void setViewSight(int parseInt) {
+		SIGHT_RAD=parseInt;
+		
 	}
 }

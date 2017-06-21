@@ -41,7 +41,7 @@ public class SetEvaluator {
     public void firstEvaluator (double [][] toEvaluate,int i, int j){
         for (int k=i; k<toEvaluate.length; k++){
             for (int l=j; l <toEvaluate[0].length;l++){
-                if (false){//toEvaluate[k][l] == 1){
+                if (toEvaluate[k][l] == 1){
                     //check if they  exist first
                     if (k+1<toEvaluate.length && toEvaluate [k+1][l]==0){
                         toEvaluate[j][k]=0;

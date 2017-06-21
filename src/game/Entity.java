@@ -19,4 +19,5 @@ public interface Entity extends Serializable{
 	public int getAngle();
 	public void setDir (String dir);
 	public String getDir();
+	public void setViewSight(int parseInt);
 }

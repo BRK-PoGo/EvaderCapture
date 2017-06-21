@@ -110,4 +110,9 @@ public class Evader implements Entity {
 	public String getDir() {
 		return dir;
 	}
+	@Override
+	public void setViewSight(int parseInt) {
+		// TODO Auto-generated method stub
+		
+	}
 }

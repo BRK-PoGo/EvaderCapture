@@ -50,7 +50,8 @@ public class RayTracer { // Written by Tom
 					System.out.println("Y");
 				else if(x>=graph[0].length)
 					System.out.println("X");
-
+				if(y>=graph.length||x>=graph[0].length)
+					System.out.println("ERRROR");
 				rayTrace.add(graph[y][x]);
 				error -= 1;
 			}

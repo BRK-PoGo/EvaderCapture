@@ -63,6 +63,7 @@ public class Leaf {
 				kid.evaluate(graph);
 				if(kid.getValue()>=bestValue){
 					bestValue = kid.getValue();
+					this.setValue(kid.getValue());
 				}
 			}
         }

@@ -2,7 +2,7 @@ package logic;
 
 import java.io.Serializable;
 
-public class AngleChecker implements Serializable{
+public class AngleChecker {
 	
 	// Needed vectors for each direction
 	//UP: I = 1, J = 0;

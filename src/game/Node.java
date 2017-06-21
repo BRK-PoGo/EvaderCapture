@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Node implements Serializable {
+public class Node {
 	private String value = "";//What's in this node? Default, nothing.
 	private boolean inVision = false;
 	public Rectangle rectangle; //coordinates of the node + dimension

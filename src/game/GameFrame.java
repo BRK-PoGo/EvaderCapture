@@ -211,7 +211,7 @@ public class GameFrame extends JFrame {
 					if(ent instanceof Evader){
 						ent.setSpeed(Integer.parseInt(textField.getText()));
 						if(rdbtnRandomEvad.isSelected())///set algorithm
-							ent.setAlgorithm(new Run(gamePanel.graph));
+							ent.setAlgorithm(new Random(gamePanel.graph));
 						else if(rdbtnComandEvad.isSelected()){
 						ent.setAlgorithm(new Run(gamePanel.graph));				
 						}

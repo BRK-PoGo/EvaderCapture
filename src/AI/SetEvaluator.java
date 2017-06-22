@@ -24,21 +24,64 @@ public class SetEvaluator {
         dirtyClean=dirty;
         double[][] tmp = sumOf2D(futureVisibility.getVisibilityMatrix(), futureVisibility.getVisibilityMatrix());
         double[][] toEvaluate = sumOf2D(tmp,dirtyClean);
-        firstEvaluator(toEvaluate,0,0);
+        masterEvaluator(toEvaluate);
         cleanUp(toEvaluate);
         sumOfDirtyClean = sumOfElements(toEvaluate);
         dirtyClean=toEvaluate;
     }
     public double getSumOfDirtyClean(){return sumOfDirtyClean;}
     public double [][] getDirtyClean(){return dirtyClean;}
+    
+    public void masterEvaluator(double[][]toEvaluate){
+    	for (int i=0; i<toEvaluate.length; i++){
+            for (int j=0; j <toEvaluate[0].length;j++){
+                if (toEvaluate[i][j] == 1){
+                	if (i+1<toEvaluate.length && toEvaluate [i+1][j]==0){
+                        toEvaluate[i][j]=0;
+                        recurrentEvaluator(toEvaluate, i,j);
+                    }
+                	else if (i-1>0 && toEvaluate [i-1][j]==0){
+                        toEvaluate[i][j]=0;
+                        recurrentEvaluator(toEvaluate, i,j);
+                    }
+                	else if (j+1<toEvaluate[0].length && toEvaluate [i][j+1]==0){
+                        toEvaluate[i][j]=0;
+                        recurrentEvaluator(toEvaluate,i,j);
+                    }
+                	else if (j-1>0 && toEvaluate [i][j-1]==0){
+                        toEvaluate[i][j]=0;
+                        recurrentEvaluator(toEvaluate, i,j);
+                    }
+                }
+            }
+    	}
+    }
 
+    private void recurrentEvaluator(double[][] toEvaluate, int i, int j) {
+    	if (i+1<toEvaluate.length && toEvaluate[i+1][j]==1){
+    		toEvaluate[i+1][j]=0;
+    		recurrentEvaluator(toEvaluate,i+1,j);
+    	}else if (i-1>0 && toEvaluate [i-1][j]==1){
+            toEvaluate[i-1][j]=0;
+            recurrentEvaluator(toEvaluate, i-1,j);
+        }
+    	else if (j+1<toEvaluate[0].length && toEvaluate [i][j+1]==1){
+            toEvaluate[i][j+1]=0;
+            recurrentEvaluator(toEvaluate,i,j+1);
+        }
+    	else if (j-1>0 && toEvaluate [i][j-1]==1){
+            toEvaluate[i][j-1]=0;
+            recurrentEvaluator(toEvaluate, i,j-1);
+        }
+		
+	}
 
-    /*This method is the first evaluator. It looks for 1 values i.e. fields that could be seen before and cannot be seen
+	/*This method is the first evaluator. It looks for 1 values i.e. fields that could be seen before and cannot be seen
     anymore and checks whether they neighbour dirty nodes and makes them dirty. It calls the second evaluator to perform
     this check on its neighbours
      */
 
-    public void firstEvaluator (double [][] toEvaluate,int i, int j){
+    public void firstEvaluatorOLD (double [][] toEvaluate,int i, int j){
         for (int k=i; k<toEvaluate.length; k++){
             for (int l=j; l <toEvaluate[0].length;l++){
                 if (toEvaluate[k][l] == 1){
@@ -87,7 +130,7 @@ public class SetEvaluator {
                     secondEvaluator(toEvaluate, k, l);
                 }
                 else {
-                    firstEvaluator(toEvaluate,k,l);
+                   // firstEvaluator(toEvaluate,k,l);
                 }
             }
         }
@@ -103,7 +146,7 @@ public class SetEvaluator {
                 if(toClean[i][j]>0){
                     toClean[i][j]=1;
                 }
-                if (toClean[i][j]<=-5){
+                if (toClean[i][j]<0){
                     toClean[i][j]=-5;
                 }
             }

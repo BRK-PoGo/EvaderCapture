@@ -3,6 +3,8 @@ import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import AI.VisibilityMap;
+
 
 
 public class Graph {
@@ -12,6 +14,7 @@ public class Graph {
     private ArrayList<Node> nodes = new ArrayList<Node>();
 	private ArrayList<Entity> entities = new ArrayList<Entity>();
 	private ArrayList<Evader> evaders = new ArrayList<Evader>();
+	private VisibilityMap visibilityMap;
 
     public Graph(int h, int w,int size){
     	this.size=size;
@@ -101,5 +104,11 @@ public class Graph {
 			
 		}
 		
+	}
+	public VisibilityMap getVisibilityMap() {
+		return visibilityMap;
+	}
+	public void setVisibilityMap(VisibilityMap visibilityMap2) {
+		visibilityMap = visibilityMap2;
 	}
 }

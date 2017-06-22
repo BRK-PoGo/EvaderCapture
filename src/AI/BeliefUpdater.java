@@ -3,7 +3,7 @@ import game.Algorithm;
 import game.Entity;
 import game.Graph;
 import game.Node;
-import game.Random;
+import game.Pursuer;
 
 import java.util.ArrayList;
 /* I am a bit confused about the structure of the code. Shouldn't the algorithm perform on the game or the entities

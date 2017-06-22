@@ -32,12 +32,10 @@ public class VisibilityChecker {
 				int y0 = nod.getY();
 				int x1 = k;
 				int y1 = j;
-if(tracer.getRayTrace(x0, x1, y0, y1, grid) == null)
-	System.out.println("ERRORO111");
+
 				ArrayList<Node> rayTrace = tracer.getRayTrace(x0, x1, y0, y1, grid);
 				boolean isLineOfSight = true;
-if(rayTrace == null)
-	System.out.println("ERROROR");
+
 				for (Node node : rayTrace) {
 					//System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
 					if (isLineOfSight && node.getValue().equals("wall")) {
@@ -55,7 +53,6 @@ if(rayTrace == null)
 				}
 			}
 		}
-		this.visibilityMatrix=visibilityMatrix;
 	}
 
 	public double [][] getVisibilityMatrix(){return visibilityMatrix;};

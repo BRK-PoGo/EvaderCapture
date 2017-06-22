@@ -82,9 +82,9 @@ public class Pursuer implements Entity {
 	}
 	@Override
 	public void move(Graph graph) {
-		resetVision(graph);
+		//resetVision(graph);
 		alg.move(this);
-		setVision(graph);
+		//setVision(graph);
 	}
 	@Override
 	public void setAlgorithm(Algorithm alg) {

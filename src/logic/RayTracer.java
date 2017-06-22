@@ -8,6 +8,8 @@ import game.Node;
 public class RayTracer { // Written by Tom
 
 	public ArrayList<Node> getRayTrace(int x0, int x1, int y0, int y1, Node[][] graph) {
+		if(x0==1 && y0 == 2&& x1==3 && y1==1)
+			System.out.println("YES");
 		ArrayList<Node> rayTrace = null;
 		if (checkInputs(x0, x1, y0, y1, graph.length, graph[0].length)) {
 			if (x0 == x1) rayTrace = doHorizontal(x0, y0, y1, graph);
@@ -61,9 +63,9 @@ public class RayTracer { // Written by Tom
 	
 	public ArrayList<Node> doShallow(int x0, int x1, int y0, int y1, Node[][] graph) {
 		ArrayList<Node> rayTrace = new ArrayList<>();
-		double deltax = x1 - x0;
-		double deltay = y1 - y0;
-		double deltaerr = Math.abs(deltay/deltax);
+		double deltax = Math.abs(x1 - x0);
+		double deltay = Math.abs(y1 - y0);
+		double deltaerr = deltay/deltax;
 		double error = deltaerr - 0.5;
 		int y = y0;
 		if (x0 > x1) {

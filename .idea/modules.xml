@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EvaderCapture.iml" filepath="$PROJECT_DIR$/EvaderCapture.iml" />
+      <module fileurl="file://C:\Users\Alexander\IdeaProjects\EvaderCapture\EvaderCapture.iml" filepath="C:\Users\Alexander\IdeaProjects\EvaderCapture\EvaderCapture.iml" />
     </modules>
   </component>
 </project>

@@ -1,5 +1,7 @@
 package game;
 
+
+
 public interface Entity {
 	public Node getNode();
 	public void moveToNode(Node node, Graph graph);

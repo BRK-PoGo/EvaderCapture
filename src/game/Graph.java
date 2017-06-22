@@ -7,7 +7,7 @@ import AI.VisibilityMap;
 
 
 
-public class Graph implements Serializable{
+public class Graph {
 
     private Node[][] nodeGrid;
     public int size;//size of node

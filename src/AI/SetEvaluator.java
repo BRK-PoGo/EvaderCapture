@@ -153,6 +153,8 @@ public class SetEvaluator {
         }
      }
 
+     /*The following methods are used for the probablistic evaluation*/
+
     /*This method sums two matrices*/
 
     public double [][] sumOf2D(double [][] sum1, double [][] sum2){

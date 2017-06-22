@@ -1,5 +1,7 @@
 package logic;
 
+import java.io.Serializable;
+
 public class AngleChecker {
 	
 	// Needed vectors for each direction
@@ -8,7 +10,7 @@ public class AngleChecker {
 	//LEFT: I = 0, J = 1
 	//RIGHT: I = 0, J = -1
 
-	public boolean checkAngle(int vI, int vJ, int uI, int uJ, double angle) {
+	public boolean checkAngle (int vI, int vJ, int uI, int uJ, double angle) {
 		boolean angleChecker = false;
 		
 		double distV = Math.sqrt((Math.pow(vI, 2)) + Math.pow(vJ, 2));

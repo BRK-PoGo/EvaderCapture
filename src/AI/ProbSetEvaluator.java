@@ -13,8 +13,6 @@ public class ProbSetEvaluator {
     private double sumOfDirtyClean;
     int XPos;
     int YPos;
-    int countX;
-    int countY;
 
     public ProbSetEvaluator (VisibilityChecker future){
         futureVisibility = future;
@@ -24,8 +22,6 @@ public class ProbSetEvaluator {
         dirtyClean=dirty;
         this.XPos=XPos;
         this.YPos=YPos;
-        countX=1;
-        countY=1;
         double[][] tmp = sumOf2D(futureVisibility.getVisibilityMatrix(), futureVisibility.getVisibilityMatrix());
         double[][] toEvaluate = sumOf2D(tmp,dirtyClean);
         firstEvaluator(toEvaluate,1,1);
@@ -71,7 +67,7 @@ this check on its neighbours
         }
 
         if (i <= XPos && j > YPos) {
-            for (int k = i; k <= countX; k++) {
+            for (int k = i; k <= XPos; k++) {
                 for (int l = (toEvaluate[0].length - 2); l > YPos; l--) {
                     if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] <= 0) {
                         //check if they  exist first
@@ -98,7 +94,7 @@ this check on its neighbours
             firstEvaluator(toEvaluate, (toEvaluate.length - 1), 1);
         }
 
-        if (countX > XPos && countY <= YPos) {
+        if (i > XPos && j <= YPos) {
             for (int k = i; k > XPos; k--) {
                 for (int l = j; l <= YPos; l++) {
                     if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] <= 0) {

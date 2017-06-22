@@ -60,7 +60,7 @@ public class Pursuer implements Entity {
 
 		VisibilityChecker toCompare;
 		SetEvaluator evaluator;
-		toCompare = new VisibilityChecker(graph,node);
+		toCompare = new VisibilityChecker(graph,node, this);
         evaluator=new SetEvaluator(toCompare);
         evaluator.evaluateDirtyClean(this.getDirtyClean());
         this.setDirtyClean(evaluator.getDirtyClean());
@@ -82,9 +82,9 @@ public class Pursuer implements Entity {
 	}
 	@Override
 	public void move(Graph graph) {
-		resetVision(graph);
+		//resetVision(graph);
 		alg.move(this);
-		setVision(graph);
+		//setVision(graph);
 	}
 	@Override
 	public void setAlgorithm(Algorithm alg) {

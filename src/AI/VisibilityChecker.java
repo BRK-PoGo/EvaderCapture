@@ -3,6 +3,7 @@ package AI;
 import game.Entity;
 import game.Graph;
 import game.Node;
+import logic.AngleChecker;
 import logic.RadiusChecker;
 import logic.RayTracer;
 
@@ -13,12 +14,13 @@ public class VisibilityChecker {
 
 	private double [][] visibilityMatrix;
 	
-	public  VisibilityChecker(Graph graph, Node nod) {
+	public  VisibilityChecker(Graph graph, Node nod, Entity ent) {
 		//This method checks the visibility of one entities and stores them visibilityMatrix
 
 		//ArrayList<Entity> toCheck = graph.getEntities();
 		RayTracer tracer = new RayTracer();
-		RadiusChecker checker = new RadiusChecker();
+		RadiusChecker radChecker = new RadiusChecker();
+		AngleChecker angChecker = new AngleChecker();
 		Node[][] grid = graph.getNodeGrid();
 		visibilityMatrix = new double[grid.length][grid[0].length];
 		for(int i=0;i<visibilityMatrix.length;i++)
@@ -34,23 +36,45 @@ public class VisibilityChecker {
 				int y0 = nod.getY();
 				int x1 = k;
 				int y1 = j;
+				int vI = x0 - x1;
+				int vJ = y0 - y1;
+				int uI = 0;
+				int uJ = 0;
+				
+				if (ent.getDir().equals("UP")) {
+					uI = 1;
+					uJ = 0;
+				} else if (ent.getDir().equals("DOWN")) {
+					uI = -1;
+					uJ = 0;
+				} else if (ent.getDir().equals("LEFT")) {
+					uI = 0;
+					uJ = 1;
+				} else if (ent.getDir().equals("LEFT")) {
+					uI = 0;
+					uJ = -1;
+				}
 
 				ArrayList<Node> rayTrace = tracer.getRayTrace(x0, x1, y0, y1, grid);
+				boolean rad = radChecker.RadiusCheck(x0, x1, y0, y1, ent.getRadius());
+				boolean ang = angChecker.checkAngle(vI, vJ, uI, uJ, ent.getAngle()/2);
 				boolean isLineOfSight = true;
 
-				for (Node node : rayTrace) {
-					//System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
-					if (isLineOfSight && node.getValue().equals("wall")) {
-						isLineOfSight = false;
-						//These are the locations of the non-visible nodes
-						visibilityMatrix[j][k] = 0;
-//						visibilityMatrix[node.getX()][node.getY()] = -5;
-						break;
-					}
-					//These are the locations of the visible
-					else {
-						visibilityMatrix[j][k] = 1;
-
+				if (rad && ang) {
+					for (Node node : rayTrace) {
+						//System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
+						if (isLineOfSight && node.getValue().equals("wall")) {
+							isLineOfSight = false;
+							//These are the locations of the non-visible nodes
+							visibilityMatrix[j][k] = 0;
+	//						visibilityMatrix[node.getX()][node.getY()] = -5;
+							break;
+						}
+						//These are the locations of the visible
+						else {
+							visibilityMatrix[j][k] = 1;
+	
+						}
 					}
 				}
 			}

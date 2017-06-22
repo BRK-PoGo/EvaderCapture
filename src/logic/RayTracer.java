@@ -9,13 +9,6 @@ public class RayTracer { // Written by Tom
 	//Figure out what the fuck is wring with thiks
 
 	public ArrayList<Node> getRayTrace(int x0, int x1, int y0, int y1, Node[][] graph) {
-
-		System.out.println("Starting: x - " + x0 + " y - " + y0);
-		System.out.println("Ending: x - " + x1 + " y - " + y1);
-
-		if(x0==1 && y0 == 2&& x1==3 && y1==1)
-			System.out.println("YES");
-
 		ArrayList<Node> rayTrace = null;
 		if (checkInputs(x0, x1, y0, y1, graph.length, graph[0].length)) {
 			if (x0 == x1) rayTrace = doHorizontal(x0, y0, y1, graph);

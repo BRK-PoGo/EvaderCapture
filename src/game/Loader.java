@@ -39,7 +39,6 @@ public class Loader {
 				else if (copyGrid[x][y].equals("pursuer")) graph.addPurs(x, y);
 			}
 		}
-		
 		return graph;
 	}
 }

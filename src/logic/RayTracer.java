@@ -8,8 +8,13 @@ import game.Node;
 public class RayTracer { // Written by Tom
 
 	public ArrayList<Node> getRayTrace(int x0, int x1, int y0, int y1, Node[][] graph) {
+
+		System.out.println("Starting: x - " + x0 + " y - " + y0);
+		System.out.println("Ending: x - " + x1 + " y - " + y1);
+
 		if(x0==1 && y0 == 2&& x1==3 && y1==1)
 			System.out.println("YES");
+
 		ArrayList<Node> rayTrace = null;
 		if (checkInputs(x0, x1, y0, y1, graph.length, graph[0].length)) {
 			if (x0 == x1) rayTrace = doHorizontal(x0, y0, y1, graph);
@@ -42,19 +47,13 @@ public class RayTracer { // Written by Tom
 		for (int y = y0; y <= y1; y++) {
 			rayTrace.add(graph[y][x]);
 			error += deltaerr;
-			if (error >= 0.5 && x1 < x0) {
-				x -= 1;
-				rayTrace.add(graph[y][x]);
-				error -= 1;
-			} else if (error >= 0.5 && x1 > x0) {
+			if (error >= 0.5 && x0 < x1) {
 				x += 1;
-				if(y>=graph.length )
-					System.out.println("Y");
-				else if(x>=graph[0].length)
-					System.out.println("X");
-				if(y>=graph.length||x>=graph[0].length)
-					System.out.println("ERRROR");
-				rayTrace.add(graph[y][x]);
+				//rayTrace.add(graph[y][x]);
+				error -= 1;
+			} else if (error >= 0.5 && x0 > x1) {
+				x -= 1;
+				//rayTrace.add(graph[y][x]);
 				error -= 1;
 			}
 		}
@@ -80,20 +79,30 @@ public class RayTracer { // Written by Tom
 		for (int x = x0; x <= x1; x++) {
 			rayTrace.add(graph[y][x]);
 			error += deltaerr;
+
+		if (error >= 0.5 && y0 < y1) {
+
 			if (error >= 0.5 && y1 < y0) {
 				y -= 1;
 				if(y<0)
 					System.out.println("Errororororo");
 				rayTrace.add(graph[y][x]);
 				error -= 1;
-			} else if (error >= 0.5 && y1 > y0) {
+				} else if (error >= 0.5 && y1 > y0) {
+
 				y += 1;
-				rayTrace.add(graph[y][x]);
+				//rayTrace.add(graph[y][x]);
+				error -= 1;
+			} else if (error >= 0.5 && y0 > y1) {
+				y -= 1;
+				//rayTrace.add(graph[y][x]);
 				error -= 1;
 			}
 		}
+		}
 		return rayTrace;
 	}
+	
 	
 	public ArrayList<Node> doHorizontal(int x, int y0, int y1, Node[][] graph) {
 		ArrayList<Node> rayTrace = new ArrayList<>();

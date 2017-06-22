@@ -60,7 +60,7 @@ public class Pursuer implements Entity {
 
 		VisibilityChecker toCompare;
 		SetEvaluator evaluator;
-		toCompare = new VisibilityChecker(graph,node);
+		toCompare = new VisibilityChecker(graph,node, this);
         evaluator=new SetEvaluator(toCompare);
         evaluator.evaluateDirtyClean(this.getDirtyClean());
         this.setDirtyClean(evaluator.getDirtyClean());

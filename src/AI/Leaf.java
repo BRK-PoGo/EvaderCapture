@@ -2,6 +2,7 @@ package AI;
 
 import java.util.ArrayList;
 
+import game.Entity;
 import game.Graph;
 import game.Node;
 
@@ -46,10 +47,10 @@ public class Leaf {
 	public void setDirtyCleanMatrix(double[][] ds) {
 	this.dirtyCleanMatrix = ds;
 }
-	public void evaluate(Graph graph) {
+	public void evaluate(Graph graph, Entity ent) {
 		VisibilityChecker toCompare;
 		SetEvaluator evaluator;
-		toCompare = new VisibilityChecker(graph,node);
+		toCompare = new VisibilityChecker(graph,node,ent);
         evaluator=new SetEvaluator(toCompare);
         evaluator.evaluateDirtyClean(parent.getDirtyCleanMatrix());
         this.setDirtyCleanMatrix(evaluator.getDirtyClean());
@@ -59,7 +60,7 @@ public class Leaf {
         else{
         	double bestValue = Double.MIN_VALUE;
 			for(Leaf kid:children){
-				kid.evaluate(graph);
+				kid.evaluate(graph, ent);
 				if(kid.getValue()>=bestValue){
 					bestValue = kid.getValue();
 					this.setValue(kid.getValue());

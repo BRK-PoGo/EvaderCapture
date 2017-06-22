@@ -46,7 +46,7 @@ public class BeliefUpdater implements Algorithm {
         for (int i = 0; i < possMoves.size(); i++) {
             Node moveToCheck = possMoves.get(i);
 
-            toCompare = new VisibilityChecker(currentState,moveToCheck);
+            toCompare = new VisibilityChecker(currentState,moveToCheck,entity);
             evaluator=new SetEvaluator(toCompare);
             evaluator.evaluateDirtyClean(entity.getDirtyClean());
             if (evaluator.getSumOfDirtyClean() >= BestSum) {
@@ -94,7 +94,7 @@ public class BeliefUpdater implements Algorithm {
         ArrayList<Leaf> possMoves = tree.getLevel(1);
         for (int i = 0; i < possMoves.size(); i++) {
             Leaf leaf = possMoves.get(i);
-            leaf.evaluate(currentState);
+            leaf.evaluate(currentState, entity);
             if (leaf.getValue() >= BestSum) {
                 BestSum=leaf.getValue();
                 bestMove=leaf.getNode();

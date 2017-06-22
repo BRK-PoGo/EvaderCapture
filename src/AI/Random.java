@@ -1,5 +1,9 @@
-package game;
+package AI;
 
+import game.Algorithm;
+import game.Entity;
+import game.Graph;
+import game.Node;
 
 public class Random implements Algorithm{
 	private Graph graph;

@@ -29,6 +29,8 @@ import java.awt.GridLayout;
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import AI.BeliefUpdater;
+import AI.Random;
+import AI.Run;
 
 import java.awt.Component;
 import javax.swing.JSpinner;
@@ -209,7 +211,7 @@ public class GameFrame extends JFrame {
 					if(ent instanceof Evader){
 						ent.setSpeed(Integer.parseInt(textField.getText()));
 						if(rdbtnRandomEvad.isSelected())///set algorithm
-							ent.setAlgorithm(new Random(gamePanel.graph));
+							ent.setAlgorithm(new Run(gamePanel.graph));
 						else if(rdbtnComandEvad.isSelected()){
 						ent.setAlgorithm(new Run(gamePanel.graph));				
 						}

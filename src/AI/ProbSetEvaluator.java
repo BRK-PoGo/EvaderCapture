@@ -28,7 +28,7 @@ public class ProbSetEvaluator {
         countY=1;
         double[][] tmp = sumOf2D(futureVisibility.getVisibilityMatrix(), futureVisibility.getVisibilityMatrix());
         double[][] toEvaluate = sumOf2D(tmp,dirtyClean);
-        firstEvaluator(toEvaluate,0,0);
+        firstEvaluator(toEvaluate,1,1);
         cleanUp(toEvaluate);
         sumOfDirtyClean = sumOfElements(toEvaluate);
         dirtyClean=toEvaluate;

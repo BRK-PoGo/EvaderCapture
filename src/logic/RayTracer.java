@@ -79,17 +79,7 @@ public class RayTracer { // Written by Tom
 		for (int x = x0; x <= x1; x++) {
 			rayTrace.add(graph[y][x]);
 			error += deltaerr;
-
-		if (error >= 0.5 && y0 < y1) {
-
-			if (error >= 0.5 && y1 < y0) {
-				y -= 1;
-				if(y<0)
-					System.out.println("Errororororo");
-				rayTrace.add(graph[y][x]);
-				error -= 1;
-				} else if (error >= 0.5 && y1 > y0) {
-
+			if (error >= 0.5 && y0 < y1) {
 				y += 1;
 				//rayTrace.add(graph[y][x]);
 				error -= 1;
@@ -98,7 +88,6 @@ public class RayTracer { // Written by Tom
 				//rayTrace.add(graph[y][x]);
 				error -= 1;
 			}
-		}
 		}
 		return rayTrace;
 	}

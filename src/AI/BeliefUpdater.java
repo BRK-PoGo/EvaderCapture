@@ -46,8 +46,7 @@ public class BeliefUpdater implements Algorithm {
         for (int i = 0; i < possMoves.size(); i++) {
             Node moveToCheck = possMoves.get(i);
 
-            toCompare = new VisibilityChecker();
-            toCompare.checkEntitiesCurrent(currentState,moveToCheck);
+            toCompare = new VisibilityChecker(currentState,moveToCheck);
             evaluator=new SetEvaluator(toCompare);
             evaluator.evaluateDirtyClean(entity.getDirtyClean());
             if (evaluator.getSumOfDirtyClean() >= BestSum) {

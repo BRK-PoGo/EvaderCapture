@@ -49,8 +49,7 @@ public class Leaf {
 	public void evaluate(Graph graph) {
 		VisibilityChecker toCompare;
 		SetEvaluator evaluator;
-		toCompare = new VisibilityChecker();
-        toCompare.checkEntitiesCurrent(graph,node);
+		toCompare = new VisibilityChecker(graph,node);
         evaluator=new SetEvaluator(toCompare);
         evaluator.evaluateDirtyClean(parent.getDirtyCleanMatrix());
         this.setDirtyCleanMatrix(evaluator.getDirtyClean());

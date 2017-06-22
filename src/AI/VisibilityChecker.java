@@ -40,7 +40,7 @@ public class VisibilityChecker {
 
 				for (Node node : rayTrace) {
 					//System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
-					if (isLineOfSight && node.getValue().equals("wall")) {
+					if(isLineOfSight && node.getValue().equals("wall")) {
 						isLineOfSight = false;
 						//These are the locations of the non-visible nodes
 						visibilityMatrix[j][k] = 0;

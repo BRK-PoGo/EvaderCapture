@@ -45,8 +45,7 @@ public class Evader implements Entity {
         }
 		VisibilityChecker toCompare;
 		SetEvaluator evaluator;
-		toCompare = new VisibilityChecker();
-        toCompare.checkEntitiesCurrent(graph,node);
+		toCompare = new VisibilityChecker(graph,node);
         evaluator=new SetEvaluator(toCompare);
         evaluator.evaluateDirtyClean(this.getDirtyClean());
         this.setDirtyClean(evaluator.getDirtyClean());

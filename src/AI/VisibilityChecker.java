@@ -3,6 +3,7 @@ package AI;
 import game.Entity;
 import game.Graph;
 import game.Node;
+import logic.RadiusChecker;
 import logic.RayTracer;
 
 import java.util.ArrayList;
@@ -12,11 +13,12 @@ public class VisibilityChecker {
 
 	private double [][] visibilityMatrix;
 	
-	public void checkEntitiesCurrent(Graph graph, Node nod) {
+	public  VisibilityChecker(Graph graph, Node nod) {
 		//This method checks the visibility of one entities and stores them visibilityMatrix
 
 		//ArrayList<Entity> toCheck = graph.getEntities();
 		RayTracer tracer = new RayTracer();
+		RadiusChecker checker = new RadiusChecker();
 		Node[][] grid = graph.getNodeGrid();
 		visibilityMatrix = new double[grid.length][grid[0].length];
 		for(int i=0;i<visibilityMatrix.length;i++)

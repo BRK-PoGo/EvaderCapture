@@ -59,6 +59,7 @@ public class VisibilityChecker {
 				boolean rad = radChecker.RadiusCheck(x0, x1, y0, y1, ent.getRadius());
 				boolean ang = angChecker.checkAngle(vI, vJ, uI, uJ, ent.getAngle()/2);
 				boolean isLineOfSight = true;
+
 				if (rad && ang) {
 					for (Node node : rayTrace) {
 						//System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());

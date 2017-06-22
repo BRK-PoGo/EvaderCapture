@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class SetEvaluator {
 
-    /* Modifiy this whole thing to work pass these into the entities. Entities would have belief system*/
+    /* Modifiy this whole thing tos pass these into the entities. Entities would have belief system*/
 
     private VisibilityChecker currentVisibility;
     private VisibilityChecker futureVisibility;

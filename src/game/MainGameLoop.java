@@ -23,6 +23,7 @@ public class MainGameLoop{
 	private RadiusChecker radChecker = new RadiusChecker();
 	private AngleChecker angChecker = new AngleChecker();
 	private boolean pause = false;
+	private long startTime;
 
 	public MainGameLoop(GamePanel panel) {
 		gamePanel=panel;
@@ -34,7 +35,9 @@ public class MainGameLoop{
 		newTimer();
 	}
 	class LoopyStuff extends TimerTask {
-		@Override
+		
+		int moveCounter = 0;
+		
 		public void run()						//loop
 			{
 			if(!pause){
@@ -64,7 +67,7 @@ public class MainGameLoop{
 				//checks if all evaders have been captured || Written by Tom
 				if (hasMoved) {
 					boolean check = true;
-					
+					moveCounter++;
 					ArrayList<Pair> pairs = checker.checkEntities(graph);
 					Entity evaderEnt = null;
 					Entity pursuerEnt = null;
@@ -116,8 +119,11 @@ public class MainGameLoop{
 				
         		gamePanel.repaint();			//update panel
         		if (!isRunning) {								//check
+        			double estimatedTime = (System.nanoTime() - startTime)/1e9;
         			timer.cancel();				//exit loop
         			System.out.println("game is done");
+        			System.out.println("moves: " + moveCounter);
+        			System.out.println("time: " + estimatedTime);
         		}
     		}else{//else if pause, avoid void loop
     			try {
@@ -155,6 +161,7 @@ public class MainGameLoop{
 	}
 	private void newTimer() {
 		timer = new Timer();
+		startTime = System.nanoTime();
     	timer.schedule(new LoopyStuff(), 0, 1000 / (int)(fps*(multiplyer/100))); //new timer at 'fps' , the timing mechanism
 		
 	}

@@ -4,7 +4,7 @@ package game;
 
 public interface Entity {
 	public Node getNode();
-	public void moveToNode(Node node, Graph graph);
+	public void moveToNode(Node node, Graph graph, String dir);
 	public void setSpeed(int parseInt);
 	public void setViewAngle(int parseInt);
 	public int getSpeed();

@@ -99,7 +99,7 @@ public class Pursuer implements Entity {
 		return isCaught;
 	}
 
-	@Override
+	
 	public double[][] getDirtyClean() {
 		return dirtyClearMatrix;
 	}
@@ -218,4 +218,5 @@ public class Pursuer implements Entity {
 		SIGHT_RAD=parseInt;
 		
 	}
+
 }

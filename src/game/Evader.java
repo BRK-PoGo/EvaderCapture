@@ -9,7 +9,6 @@ public class Evader implements Entity {
 	private int speed;////moves in 100 frames
 	private Algorithm alg;
 	private boolean isCaught = false;
-	private double [][] dirtyCleanMatrix;
 	private Boolean isPursuer = false;
 	private final int SIGHT_RAD = 10;
 	private final int SIGHT_ANG = 360;
@@ -33,22 +32,6 @@ public class Evader implements Entity {
 		this.node.setValue("");
 		this.node = node;
 		this.node.setValue("evader");
-		if (this.getDirtyClean()==null){
-            this.setDirtyClean(new double[graph.getNodeGrid().length][graph.getNodeGrid()[0].length]);
-            for(int i=0;i<graph.getNodeGrid().length;i++)
-                for(int j=0;j<graph.getNodeGrid()[0].length;j++){
-                    if(graph.getNodeGrid()[i][j].getValue().equals("wall")){
-                        this.getDirtyClean()[i][j]=-5;
-                    }
-
-                }
-        }
-		VisibilityChecker toCompare;
-		SetEvaluator evaluator;
-		toCompare = new VisibilityChecker(graph,node,this);
-        evaluator=new SetEvaluator(toCompare);
-        evaluator.evaluateDirtyClean(this.getDirtyClean());
-        this.setDirtyClean(evaluator.getDirtyClean());
 		
 	}
 	@Override
@@ -84,16 +67,7 @@ public class Evader implements Entity {
 	public Boolean isPursuer(Entity e){
 		return isPursuer;
 	}
-	@Override
-	public double[][] getDirtyClean() {
-		return dirtyCleanMatrix;
-	}
 	
-	public void setDirtyClean(double[][] ds) {
-		this.dirtyCleanMatrix = ds;
-		
-	}
-	@Override
 	public int getRadius() {
 		return SIGHT_RAD;
 	}

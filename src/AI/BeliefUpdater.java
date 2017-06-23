@@ -31,12 +31,12 @@ public class BeliefUpdater implements Algorithm {
     public void moveOLD(Entity entity){
     	//move depth 1
         //Current now contains an Arraylist of all visibilty matrices of all current entities
-        if (entity.getDirtyClean()==null){
-            entity.setDirtyClean(new double[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
+        if (entity instanceof Pursuer && ((Pursuer) entity).getDirtyClean()==null){
+            ((Pursuer) entity).setDirtyClean(new double[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
             for(int i=0;i<currentState.getNodeGrid().length;i++)
                 for(int j=0;j<currentState.getNodeGrid()[0].length;j++){
                     if(currentState.getNodeGrid()[i][j].getValue().equals("wall")){
-                        entity.getDirtyClean()[i][j]=-5;
+                        ((Pursuer) entity).getDirtyClean()[i][j]=-5;
                     }
 
                 }
@@ -48,7 +48,7 @@ public class BeliefUpdater implements Algorithm {
 
             toCompare = new VisibilityChecker(currentState,moveToCheck,entity);
             evaluator=new SetEvaluator(toCompare);
-            evaluator.evaluateDirtyClean(entity.getDirtyClean());
+            //xevaluator.evaluateDirtyClean(entity.getDirtyClean());
             if (evaluator.getSumOfDirtyClean() >= BestSum) {
                 BestSum=evaluator.getSumOfDirtyClean();
                 bestMove=possMoves.get(i);
@@ -79,18 +79,18 @@ public class BeliefUpdater implements Algorithm {
     public void move(Entity entity) {
     	//move depth "depth"
         //Current now contains an Arraylist of all visibilty matrices of all current entities
-        if (entity.getDirtyClean()==null){
-            entity.setDirtyClean(new double[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
+        if (entity instanceof Pursuer && ((Pursuer) entity).getDirtyClean()==null){
+            ((Pursuer) entity).setDirtyClean(new double[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
             for(int i=0;i<currentState.getNodeGrid().length;i++)
                 for(int j=0;j<currentState.getNodeGrid()[0].length;j++){
                     if(currentState.getNodeGrid()[i][j].getValue().equals("wall")){
-                        entity.getDirtyClean()[i][j]=-5;
+                        ((Pursuer) entity).getDirtyClean()[i][j]=-5;
                     }
 
                 }
         }
         double BestSum= Double.MIN_VALUE;
-        Tree tree = new Tree(entity,currentState,depth);
+        Tree tree = new Tree((Pursuer)entity,currentState,depth);
         ArrayList<Leaf> possMoves = tree.getLevel(1);
         for (int i = 0; i < possMoves.size(); i++) {
             Leaf leaf = possMoves.get(i);
@@ -128,7 +128,6 @@ public class BeliefUpdater implements Algorithm {
             for (int j = 0; j < matrix[0].length; j++) {
                 if(matrix[i][j]>0)
                     sum+=matrix[i][j];
-
             }
         }
         return sum;

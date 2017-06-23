@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import game.Entity;
 import game.Graph;
 import game.Node;
+import game.Pursuer;
 public class Tree {
 	private ArrayList<ArrayList<Leaf>> levels = new ArrayList<ArrayList<Leaf>>();
 	private Graph graph;
 
-	public Tree(Entity startingEntity, Graph g, int depth) {
+	public Tree(Pursuer startingEntity, Graph g, int depth) {
 		graph = g;
 		ArrayList<Leaf> root = new ArrayList<Leaf>();
 		root.add(new Leaf(startingEntity.getNode(),startingEntity.getDirtyClean()));

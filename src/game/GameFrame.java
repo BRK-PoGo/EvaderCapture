@@ -213,7 +213,7 @@ public class GameFrame extends JFrame {
 						if(rdbtnRandomEvad.isSelected())///set algorithm
 							ent.setAlgorithm(new Random(gamePanel.graph));
 						else if(rdbtnComandEvad.isSelected()){
-						ent.setAlgorithm(new Run(gamePanel.graph));				
+						ent.setAlgorithm(new Run(gamePanel.graph, 1));				
 						}
 					}else if(ent instanceof Pursuer){
 						ent.setSpeed(Integer.parseInt(textField_speed.getText()));
@@ -223,7 +223,7 @@ public class GameFrame extends JFrame {
 							ent.setAlgorithm(new Random(gamePanel.graph));
 						}
 						else if(comandPurs.isSelected()){
-						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph, (int)spinner_1.getValue()));	
+						ent.setAlgorithm(new BeliefUpdater(gamePanel.graph, (int)spinner_1.getValue()));
 						}
 					}
 				}

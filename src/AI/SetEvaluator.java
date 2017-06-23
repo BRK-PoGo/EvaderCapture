@@ -35,7 +35,7 @@ public class SetEvaluator {
     public void masterEvaluator(double[][]toEvaluate){
     	for (int i=0; i<toEvaluate.length; i++){
             for (int j=0; j <toEvaluate[0].length;j++){
-                if (toEvaluate[i][j] == 1){
+                if (false && toEvaluate[i][j] == 1){  //TODO change false, to disable dirtying, true to enable.
                 	if (i+1<toEvaluate.length && toEvaluate [i+1][j]==0){
                         toEvaluate[i][j]=0;
                         recurrentEvaluator(toEvaluate, i,j);

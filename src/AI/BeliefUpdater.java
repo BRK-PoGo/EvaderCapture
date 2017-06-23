@@ -19,6 +19,8 @@ public class BeliefUpdater implements Algorithm {
 	private Node previousMove = null;
     private Graph currentState;
     private Node bestMove;
+    private String bestDir;
+    private String pastDir;
 
     VisibilityChecker toCompare;
     SetEvaluator evaluator;
@@ -29,6 +31,8 @@ public class BeliefUpdater implements Algorithm {
         currentState = g;
     }
     public void moveOLD(Entity entity){
+    	boolean turn = false;
+    	String bestDir = "";
     	//move depth 1
         //Current now contains an Arraylist of all visibilty matrices of all current entities
         if (entity.getDirtyClean()==null){
@@ -46,7 +50,7 @@ public class BeliefUpdater implements Algorithm {
         for (int i = 0; i < possMoves.size(); i++) {
             Node moveToCheck = possMoves.get(i);
 
-            toCompare = new VisibilityChecker(currentState,moveToCheck,entity);
+            toCompare = new VisibilityChecker(currentState,moveToCheck,entity,entity.getDir());
             evaluator=new SetEvaluator(toCompare);
             evaluator.evaluateDirtyClean(entity.getDirtyClean());
             if (evaluator.getSumOfDirtyClean() >= BestSum) {
@@ -54,12 +58,31 @@ public class BeliefUpdater implements Algorithm {
                 bestMove=possMoves.get(i);
             }
         }
+        /*
+        for (int i = 0; i < 4; i++) {
+        	if (i == 0) entity.setDir("UP");
+			else if (i == 1) entity.setDir("DOWN");
+			else if (i == 2) entity.setDir("LEFT");
+			else if (i == 3) entity.setDir("RIGHT");
+            toCompare = new VisibilityChecker(currentState,entity.getNode(),entity);
+            evaluator=new SetEvaluator(toCompare);
+            evaluator.evaluateDirtyClean(entity.getDirtyClean());
+            if (evaluator.getSumOfDirtyClean() >= BestSum) {
+                BestSum=evaluator.getSumOfDirtyClean();
+                //bestMove=possMoves.get(i);
+                turn = true;
+                bestDir = entity.getDir();
+            }
+        }
+        */
         if(previousMove != null)
         	System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
         
-        if(previousMove==null || bestMove != previousMove){
+        if((previousMove==null || bestMove != previousMove) && !turn){
         	previousMove = entity.getNode();
-        	entity.moveToNode(bestMove,currentState);
+        	//entity.moveToNode(bestMove,currentState);
+        } else if (previousMove==null || turn) {
+        	entity.setDir(bestDir);
         }
         else{
         	
@@ -77,6 +100,7 @@ public class BeliefUpdater implements Algorithm {
 
     }
     public void move(Entity entity) {
+    	
     	//move depth "depth"
         //Current now contains an Arraylist of all visibilty matrices of all current entities
         if (entity.getDirtyClean()==null){
@@ -94,18 +118,21 @@ public class BeliefUpdater implements Algorithm {
         ArrayList<Leaf> possMoves = tree.getLevel(1);
         for (int i = 0; i < possMoves.size(); i++) {
             Leaf leaf = possMoves.get(i);
-            leaf.evaluate(currentState, entity);
+            leaf.evaluate(currentState,entity);
             if (leaf.getValue() >= BestSum) {
                 BestSum=leaf.getValue();
                 bestMove=leaf.getNode();
+                bestDir = leaf.getDir();
             }
         }
+        
         if(previousMove != null)
         	System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
         
-        if(previousMove==null || bestMove != previousMove){
+        if(previousMove==null || (bestMove != previousMove || !bestDir.equals(pastDir))){
         	previousMove = entity.getNode();
-        	entity.moveToNode(bestMove,currentState);
+        	pastDir = entity.getDir();
+        	entity.moveToNode(bestMove,currentState,bestDir);
         }
         else{
         	  	

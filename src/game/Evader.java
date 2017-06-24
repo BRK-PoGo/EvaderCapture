@@ -28,7 +28,7 @@ public class Evader implements Entity {
 	public Node getNode() {
 		return node;
 	}
-	public void moveToNode(Node node, Graph graph) {
+	public void moveToNode(Node node, Graph graph, String dir) {
 		this.node.setValue("");
 		this.node = node;
 		this.node.setValue("evader");

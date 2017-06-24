@@ -22,14 +22,15 @@ public class Tree {
 						levelI.add(new Leaf(n,null,l,l.getDir()));
 				}
 				
-				for (int x = 0; x < 4; x++) {
-					if (x == 0 && !l.getDir().equals("UP")) levelI.add(new Leaf(l.getNode(),null,l,"UP"));
-					else if (x == 1 && !l.getDir().equals("DOWN")) levelI.add(new Leaf(l.getNode(),null,l,"DOWN"));
-					else if (x == 2 && !l.getDir().equals("LEFT")) levelI.add(new Leaf(l.getNode(),null,l,"LEFT"));
-					else if (x == 3 && !l.getDir().equals("RIGHT")) levelI.add(new Leaf(l.getNode(),null,l,"RIGHT"));
-					
-				}
 				
+				if (startingEntity.getAngle() != 360){
+					for (int x = 0; x < 4; x++) {
+						if (x == 0 && !l.getDir().equals("UP")) levelI.add(new Leaf(l.getNode(),null,l,"UP"));
+						else if (x == 1 && !l.getDir().equals("DOWN")) levelI.add(new Leaf(l.getNode(),null,l,"DOWN"));
+						else if (x == 2 && !l.getDir().equals("LEFT")) levelI.add(new Leaf(l.getNode(),null,l,"LEFT"));
+						else if (x == 3 && !l.getDir().equals("RIGHT")) levelI.add(new Leaf(l.getNode(),null,l,"RIGHT"));
+					}
+				}
 			}
 			levels.add(levelI);
 		}

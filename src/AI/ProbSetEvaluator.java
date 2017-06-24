@@ -62,7 +62,7 @@ this check on its neighbours
                         }
                     }
                 }
-                firstEvaluator(toEvaluate, 1, (toEvaluate[0].length - 2));
+                firstEvaluator(toEvaluate, 1, (toEvaluate[0].length - 1));
             }
         }
 

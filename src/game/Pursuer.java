@@ -43,10 +43,11 @@ public class Pursuer implements Entity {
 	public Node getNode() {
 		return node;
 	}
-	public void moveToNode(Node node, Graph graph) {
+	public void moveToNode(Node node, Graph graph, String dir) {
 		this.node.setValue("");
 		this.node = node;
 		this.node.setValue("pursuer");
+		this.dir = dir;
 		if (this.getDirtyClean()==null){
             this.setDirtyClean(new double[graph.getNodeGrid().length][graph.getNodeGrid()[0].length]);
             for(int i=0;i<graph.getNodeGrid().length;i++)
@@ -60,7 +61,7 @@ public class Pursuer implements Entity {
 
 		VisibilityChecker toCompare;
 		SetEvaluator evaluator;
-		toCompare = new VisibilityChecker(graph,node, this);
+		toCompare = new VisibilityChecker(graph,node, this,this.dir);
         evaluator=new SetEvaluator(toCompare);
         evaluator.evaluateDirtyClean(this.getDirtyClean());
         this.setDirtyClean(evaluator.getDirtyClean());

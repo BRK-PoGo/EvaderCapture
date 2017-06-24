@@ -12,15 +12,23 @@ public class Leaf {
  	private Node node;
  	private double[][] dirtyCleanMatrix;
  	private double value = Double.MIN_VALUE;
+ 	private String dir;
   
- 	public Leaf(Node n, double[][] dirtyCleanMatrix){
+ 	public Leaf(Node n, double[][] dirtyCleanMatrix,String dir){
 	  this.dirtyCleanMatrix = dirtyCleanMatrix;
 	  node = n;
+	  this.dir = dir;
   }public Leaf(Node n, double[][] dirtyCleanMatrix,Leaf parent){
 	  this.dirtyCleanMatrix = dirtyCleanMatrix;
 	  node = n;
 	  this.parent = parent;
 	  parent.setChildren(this);
+  }public Leaf(Node n, double[][] dirtyCleanMatrix,Leaf parent, String dir){
+	  this.dirtyCleanMatrix = dirtyCleanMatrix;
+	  node = n;
+	  this.parent = parent;
+	  parent.setChildren(this);
+	  this.dir = dir;
   }
 	private void setChildren(Leaf leaf) {
 	if(children == null){
@@ -50,7 +58,7 @@ public class Leaf {
 	public void evaluate(Graph graph, Entity ent) {
 		VisibilityChecker toCompare;
 		SetEvaluator evaluator;
-		toCompare = new VisibilityChecker(graph,node,ent);
+		toCompare = new VisibilityChecker(graph,node,ent,dir);
         evaluator=new SetEvaluator(toCompare);
         evaluator.evaluateDirtyClean(parent.getDirtyCleanMatrix());
         this.setDirtyCleanMatrix(evaluator.getDirtyClean());
@@ -74,5 +82,11 @@ public class Leaf {
 	}
 	public void setValue(double value){
 		this.value = value;
+	}
+	public void setDir(String dir) {
+		this.dir = dir;
+	}
+	public String getDir() {
+		return dir;
 	}
 }

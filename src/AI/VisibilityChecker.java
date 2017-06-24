@@ -14,7 +14,7 @@ public class VisibilityChecker {
 
 	private double [][] visibilityMatrix;
 	
-	public  VisibilityChecker(Graph graph, Node nod, Entity ent) {
+	public  VisibilityChecker(Graph graph, Node nod, Entity ent, String dir) {
 		//This method checks the visibility of one entities and stores them visibilityMatrix
 
 		//ArrayList<Entity> toCheck = graph.getEntities();
@@ -41,16 +41,16 @@ public class VisibilityChecker {
 				int uI = 0;
 				int uJ = 0;
 				
-				if (ent.getDir().equals("UP")) {
+				if (dir.equals("UP")) {
 					uI = 1;
 					uJ = 0;
-				} else if (ent.getDir().equals("DOWN")) {
+				} else if (dir.equals("DOWN")) {
 					uI = -1;
 					uJ = 0;
-				} else if (ent.getDir().equals("LEFT")) {
+				} else if (dir.equals("LEFT")) {
 					uI = 0;
 					uJ = 1;
-				} else if (ent.getDir().equals("LEFT")) {
+				} else if (dir.equals("LEFT")) {
 					uI = 0;
 					uJ = -1;
 				}

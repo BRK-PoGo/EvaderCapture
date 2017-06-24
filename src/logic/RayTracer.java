@@ -6,6 +6,7 @@ import game.Node;
 
 //There are some problems in the logic of the raytracer the other stuff should be fine
 public class RayTracer { // Written by Tom
+	//Figure out what the fuck is wring with thiks
 
 	public ArrayList<Node> getRayTrace(int x0, int x1, int y0, int y1, Node[][] graph) {
 		ArrayList<Node> rayTrace = null;

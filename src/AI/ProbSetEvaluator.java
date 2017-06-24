@@ -62,8 +62,8 @@ this check on its neighbours
                         }
                     }
                 }
-                firstEvaluator(toEvaluate, 1, (toEvaluate[0].length - 1));
             }
+            firstEvaluator(toEvaluate, 1, (toEvaluate[0].length - 1));
         }
 
         if (i <= XPos && j > YPos) {
@@ -116,8 +116,8 @@ this check on its neighbours
                         }
                     }
                 }
-                firstEvaluator(toEvaluate, (toEvaluate.length - 1), (toEvaluate[0].length - 1));
             }
+            firstEvaluator(toEvaluate, (toEvaluate.length - 1), (toEvaluate[0].length - 1));
         }
 
         if (i > XPos && j > YPos) {

@@ -111,4 +111,14 @@ public class Graph {
 	public void setVisibilityMap(VisibilityMap visibilityMap2) {
 		visibilityMap = visibilityMap2;
 	}
+	public void print() {
+		for(int i=0;i<nodeGrid.length;i++)
+		{
+			for(int j=0;j<nodeGrid[0].length;j++){
+				System.out.print(nodeGrid[j][i].getValue() + " ");
+			}
+			System.out.println();;
+		}
+		
+	}
 }

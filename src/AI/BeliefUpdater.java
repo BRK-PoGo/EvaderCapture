@@ -129,7 +129,7 @@ public class BeliefUpdater implements Algorithm {
         if(previousMove != null)
         	System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
         
-        if(previousMove==null || (bestMove != previousMove || !bestDir.equals(pastDir))){
+        if(previousMove==null || bestMove != previousMove || !bestDir.equals(pastDir)){
         	previousMove = entity.getNode();
         	pastDir = entity.getDir();
         	entity.moveToNode(bestMove,currentState, bestDir);

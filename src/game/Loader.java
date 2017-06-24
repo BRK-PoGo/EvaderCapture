@@ -1,5 +1,6 @@
 package game;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
@@ -10,6 +11,7 @@ public class Loader {
 	public Graph LoadGraph(GamePanel parent) {
 		SaverGraph saverGraph = null;
 		JFileChooser c = new JFileChooser();
+		c.setCurrentDirectory(new File("maps") );
 		int rVal = c.showOpenDialog(parent);
 	    if (rVal == JFileChooser.APPROVE_OPTION) {
 	        String fileName = c.getSelectedFile().getName();

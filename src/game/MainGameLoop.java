@@ -116,7 +116,7 @@ public class MainGameLoop{
 					if (check) isRunning = false;
 				}
 				
-				
+				gamePanel.setGraph(graph);
         		gamePanel.repaint();			//update panel
         		if (!isRunning) {								//check
         			double estimatedTime = (System.nanoTime() - startTime)/1e9;

@@ -19,7 +19,7 @@ public class Random implements Algorithm{
 		int random = (int) Math.floor(r.nextInt(entity.getNode().getActiveNeighbors().size()));
 		Node node = entity.getNode().getActiveNeighbors().get((int)random);
 		if(node.getValue()=="")
-			entity.moveToNode(node, graph);
+			entity.moveToNode(node, graph, "UP");
 		else {
 			recursiveMove(entity,0);
 		}
@@ -33,7 +33,7 @@ public class Random implements Algorithm{
 		node = entity.getNode().getActiveNeighbors().get((int)random);
 		}while(node == nodeNoGo );
 		if(node.getValue()=="")
-			entity.moveToNode(node,graph);
+			entity.moveToNode(node,graph,"UP");
 		else {
 			recursiveMove(entity,0);
 		}
@@ -43,7 +43,7 @@ public class Random implements Algorithm{
 		int random = (int) Math.floor(Math.random()*entity.getNode().getActiveNeighbors().size());
 		Node node = entity.getNode().getActiveNeighbors().get((int)random);
 		if(node.getValue()=="")
-			entity.moveToNode(node,graph);
+			entity.moveToNode(node,graph,"UP");
 		else if (counter<6){
 			System.err.println(counter);
 			counter++;

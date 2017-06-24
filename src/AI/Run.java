@@ -36,7 +36,7 @@ public class Run implements Algorithm {
 	public void move(Entity entity) {
 		if(pathFinding){
 			if(pf.hasNextNod()){
-				entity.moveToNode(pf.removeNextNode(), graph);
+				entity.moveToNode(pf.removeNextNode(), graph, "UP");
 			}else{
 				pathFinding = false;
 				move(entity);

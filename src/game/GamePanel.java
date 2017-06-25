@@ -66,6 +66,7 @@ public class GamePanel extends JPanel {
 		super.paintComponent(g);
 		//paint graph
 		if(graph != null ){
+			//graph.print();
 			g.setColor(Color.gray);
 			for(int i=0; i<graph.getNodeGrid().length; i++) {
 	            for (int j=0; j<graph.getNodeGrid()[i].length; j++) {
@@ -73,12 +74,11 @@ public class GamePanel extends JPanel {
 	            		g.setColor(Color.CYAN);
 	            		g.fillRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
 	            		g.setColor(Color.gray);
+	            	}if (graph.getNodeGrid()[i][j].getVision()) {
+	            		g.setColor(Color.red); 
+	            		g.fillRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
+	            		g.setColor(Color.gray);
 	            	}
-//	            	if (graph.getNodeGrid()[i][j].getVision()) {
-//	            		g.setColor(Color.yellow); 
-//	            		g.fillRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
-//	            		g.setColor(Color.gray);
-//	            	}
 	            	g.drawRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
 	            	g.setColor(Color.gray);
 	            	if(graph.getNodeGrid()[i][j].getValue().equals("wall")){

@@ -83,8 +83,12 @@ public class Pursuer implements Entity {
 	}
 	@Override
 	public void move(Graph graph) {
-		//resetVision(graph);
+		resetVision(graph);
 		alg.move(this);
+		if (dir.equals("UP")) graph.getNodeGrid()[node.getY()][node.getX() - 1].setVision(true);
+		else if (dir.equals("DOWN")) graph.getNodeGrid()[node.getY()][node.getX() + 1].setVision(true);
+		else if (dir.equals("LEFT")) graph.getNodeGrid()[node.getY() - 1][node.getX()].setVision(true);
+		else if (dir.equals("RIGHT")) graph.getNodeGrid()[node.getY() + 1][node.getX()].setVision(true);
 		//setVision(graph);
 	}
 	@Override
@@ -134,40 +138,10 @@ public class Pursuer implements Entity {
 	
 	private void setVision(Graph graph) {
 		//TODO Fix, its a mess
-		System.out.println("starting pureser check");
 		Node[][] grid = graph.getNodeGrid();
 		for (int x = node.getX() - SIGHT_RAD; x <= node.getX() + SIGHT_RAD; x++) {
 			for (int y = node.getY() - SIGHT_RAD; y <= node.getY() + SIGHT_RAD; y++) {
 				if (x >= 0 && x < graph.getNodeGrid()[0].length && y >= 0 && y < graph.getNodeGrid().length) {
-					/*
-					if (radChecker.RadiusCheck(node.getX(), x, node.getY(), y, SIGHT_RAD)) {
-						if (dir.equals("UP")) {
-							int uI = 1;
-							int uJ = 0;
-							int vI = node.getX() - x;
-							int vJ = node.getY() - y;
-							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, viewAngle/2));
-						} else if (dir.equals("DOWN")) {
-							int uI = -1;
-							int uJ = 0;
-							int vI = node.getX() - x;
-							int vJ = node.getY() - y;
-							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, viewAngle/2));
-						} else if (dir.equals("LEFT")) {
-							int uI = 0;
-							int uJ = 1;
-							int vI = node.getX() - x;
-							int vJ = node.getY() - y;
-							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, viewAngle/2));
-						} else if (dir.equals("LEFT")) {
-							int uI = 0;
-							int uJ = -1;
-							int vI = node.getX() - x;
-							int vJ = node.getY() - y;
-							grid[y][x].setVision(angChecker.checkAngle(vI, vJ, uI, uJ, viewAngle/2));
-						}
-					}
-					*/
 					int x0 = node.getX();
 					int y0 = node.getY();
 					int x1 = x;
@@ -194,7 +168,6 @@ public class Pursuer implements Entity {
 					ArrayList<Node> rayTrace = lineChecker.getRayTrace(x0, x1, y0, y1, grid);
 					boolean line = true;
 					for(Node node : rayTrace) {
-					//	System.out.println(node.getValue() + " x: " + node.getX() + " y: " + node.getY());
 						if (line && node.getValue().equals("wall")) {
 							line = false;
 						}

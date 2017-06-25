@@ -33,7 +33,7 @@ public class Random implements Algorithm{
 		node = entity.getNode().getActiveNeighbors().get((int)random);
 		}while(node == nodeNoGo );
 		if(node.getValue()=="")
-			entity.moveToNode(node,graph,"UP");
+			entity.moveToNode(node,graph,entity.getDir());
 		else {
 			recursiveMove(entity,0);
 		}

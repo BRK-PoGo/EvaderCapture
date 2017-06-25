@@ -12,8 +12,9 @@ public class Run implements Algorithm {
 	private Graph graph;
 	private VisibilityMap visibilityMap;
 	private Random random;
-	private int counter =5;
-	private  int mod = 5;
+	private  int mod = 22;
+	private int counter =mod;
+
 	private int[][] bestNode;
 	private int bestCounter=0;
 	private boolean pathFinding=false;
@@ -42,7 +43,7 @@ public class Run implements Algorithm {
 				move(entity);
 			}
 		}else{
-			if(counter%mod == 0){
+			if(counter >0 && counter%mod == 0){
 				pathFinding = true;
 				counter=0;
 				pf = new PathFinding(entity,graph,bestNode[bestCounter]);
@@ -52,7 +53,7 @@ public class Run implements Algorithm {
 				}
 				move(entity);
 			}else{
-				random.move(entity);
+				//random.move(entity);
 				counter++;
 			}		
 		}

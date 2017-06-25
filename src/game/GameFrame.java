@@ -56,6 +56,7 @@ public class GameFrame extends JFrame {
 	private JPanel speedControl = new JPanel();
 	protected MainGameLoop gameLoop;
 	private JSpinner spinner_1;
+	private JSpinner spinner_3;
 	private JTextField textField_Sight;
 	private final int NO_OF_GAMES = 2;
 	
@@ -214,7 +215,7 @@ public class GameFrame extends JFrame {
 						if(rdbtnRandomEvad.isSelected())///set algorithm
 							ent.setAlgorithm(new Random(gamePanel.graph));
 						else if(rdbtnComandEvad.isSelected()){
-						ent.setAlgorithm(new Run(gamePanel.graph, 1));				
+						ent.setAlgorithm(new Run(gamePanel.graph, (int)spinner_3.getValue()));				
 						}
 					}else if(ent instanceof Pursuer){
 						ent.setSpeed(Integer.parseInt(textField_speed.getText()));
@@ -309,9 +310,11 @@ public class GameFrame extends JFrame {
 		textField_Sight.setText("100");
 		textField_Sight.setHorizontalAlignment(SwingConstants.TRAILING);
 		textField_Sight.setColumns(10);
+		
+		JLabel lblDepth = new JLabel("Depth");
 		GroupLayout gl_pursuerPanel = new GroupLayout(pursuerPanel);
 		gl_pursuerPanel.setHorizontalGroup(
-			gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
+			gl_pursuerPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_pursuerPanel.createSequentialGroup()
 					.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_pursuerPanel.createSequentialGroup()
@@ -319,11 +322,7 @@ public class GameFrame extends JFrame {
 							.addComponent(randomPurs))
 						.addGroup(gl_pursuerPanel.createSequentialGroup()
 							.addContainerGap()
-							.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_pursuerPanel.createSequentialGroup()
-									.addGap(24)
-									.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addComponent(comandPurs, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(comandPurs, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_pursuerPanel.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(label))
@@ -342,7 +341,12 @@ public class GameFrame extends JFrame {
 							.addGap(32)
 							.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
 								.addComponent(textField_speed, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-								.addComponent(label_3))))
+								.addComponent(label_3)))
+						.addGroup(gl_pursuerPanel.createSequentialGroup()
+							.addGap(32)
+							.addGroup(gl_pursuerPanel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblDepth, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+								.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_pursuerPanel.setVerticalGroup(
@@ -366,9 +370,11 @@ public class GameFrame extends JFrame {
 					.addComponent(randomPurs)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(comandPurs)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(2)
+					.addComponent(lblDepth)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(144, Short.MAX_VALUE))
+					.addContainerGap(128, Short.MAX_VALUE))
 		);
 		pursuerPanel.setLayout(gl_pursuerPanel);
 		
@@ -383,9 +389,20 @@ public class GameFrame extends JFrame {
 		textField.setColumns(10);
 		
 		JLabel lblMovingAlgorithm = new JLabel("Moving Algorithm");
+		
+		JSpinner spinner = new JSpinner();
+		
+		JLabel label_1 = new JLabel("Depth");
+		
+		JSpinner spinner_2 = new JSpinner();
+		
+		JLabel label_2 = new JLabel("Depth");
+		
+		spinner_3 = new JSpinner();
+		spinner_3.setModel(new SpinnerNumberModel(new Integer(1), null, null, new Integer(1)));
 		GroupLayout gl_Evader = new GroupLayout(Evader);
 		gl_Evader.setHorizontalGroup(
-			gl_Evader.createParallelGroup(Alignment.LEADING)
+			gl_Evader.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_Evader.createSequentialGroup()
 					.addGroup(gl_Evader.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_Evader.createSequentialGroup()
@@ -398,12 +415,26 @@ public class GameFrame extends JFrame {
 							.addComponent(rdbtnRandomEvad))
 						.addGroup(gl_Evader.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(rdbtnComandEvad, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(gl_Evader.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_Evader.createParallelGroup(Alignment.LEADING)
+									.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(rdbtnComandEvad, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, gl_Evader.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+				.addGroup(gl_Evader.createSequentialGroup()
+					.addContainerGap(23, Short.MAX_VALUE)
 					.addComponent(lblMovingAlgorithm)
 					.addContainerGap())
+				.addGroup(Alignment.LEADING, gl_Evader.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_Evader.createParallelGroup(Alignment.LEADING)
+						.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
+						.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(Alignment.LEADING, gl_Evader.createSequentialGroup()
+					.addGap(41)
+					.addComponent(spinner_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(51, Short.MAX_VALUE))
 		);
 		gl_Evader.setVerticalGroup(
 			gl_Evader.createParallelGroup(Alignment.LEADING)
@@ -418,7 +449,18 @@ public class GameFrame extends JFrame {
 					.addComponent(rdbtnRandomEvad)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(rdbtnComandEvad)
-					.addContainerGap(175, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(spinner_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(209)
+					.addComponent(label_2)
+					.addGap(7)
+					.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(175)
+					.addComponent(label_1)
+					.addGap(7)
+					.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		Evader.setLayout(gl_Evader);
 		AIMenu.setLayout(gl_panel);

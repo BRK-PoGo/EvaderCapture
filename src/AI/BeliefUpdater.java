@@ -97,6 +97,8 @@ public class BeliefUpdater implements Algorithm {
         	//firtsIteration=false;
         } 
         
+   
+        
 
     }
     public void move(Entity entity) {

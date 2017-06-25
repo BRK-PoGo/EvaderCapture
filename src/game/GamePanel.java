@@ -102,12 +102,6 @@ public class GamePanel extends JPanel {
 	            		g.fillOval(graph.getNodeGrid()[i][j].rectangle.x+delta/2, graph.getNodeGrid()[i][j].rectangle.y+delta/2, graph.getNodeGrid()[i][j].rectangle.width-delta, graph.getNodeGrid()[i][j].rectangle.height-delta);
 	            		g.setColor(Color.gray);
 	            	}
-	            	if(graph.getVisibilityMap()==null ||graph.getNodeGrid()[i][j].getValue().equals("wall"))
-	            		g.setColor(Color.white);
-	            	else{
-	            	g.setColor(Color.black);
-	            	g.drawString(Integer.toString(graph.getVisibilityMap().getVisibilityMatrix()[i][j]), (int) (graph.getNodeGrid()[i][j].rectangle.x+( graph.getNodeGrid()[i][j].rectangle.height/10)),(int) ( graph.getNodeGrid()[i][j].rectangle.y+(( graph.getNodeGrid()[i][j].rectangle.width/1.5))));
-	            	}g.setColor(Color.GRAY);
 	            }
 			}
 		}

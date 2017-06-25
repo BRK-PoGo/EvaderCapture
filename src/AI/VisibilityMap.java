@@ -59,7 +59,8 @@ public class VisibilityMap {
 					if((!graph.getNodeGrid()[i][j].getValue().equals("wall"))&& visibilityMatrix[i][j]<visibilityMatrix[result[k][0]][result[k][1]]){
 						boolean alreadyChosen = false;
 						for(int k2=0;k2<k;k2++){
-							if(result[k2][0]== i && result[k2][1]== j){
+							if((Math.abs(result[k2][0]-i)+Math.abs(result[k2][1]-j))<=5){
+							//if(result[k2][0]== i && result[k2][1]== j){
 								alreadyChosen=true;
 								break;
 							}

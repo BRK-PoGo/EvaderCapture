@@ -42,22 +42,22 @@ this check on its neighbours
         if (i <= XPos && j <= YPos) {
             for (int k = i; k <= XPos; k++) {
                 for (int l = j; l <= YPos; l++) {
-                    if (toEvaluate[k][l] <= 1 && toEvaluate[k][l] <= 0) {
+                    if (toEvaluate[k][l] <= 1 && toEvaluate[k][l] >= 0) {
                         //check if they  exist first
-                        if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k + 1][l]));
+                        if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k + 1][l]));
 
                         }
-                        if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k - 1][l]));
+                        if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k - 1][l]));
 
                         }
-                        if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k][l + 1]));
+                        if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l + 1]));
 
                         }
-                        if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k][l - 1]));
+                        if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l - 1]));
 
                         }
                     }
@@ -69,22 +69,22 @@ this check on its neighbours
         if (i <= XPos && j > YPos) {
             for (int k = i; k <= XPos; k++) {
                 for (int l = (toEvaluate[0].length - 2); l > YPos; l--) {
-                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] <= 0) {
+                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] >= 0) {
                         //check if they  exist first
-                        if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1- toEvaluate[k + 1][l]));
+                        if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1- toEvaluate[k + 1][l]));
 
                         }
-                        if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k - 1][l]));
+                        if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k - 1][l]));
 
                         }
-                        if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k][l + 1]));
+                        if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l + 1]));
 
                         }
-                        if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k][l - 1]));
+                        if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l - 1]));
 
                         }
                     }
@@ -97,22 +97,22 @@ this check on its neighbours
         if (i > XPos && j <= YPos) {
             for (int k = i; k > XPos; k--) {
                 for (int l = j; l <= YPos; l++) {
-                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] <= 0) {
+                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] >= 0) {
                         //check if they  exist first
-                        if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1- toEvaluate[k + 1][l]));
+                        if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1- toEvaluate[k + 1][l]));
 
                         }
-                        if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k - 1][l]));
+                        if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k - 1][l]));
 
                         }
-                        if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k][l + 1]));
+                        if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l + 1]));
 
                         }
-                        if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] -( 0.25 * (1- toEvaluate[k][l - 1]));
+                        if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] -( 0.25 * (1- toEvaluate[k][l - 1]));
                         }
                     }
                 }
@@ -123,22 +123,22 @@ this check on its neighbours
         if (i > XPos && j > YPos) {
             for (int k = i; k > XPos; k--) {
                 for (int l = j; l > YPos; l--) {
-                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] <= 0) {
+                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] >= 0) {
                         //check if they  exist first
-                        if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k + 1][l]));
+                        if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k + 1][l]));
 
                         }
-                        if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1- toEvaluate[k - 1][l]));
+                        if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1- toEvaluate[k - 1][l]));
 
                         }
-                        if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] - (0.25 * (1-toEvaluate[k][l + 1]));
+                        if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l + 1]));
 
                         }
-                        if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] > 0) {
-                            toEvaluate[j][k] = toEvaluate[j][k] -(0.25 * (1-toEvaluate[k][l - 1]));
+                        if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] >= 0) {
+                            toEvaluate[k][l] = toEvaluate[k][l] -(0.25 * (1-toEvaluate[k][l - 1]));
                         }
                     }
                 }

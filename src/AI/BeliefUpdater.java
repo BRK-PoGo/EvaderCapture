@@ -137,21 +137,25 @@ public class BeliefUpdater implements Algorithm {
         	entity.moveToNode(bestMove,currentState, bestDir);
         }
         else{
-//        	if(!pathFind){
-//        		//find node to visit
-//        		int[] worst = currentState.getVisibilityMap().getWorst( (Pursuer)entity);
-//        		pathFind=true;
-//        		pf = new PathFinding(entity, currentState,worst);
-//        	}else{
-//        		if(pf.hasNextNod()){
-//        			entity.moveToNode(pf.removeNextNode(), currentState, "UP");
-//        		}
-//        	}
-        	  	
-            Node temp = entity.getNode();
-            Random r = new Random(currentState);
-            r.move(entity,previousMove);
-            previousMove = temp;
+        	if(!pathFind){
+        		//find node to visit
+        		VisibilityMap map = currentState.getVisibilityMap();
+        		int[] worst = map.getWorst(entity);
+        		System.out.println("x "+worst[0]+" y "+worst[1]);
+        		pathFind=true;
+        		pf = new PathFinding(entity, currentState,worst);
+        	}else{
+        		if(pf.hasNextNod()){
+        			entity.moveToNode(pf.removeNextNode(), currentState, "UP");
+        		}else{
+        			pathFind = false;
+        		}
+        	}
+//        	  	
+//            Node temp = entity.getNode();
+//            Random r = new Random(currentState);
+//            r.move(entity,previousMove);
+//            previousMove = temp;
         }
         if(previousMove == null){
         	previousMove= entity.getNode(); //update previous of 1st iteration

@@ -106,11 +106,12 @@ public class Graph {
 		
 	}
 	public VisibilityMap getVisibilityMap() {
+		if(visibilityMap == null){
+			visibilityMap = new VisibilityMap(this);
+		}
 		return visibilityMap;
 	}
-	public void setVisibilityMap(VisibilityMap visibilityMap2) {
-		visibilityMap = visibilityMap2;
-	}
+
 	public void print() {
 		for(int i=0;i<nodeGrid.length;i++)
 		{

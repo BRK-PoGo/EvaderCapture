@@ -21,11 +21,7 @@ public class Run implements Algorithm {
 	private PathFinding pf;
 	public Run(Graph graph,int runningPoints) {
 		this.graph=graph;
-		if(graph.getVisibilityMap()==null){
-			visibilityMap = new VisibilityMap(graph);
-			graph.setVisibilityMap(visibilityMap);
-		}
-		else
+		
 			visibilityMap = graph.getVisibilityMap();
 		    bestNode= visibilityMap.getBest(runningPoints);
 		

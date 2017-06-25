@@ -71,7 +71,7 @@ public class GamePanel extends JPanel {
 			for(int i=0; i<graph.getNodeGrid().length; i++) {
 	            for (int j=0; j<graph.getNodeGrid()[i].length; j++) {
 	            	if(graph.getNodeGrid()[i][j].getDirtyCleanValue()>0){
-	            		g.setColor(Color.CYAN);
+	            		g.setColor(new Color(95,158,160,(float)graph.getNodeGrid()[i][j].getDirtyCleanValue()));
 	            		g.fillRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
 	            		g.setColor(Color.gray);
 	            	}if (graph.getNodeGrid()[i][j].getVision()) {

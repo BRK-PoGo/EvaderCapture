@@ -58,6 +58,7 @@ public class GameFrame extends JFrame {
 	private JSpinner spinner_1;
 	private JSpinner spinner_3;
 	private JTextField textField_Sight;
+	private final int NO_OF_GAMES = 2;
 	
 	/**
 	 * Create the frame.

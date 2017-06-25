@@ -72,15 +72,17 @@ public class GamePanel extends JPanel {
 	            for (int j=0; j<graph.getNodeGrid()[i].length; j++) {
 	            	if(graph.getNodeGrid()[i][j].getDirtyCleanValue()>0){
 	            		g.setColor(Color.CYAN);
-      	if(graph.getNodeGrid()[i][j].getDirtyCleanValue()>0){
-      					g.drawString(Double.toString(graph.getNodeGrid()[i][j].getDirtyCleanValue()), graph.getNodeGrid()[i][j].rectangle.x-1, graph.getNodeGrid()[i][j].rectangle.y);
+	            		if(graph.getNodeGrid()[i][j].getDirtyCleanValue()>0){
+	            		g.setColor(Color.BLACK);
+      					g.drawString(Double.toString(graph.getNodeGrid()[i][j].getDirtyCleanValue()), graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y-1);
 	            		g.setColor(Color.cyan);
 	            		g.fillRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
 	            		g.setColor(Color.gray);
-	            	}if (graph.getNodeGrid()[i][j].getVision()) {
+	            		}if (graph.getNodeGrid()[i][j].getVision()) {
 	            		g.setColor(Color.red); 
 	            		g.fillRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
 	            		g.setColor(Color.gray);
+	            		}
 	            	}
 	            	g.drawRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
 	            	g.setColor(Color.gray);
@@ -107,7 +109,6 @@ public class GamePanel extends JPanel {
 	            	}
 	            }
 			}
-		}
 		}
 	}
 	public void setEdit(String edit) {

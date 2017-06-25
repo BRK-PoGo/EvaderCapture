@@ -70,6 +70,8 @@ public class GamePanel extends JPanel {
 			g.setColor(Color.gray);
 			for(int i=0; i<graph.getNodeGrid().length; i++) {
 	            for (int j=0; j<graph.getNodeGrid()[i].length; j++) {
+	            	if(graph.getNodeGrid()[i][j].getDirtyCleanValue()>0){
+	            		g.setColor(Color.CYAN);
       	if(graph.getNodeGrid()[i][j].getDirtyCleanValue()>0){
       					g.drawString(Double.toString(graph.getNodeGrid()[i][j].getDirtyCleanValue()), graph.getNodeGrid()[i][j].rectangle.x-1, graph.getNodeGrid()[i][j].rectangle.y);
 	            		g.setColor(Color.cyan);
@@ -105,6 +107,7 @@ public class GamePanel extends JPanel {
 	            	}
 	            }
 			}
+		}
 		}
 	}
 	public void setEdit(String edit) {

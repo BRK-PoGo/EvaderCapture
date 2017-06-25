@@ -37,6 +37,7 @@ public class ProbSetEvaluator {
 anymore and checks whether they neighbour dirty nodes and makes them dirty. It calls the second evaluator to perform
 this check on its neighbours
  */
+//comment
 
     public void firstEvaluator (double [][] toEvaluate,int i, int j) {
         if (i <= XPos && j <= YPos) {

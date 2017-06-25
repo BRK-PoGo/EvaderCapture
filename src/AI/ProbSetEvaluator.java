@@ -143,7 +143,6 @@ this check on its neighbours
                     }
                 }
             }
-            cleanUp(toEvaluate);
         }
     }
 

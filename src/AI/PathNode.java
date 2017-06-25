@@ -18,13 +18,21 @@ public class PathNode{
 	}
 
 
-	private int manathanDistance(Node node2, Node eNode) {
-		// TODO Auto-generated method stub
-		return 0;
+	public static int manathanDistance(Node node, Node eNode) {
+		
+		return Math.abs(node.getX()-eNode.getX())+Math.abs(node.getY()-eNode.getY());
+	}
+	public int getTotalPathValueOld() {
+		if(pathDistance == Integer.MAX_VALUE)
+			return Integer.MAX_VALUE;
+		return remainDistance+pathDistance;
 	}
 	public int getTotalPathValue() {
-		return pathDistance+remainDistance;
+		if(pathDistance == Integer.MAX_VALUE)
+			return Integer.MAX_VALUE;
+		return remainDistance+pathDistance+graph.getVisibilityMap().getVisibilityMatrix()[node.getY()][node.getX()];
 	}
+
 	public Node getNode() {
 		
 		return node;

@@ -12,8 +12,10 @@ public class PathFinding {
 	ArrayList<PathNode> openSet= new ArrayList<PathNode>();
 	ArrayList<PathNode> closedSet= new ArrayList<PathNode>();
 	private Node eNode;
+	private Graph graph;
 
 	public PathFinding(Entity entity, Graph graph, int[] endNode) {
+		this.graph = graph;
 		PathNode.setGraph(graph);
 		eNode = graph.getNodeGrid()[endNode[0]][endNode[1]];
 		grid = new PathNode[graph.getNodeGrid().length][graph.getNodeGrid()[0].length];
@@ -23,8 +25,8 @@ public class PathFinding {
 			}
 		}
 		
-		grid[entity.getNode().getX()][entity.getNode().getY()].setPathDistance(0);
-		openSet.add( grid[entity.getNode().getX()][entity.getNode().getY()]);
+		grid[entity.getNode().getY()][entity.getNode().getX()].setPathDistance(0);
+		openSet.add( grid[entity.getNode().getY()][entity.getNode().getX()]);
 		while(!openSet.isEmpty()){
 			if(openSet.get(0).getNode()==eNode){
 				break;
@@ -35,10 +37,9 @@ public class PathFinding {
 			System.out.println("No Path found");
 		}else{
 			PathNode node = grid[endNode[0]][endNode[1]];
-			path.add(node.getNode());
-			while(node.getParent()!=null){
-				node = node.getParent();
+			while(node.getNode()!=entity.getNode()){
 				path.add(node.getNode());
+				node = node.getParent();
 			}
 		}
 		
@@ -51,13 +52,11 @@ public class PathFinding {
 			}else{
 				for(int i=0;i<openSet.size();i++){
 					if(expand.getTotalPathValue()<openSet.get(i).getTotalPathValue()){
-						for(int j=openSet.size()-1;j>=i;j--){
-							openSet.add(j+1, openSet.get(j));
-						}
 						openSet.add(i,expand);
-						break;
+						return;
 					}
 				}
+				openSet.add(expand);
 			}
 		
 	}
@@ -68,18 +67,26 @@ public class PathFinding {
 		openSet.remove(node);
 		closedSet.add(node);
 		for(Node n:node.getNode().getActiveNeighbors()){
-			PathNode nextNode = grid[n.getX()][n.getY()];
+			PathNode nextNode = grid[n.getY()][n.getX()];
 			pn.add(nextNode);
 			if(openSet.contains(nextNode)){
-				if(nextNode.getPathDistance()>=node.getPathDistance()+1)continue;
-			}else if(closedSet.contains(grid[n.getX()][n.getY()])){
-				if(nextNode.getPathDistance()>=node.getPathDistance()+1)continue;
+				if(nextNode.getPathDistance()<=node.getPathDistance()+ graph.getVisibilityMap().getVisibilityMatrix()[nextNode.getNode().getY()][nextNode.getNode().getX()]){
+					continue;
+				}
+				openSet.remove(nextNode);
+				nextNode.setPathDistance(node.getPathDistance()+ graph.getVisibilityMap().getVisibilityMatrix()[nextNode.getNode().getY()][nextNode.getNode().getX()]);
+				addOpen(nextNode);
+			}else if(closedSet.contains(grid[n.getY()][n.getX()])){
+				if(nextNode.getPathDistance()<=node.getPathDistance()+ graph.getVisibilityMap().getVisibilityMatrix()[nextNode.getNode().getY()][nextNode.getNode().getX()]){
+					continue;
+				}
 				closedSet.remove(nextNode);
+				nextNode.setPathDistance(node.getPathDistance()+ graph.getVisibilityMap().getVisibilityMatrix()[nextNode.getNode().getY()][nextNode.getNode().getX()]);
 				addOpen(nextNode);
 			}else{
+				nextNode.setPathDistance(node.getPathDistance()+ graph.getVisibilityMap().getVisibilityMatrix()[nextNode.getNode().getY()][nextNode.getNode().getX()]);
 				addOpen(nextNode);
 			}
-			nextNode.setPathDistance(node.getPathDistance()+1);
 			nextNode.setParent(node);
 		}
 		return pn;

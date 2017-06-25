@@ -21,6 +21,8 @@ public class BeliefUpdater implements Algorithm {
     private Node bestMove;
     private String bestDir;
     private String pastDir;
+    private boolean pathFind=false;
+    private PathFinding pf;
 
     VisibilityChecker toCompare;
     SetEvaluator evaluator;
@@ -128,15 +130,23 @@ public class BeliefUpdater implements Algorithm {
             }
         }
         
-        if(previousMove != null)
-        	System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
         
-        if(previousMove==null || bestMove != previousMove || !bestDir.equals(pastDir)){
+        if(!pathFind && (previousMove==null || bestMove != previousMove || !bestDir.equals(pastDir))){
         	previousMove = entity.getNode();
         	pastDir = entity.getDir();
         	entity.moveToNode(bestMove,currentState, bestDir);
         }
         else{
+//        	if(!pathFind){
+//        		//find node to visit
+//        		int[] worst = currentState.getVisibilityMap().getWorst( (Pursuer)entity);
+//        		pathFind=true;
+//        		pf = new PathFinding(entity, currentState,worst);
+//        	}else{
+//        		if(pf.hasNextNod()){
+//        			entity.moveToNode(pf.removeNextNode(), currentState, "UP");
+//        		}
+//        	}
         	  	
             Node temp = entity.getNode();
             Random r = new Random(currentState);

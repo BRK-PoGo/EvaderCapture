@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import game.Graph;
 import game.Node;
+import game.Pursuer;
 import logic.RayTracer;
 
 public class VisibilityMap {
@@ -76,4 +77,18 @@ public class VisibilityMap {
 		return result;
 	}
 
+
+	public int[] getWorst(Pursuer entity) {
+		int[] returner = new int[2];
+		for(int i=0;i<visibilityMatrix.length;i++){
+			for(int j=0;j<visibilityMatrix[i].length;j++){
+				if(!graph.getNodeGrid()[i][j].getValue().equals("wall") && visibilityMatrix[i][j]>visibilityMatrix[returner[0]][returner[1]]){
+					returner[0]=i;
+					returner[1]=j;
+				}
+			}
+		
+		}
+		return returner;
+	}
 }

@@ -192,5 +192,10 @@ public class Pursuer implements Entity {
 		SIGHT_RAD=parseInt;
 		
 	}
+	public double[][] getDirtyClearMatrix() {
+		return dirtyClearMatrix;
+	}
+	
+	
 
 }

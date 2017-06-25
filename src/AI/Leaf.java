@@ -57,10 +57,10 @@ public class Leaf {
 }
 	public void evaluate(Graph graph, Entity ent) {
 		VisibilityChecker toCompare;
-		SetEvaluator evaluator;
+		ProbSetEvaluator evaluator;
 		toCompare = new VisibilityChecker(graph,node,ent,dir);
-        evaluator=new SetEvaluator(toCompare);
-        evaluator.evaluateDirtyClean(parent.getDirtyCleanMatrix());//,ent.getNode().getY(),ent.getNode().getX());
+        evaluator=new ProbSetEvaluator(toCompare);
+        evaluator.evaluateDirtyClean(parent.getDirtyCleanMatrix(),ent.getNode().getY(),ent.getNode().getX());
         this.setDirtyCleanMatrix(evaluator.getDirtyClean());
         if(children.isEmpty()){
         	this.setValue(evaluator.getSumOfDirtyClean());

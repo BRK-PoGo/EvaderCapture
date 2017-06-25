@@ -7,7 +7,8 @@ public class ProbSetEvaluator {
 
 /* Modifiy this whole thing to work pass these into the entities. Entities would have belief system*/
 
-    private VisibilityChecker currentVisibility;
+    private static final double DISCOUNT = 0.05;
+	private VisibilityChecker currentVisibility;
     private VisibilityChecker futureVisibility;
     private double [][] dirtyClean;
     private double sumOfDirtyClean;
@@ -43,22 +44,22 @@ this check on its neighbours
         if (i <= XPos && j <= YPos) {
             for (int k = i; k <= XPos; k++) {
                 for (int l = j; l <= YPos; l++) {
-                    if (toEvaluate[k][l] <= 1 && toEvaluate[k][l] >= 0) {
+                    if (toEvaluate[k][l] <= 1 && toEvaluate[k][l] > 0) {
                         //check if they  exist first
                         if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l]  >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k + 1][l]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k + 1][l])),0);
 
                         }
                         if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k - 1][l]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k - 1][l])),0);
 
                         }
                         if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l + 1]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k][l + 1])),0);
 
                         }
                         if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l - 1]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k][l - 1])),0);
 
                         }
                     }
@@ -70,22 +71,22 @@ this check on its neighbours
         if (i <= XPos && j > YPos) {
             for (int k = i; k <= XPos; k++) {
                 for (int l = (toEvaluate[0].length - 2); l > YPos; l--) {
-                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] >= 0) {
+                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] > 0) {
                         //check if they  exist first
                         if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1- toEvaluate[k + 1][l]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1- toEvaluate[k + 1][l])),0);
 
                         }
                         if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k - 1][l]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k - 1][l])),0);
 
                         }
                         if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l + 1]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k][l + 1])),0);
 
                         }
                         if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l - 1]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k][l - 1])),0);
 
                         }
                     }
@@ -98,22 +99,22 @@ this check on its neighbours
         if (i > XPos && j <= YPos) {
             for (int k = i; k > XPos; k--) {
                 for (int l = j; l <= YPos; l++) {
-                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] >= 0) {
+                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] > 0) {
                         //check if they  exist first
                         if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1- toEvaluate[k + 1][l]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1- toEvaluate[k + 1][l])),0);
 
                         }
                         if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k - 1][l]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k - 1][l])),0);
 
                         }
                         if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l + 1]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k][l + 1])),0);
 
                         }
                         if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] -( 0.25 * (1- toEvaluate[k][l - 1]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] -( DISCOUNT * (1- toEvaluate[k][l - 1])),0);
                         }
                     }
                 }
@@ -124,22 +125,22 @@ this check on its neighbours
         if (i > XPos && j > YPos) {
             for (int k = i; k > XPos; k--) {
                 for (int l = j; l > YPos; l--) {
-                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] >= 0) {
+                    if (toEvaluate[k][l] <= 1&& toEvaluate[k][l] > 0) {
                         //check if they  exist first
                         if (k + 1 < toEvaluate.length && toEvaluate[k + 1][l] < 1 && toEvaluate[k + 1][l] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k + 1][l]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k + 1][l])),0);
 
                         }
                         if (k - 1 > 0 && toEvaluate[k - 1][l] < 1 && toEvaluate[k - 1][l] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1- toEvaluate[k - 1][l]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1- toEvaluate[k - 1][l])),0);
 
                         }
                         if (l + 1 < toEvaluate[0].length && toEvaluate[k][l + 1] < 1 && toEvaluate[k][l + 1] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] - (0.25 * (1-toEvaluate[k][l + 1]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] - (DISCOUNT * (1-toEvaluate[k][l + 1])),0);
 
                         }
                         if (l - 1 > 0 && toEvaluate[k][l - 1] < 1 && toEvaluate[k][l - 1] >= 0) {
-                            toEvaluate[k][l] = toEvaluate[k][l] -(0.25 * (1-toEvaluate[k][l - 1]));
+                            toEvaluate[k][l] = Math.max(toEvaluate[k][l] -(DISCOUNT * (1-toEvaluate[k][l - 1])),0);
                         }
                     }
                 }
@@ -164,6 +165,9 @@ this check on its neighbours
             for (int j = 0; j<toClean[0].length; j++){
                 if(toClean[i][j]>=1){
                     toClean[i][j]=1;
+                }
+                if (toClean[i][j]<0){
+                    toClean[i][j]=-5;
                 }
 
             }

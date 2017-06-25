@@ -146,7 +146,7 @@ public class BeliefUpdater implements Algorithm {
         		pf = new PathFinding(entity, currentState,worst);
         	}else{
         		if(pf.hasNextNod()){
-        			entity.moveToNode(pf.removeNextNode(), currentState, "UP");
+        			entity.moveToNode(pf.removeNextNode(), currentState, entity.getDir());
         		}else{
         			pathFind = false;
         		}

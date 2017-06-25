@@ -32,6 +32,7 @@ public class VisibilityChecker {
 		//for (int i = 0; i < toCheck.size(); i++) {
 		for (int j = 1; j < grid.length-1; j++) {
 			for (int k = 1; k < grid[0].length-1; k++) {
+				if (j == nod.getY() && k == nod.getX()) visibilityMatrix[j][k] = 1;
 				int x0 = nod.getX();
 				int y0 = nod.getY();
 				int x1 = k;

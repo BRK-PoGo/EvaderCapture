@@ -83,7 +83,7 @@ public class VisibilityMap {
 		int[] returner = new int[2];
 		for(int i=1;i<visibilityMatrix.length-1;i++){
 			for(int j=1;j<visibilityMatrix[i].length-1;j++){
-				if(!graph.getNodeGrid()[i][j].getValue().equals("wall")&& ((Pursuer) entity).getDirtyClean()[i][j]<=0.1 && (visibilityMatrix[returner[0]][returner[1]]==Integer.MAX_VALUE||visibilityMatrix[i][j]>visibilityMatrix[returner[0]][returner[1]])){
+				if(!graph.getNodeGrid()[i][j].getValue().equals("wall")&& Pursuer.getDirtyClean()[i][j]<=0.1 && (visibilityMatrix[returner[0]][returner[1]]==Integer.MAX_VALUE||visibilityMatrix[i][j]>visibilityMatrix[returner[0]][returner[1]])){
 					returner[0]=i;
 					returner[1]=j;
 				}

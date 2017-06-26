@@ -55,4 +55,9 @@ public class Run implements Algorithm {
 		}
 	}
 
+	@Override
+	public boolean getPathFind() {
+		return false;
+	}
+
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+import AI.BeliefUpdater;
 import NeuralNetwork.Network;
 
 import java.awt.event.MouseAdapter;
@@ -71,12 +72,12 @@ public class GamePanel extends JPanel {
 			for(int i=0; i<graph.getNodeGrid().length; i++) {
 	            for (int j=0; j<graph.getNodeGrid()[i].length; j++) {
 	            	if(graph.getNodeGrid()[i][j].getDirtyCleanValue()>0){
-	            		g.setColor(new Color(0, 1, 0, (float) graph.getNodeGrid()[i][j].getDirtyCleanValue()));
+	            		g.setColor(new Color((float) 0, 1, 1, (float) graph.getNodeGrid()[i][j].getDirtyCleanValue()));
 	            		g.fillRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
 	            		g.setColor(Color.gray);
 	            		if (graph.getNodeGrid()[i][j].getVision()) {
 	            		g.setColor(Color.red); 
-	            		g.fillRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
+	            		//g.fillRect(graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y, graph.getNodeGrid()[i][j].rectangle.width, graph.getNodeGrid()[i][j].rectangle.height);
 	            		g.setColor(Color.gray);
 	            		}
 	            	}
@@ -89,6 +90,12 @@ public class GamePanel extends JPanel {
 	            	}else if(graph.getNodeGrid()[i][j].getValue().equals("pursuer")){
 	            		int delta = graph.getNodeGrid()[i][j].rectangle.height/5;
 	            		g.setColor(Color.blue);
+	            		for(Entity e:graph.getEntities()){
+	            			if(e.getNode()==graph.getNodeGrid()[i][j] && e instanceof Pursuer && e.getAlgorithm() instanceof BeliefUpdater){
+	            				if(e.getAlgorithm().getPathFind())
+	            					g.setColor(new Color((float)0,(float)0.8,(float)0.8));
+	            			}
+	            		}
 	            		g.fillOval(graph.getNodeGrid()[i][j].rectangle.x+delta/2, graph.getNodeGrid()[i][j].rectangle.y+delta/2, graph.getNodeGrid()[i][j].rectangle.width-delta, graph.getNodeGrid()[i][j].rectangle.height-delta);
 	            		g.setColor(Color.gray);
 	            		

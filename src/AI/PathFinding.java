@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import game.Entity;
 import game.Graph;
 import game.Node;
+import game.Pursuer;
 
 public class PathFinding {
 	ArrayList<Node> path = new ArrayList<Node>();
 	PathNode[][] grid;
 	ArrayList<PathNode> openSet= new ArrayList<PathNode>();
 	ArrayList<PathNode> closedSet= new ArrayList<PathNode>();
-	private Node eNode;
+	public Node eNode;
 	private Graph graph;
 
 	public PathFinding(Entity entity, Graph graph, int[] endNode) {
@@ -31,7 +32,10 @@ public class PathFinding {
 			if(openSet.get(0).getNode()==eNode){
 				break;
 			}
-			expand(openSet.get(0));
+			if(entity instanceof Pursuer)
+				expandPursuer(openSet.get(0));
+			else
+				expandEvader(openSet.get(0));
 		}
 		if(openSet.isEmpty()){
 			System.out.println("No Path found");
@@ -62,7 +66,7 @@ public class PathFinding {
 	}
 
 
-	private ArrayList<PathNode> expand(PathNode node) {
+	private ArrayList<PathNode> expandEvader(PathNode node) {
 		ArrayList<PathNode> pn = new ArrayList<PathNode>();
 		openSet.remove(node);
 		closedSet.add(node);
@@ -85,6 +89,34 @@ public class PathFinding {
 				addOpen(nextNode);
 			}else{
 				nextNode.setPathDistance(node.getPathDistance()+ graph.getVisibilityMap().getVisibilityMatrix()[nextNode.getNode().getY()][nextNode.getNode().getX()]);
+				addOpen(nextNode);
+			}
+			nextNode.setParent(node);
+		}
+		return pn;
+	}	private ArrayList<PathNode> expandPursuer(PathNode node) {
+		ArrayList<PathNode> pn = new ArrayList<PathNode>();
+		openSet.remove(node);
+		closedSet.add(node);
+		for(Node n:node.getNode().getActiveNeighbors()){
+			PathNode nextNode = grid[n.getY()][n.getX()];
+			pn.add(nextNode);
+			if(openSet.contains(nextNode)){
+				if(nextNode.getPathDistance()<=node.getPathDistance()+1){
+					continue;
+				}
+				openSet.remove(nextNode);
+				nextNode.setPathDistance(node.getPathDistance()+1);
+				addOpen(nextNode);
+			}else if(closedSet.contains(grid[n.getY()][n.getX()])){
+				if(nextNode.getPathDistance()<=node.getPathDistance()+1){
+					continue;
+				}
+				closedSet.remove(nextNode);
+				nextNode.setPathDistance(node.getPathDistance()+1);
+				addOpen(nextNode);
+			}else{
+				nextNode.setPathDistance(node.getPathDistance()+1);
 				addOpen(nextNode);
 			}
 			nextNode.setParent(node);

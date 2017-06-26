@@ -21,7 +21,7 @@ public class BeliefUpdater implements Algorithm {
     private Node bestMove;
     private String bestDir;
     private String pastDir;
-    private boolean pathFind=false;
+    public boolean pathFind=false;
     private PathFinding pf;
 
     VisibilityChecker toCompare;
@@ -37,12 +37,12 @@ public class BeliefUpdater implements Algorithm {
     	String bestDir = "";
     	//move depth 1
         //Current now contains an Arraylist of all visibilty matrices of all current entities
-        if (entity instanceof Pursuer && ((Pursuer) entity).getDirtyClean()==null){
-            ((Pursuer) entity).setDirtyClean(new double[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
+        if (entity instanceof Pursuer && Pursuer.getDirtyClean()==null){
+            Pursuer.setDirtyClean(new double[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
             for(int i=0;i<currentState.getNodeGrid().length;i++)
                 for(int j=0;j<currentState.getNodeGrid()[0].length;j++){
                     if(currentState.getNodeGrid()[i][j].getValue().equals("wall")){
-                        ((Pursuer) entity).getDirtyClean()[i][j]=-5;
+                        Pursuer.getDirtyClean()[i][j]=-5;
                     }
 
                 }
@@ -77,8 +77,8 @@ public class BeliefUpdater implements Algorithm {
             }
         }
         */
-        if(previousMove != null)
-        	System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
+//        if(previousMove != null)
+//        	System.out.println("x: "+previousMove.getY()+" y: "+previousMove.getX());
         
         if((previousMove==null || bestMove != previousMove) && !turn){
         	previousMove = entity.getNode();
@@ -107,27 +107,29 @@ public class BeliefUpdater implements Algorithm {
     	
     	//move depth "depth"
         //Current now contains an Arraylist of all visibilty matrices of all current entities
-        if (entity instanceof Pursuer && ((Pursuer) entity).getDirtyClean()==null){
-            ((Pursuer) entity).setDirtyClean(new double[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
+        if (entity instanceof Pursuer && Pursuer.getDirtyClean()==null){
+            Pursuer.setDirtyClean(new double[currentState.getNodeGrid().length][currentState.getNodeGrid()[0].length]);
             for(int i=0;i<currentState.getNodeGrid().length;i++)
                 for(int j=0;j<currentState.getNodeGrid()[0].length;j++){
                     if(currentState.getNodeGrid()[i][j].getValue().equals("wall")){
-                        ((Pursuer) entity).getDirtyClean()[i][j]=-5;
+                        Pursuer.getDirtyClean()[i][j]=-5;
                     }
 
                 }
         }
-        double BestSum= Double.MIN_VALUE;
-        Tree tree = new Tree((Pursuer)entity,currentState,depth);
-        ArrayList<Leaf> possMoves = tree.getLevel(1);
-        for (int i = 0; i < possMoves.size(); i++) {
-            Leaf leaf = possMoves.get(i);
-            leaf.evaluate(currentState,entity);
-            if (leaf.getValue() >= BestSum) {
-                BestSum=leaf.getValue();
-                bestMove=leaf.getNode();
-                bestDir = leaf.getDir();
-            }
+        if(!pathFind){
+	        double BestSum= Double.MIN_VALUE;
+	        Tree tree = new Tree((Pursuer)entity,currentState,depth);
+	        ArrayList<Leaf> possMoves = tree.getLevel(1);
+	        for (int i = 0; i < possMoves.size(); i++) {
+	            Leaf leaf = possMoves.get(i);
+	            leaf.evaluate(currentState,entity);
+	            if (leaf.getValue() >= BestSum) {
+	                BestSum=leaf.getValue();
+	                bestMove=leaf.getNode();
+	                bestDir = leaf.getDir();
+	            }
+	        }
         }
         
         
@@ -141,11 +143,10 @@ public class BeliefUpdater implements Algorithm {
         		//find node to visit
         		VisibilityMap map = currentState.getVisibilityMap();
         		int[] worst = map.getWorst(entity);
-        		System.out.println("x "+worst[0]+" y "+worst[1]);
         		pathFind=true;
         		pf = new PathFinding(entity, currentState,worst);
         	}else{
-        		if(pf.hasNextNod()){
+        		if(pf.hasNextNod()){// && Pursuer.getDirtyClean()[pf.eNode.getY()][pf.eNode.getX()]<0.1){
         			entity.moveToNode(pf.removeNextNode(), currentState, entity.getDir());
         		}else{
         			pathFind = false;
@@ -175,5 +176,10 @@ public class BeliefUpdater implements Algorithm {
         }
         return sum;
     }
+	@Override
+	public boolean getPathFind() {
+		return pathFind;
+		
+	}
 
 }

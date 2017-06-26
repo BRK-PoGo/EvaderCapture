@@ -13,7 +13,7 @@ public class Tree {
 	public Tree(Pursuer startingEntity, Graph g, int depth) {
 		graph = g;
 		ArrayList<Leaf> root = new ArrayList<Leaf>();
-		root.add(new Leaf(startingEntity.getNode(),startingEntity.getDirtyClean(),startingEntity.getDir()));
+		root.add(new Leaf(startingEntity.getNode(),Pursuer.getDirtyClean(),startingEntity.getDir()));
 		levels.add(root);
 		for(int i=0;i<depth;i++){
 			ArrayList<Leaf> levelI = new ArrayList<Leaf>();

@@ -18,7 +18,7 @@ public class Pursuer implements Entity {
 	private int viewAngle;
 	private Algorithm alg;
 	private boolean isCaught = false;
-	private double [][] dirtyClearMatrix;
+	private static double [][] dirtyClearMatrix;
 	private boolean isPursuer = true;
 	private  int SIGHT_RAD;
 	private RadiusChecker radChecker = new RadiusChecker();
@@ -48,12 +48,12 @@ public class Pursuer implements Entity {
 		this.node = node;
 		this.node.setValue("pursuer");
 		this.dir = dir;
-		if (this.getDirtyClean()==null){
-            this.setDirtyClean(new double[graph.getNodeGrid().length][graph.getNodeGrid()[0].length]);
+		if (getDirtyClean()==null){
+            setDirtyClean(new double[graph.getNodeGrid().length][graph.getNodeGrid()[0].length]);
             for(int i=0;i<graph.getNodeGrid().length;i++)
                 for(int j=0;j<graph.getNodeGrid()[0].length;j++){
                     if(graph.getNodeGrid()[i][j].getValue().equals("wall")){
-                        this.getDirtyClean()[i][j]=-5;
+                        getDirtyClean()[i][j]=-5;
                     }
 
                 }
@@ -63,9 +63,9 @@ public class Pursuer implements Entity {
 		ProbSetEvaluator evaluator;
 		toCompare = new VisibilityChecker(graph,node, this,this.dir);
         evaluator=new ProbSetEvaluator(toCompare);
-        evaluator.evaluateDirtyClean(this.getDirtyClean(),this.getNode().getY(),this.getNode().getX());
-        this.setDirtyClean(evaluator.getDirtyClean());
-        graph.setDirtyClean(this.getDirtyClean());
+        evaluator.evaluateDirtyClean(getDirtyClean(),this.getNode().getY(),this.getNode().getX());
+        setDirtyClean(evaluator.getDirtyClean());
+        graph.setDirtyClean(getDirtyClean());
 	}
 	@Override
 	public void setSpeed(int parseInt) {
@@ -105,13 +105,13 @@ public class Pursuer implements Entity {
 	}
 
 	
-	public double[][] getDirtyClean() {
+	public static double[][] getDirtyClean() {
 		return dirtyClearMatrix;
 	}
 
 	
-	public void setDirtyClean(double[][] ds) {
-		this.dirtyClearMatrix=ds;
+	public static void setDirtyClean(double[][] ds) {
+		dirtyClearMatrix=ds;
 	}
 	public Boolean isPursuer(Entity e){
 		return isPursuer;
@@ -137,7 +137,6 @@ public class Pursuer implements Entity {
 	}
 	
 	private void setVision(Graph graph) {
-		//TODO Fix, its a mess
 		Node[][] grid = graph.getNodeGrid();
 		for (int x = node.getX() - SIGHT_RAD; x <= node.getX() + SIGHT_RAD; x++) {
 			for (int y = node.getY() - SIGHT_RAD; y <= node.getY() + SIGHT_RAD; y++) {
@@ -192,8 +191,10 @@ public class Pursuer implements Entity {
 		SIGHT_RAD=parseInt;
 		
 	}
-	public double[][] getDirtyClearMatrix() {
-		return dirtyClearMatrix;
+	@Override
+	public Algorithm getAlgorithm() {
+		
+		return alg;
 	}
 	
 	

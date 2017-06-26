@@ -18,5 +18,6 @@ public interface Entity {
 	public void setDir (String dir);
 	public String getDir();
 	public void setViewSight(int parseInt);
+	public Algorithm getAlgorithm();
 
 }

@@ -88,4 +88,8 @@ public class Evader implements Entity {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public Algorithm getAlgorithm() {
+		return alg;
+	}
 }

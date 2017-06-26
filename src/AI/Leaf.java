@@ -55,7 +55,7 @@ public class Leaf {
 	public void setDirtyCleanMatrix(double[][] ds) {
 	this.dirtyCleanMatrix = ds;
 }
-	public void evaluate(Graph graph, Entity ent) {
+	public void evaluate(Graph graph, Entity ent){
 		VisibilityChecker toCompare;
 		ProbSetEvaluator evaluator;
 		toCompare = new VisibilityChecker(graph,node,ent,dir);

@@ -52,4 +52,10 @@ public class Random implements Algorithm{
 		
 	}
 
+	@Override
+	public boolean getPathFind() {
+		return false;
+		
+	}
+
 }

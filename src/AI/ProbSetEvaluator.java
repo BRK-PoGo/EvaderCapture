@@ -7,7 +7,7 @@ public class ProbSetEvaluator {
 
 /* Modifiy this whole thing to work pass these into the entities. Entities would have belief system*/
 
-    private static final double DISCOUNT = 0.07;
+    private static final double DISCOUNT = 0.01;
 	private VisibilityChecker currentVisibility;
     private VisibilityChecker futureVisibility;
     private double [][] dirtyClean;

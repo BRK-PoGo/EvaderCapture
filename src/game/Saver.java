@@ -1,5 +1,6 @@
 package game;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
@@ -10,6 +11,7 @@ public class Saver {
 	
 	public void saveGraph(GamePanel parent, Graph graph) {
 		JFileChooser c = new JFileChooser();
+		c.setCurrentDirectory(new File("maps") );
 		int rVal = c.showSaveDialog(parent);
 	    if (rVal == JFileChooser.APPROVE_OPTION) {
 	        String fileName = c.getSelectedFile().getName() + ".ser";

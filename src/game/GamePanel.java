@@ -91,12 +91,12 @@ public class GamePanel extends JPanel {
 	            	}else if(graph.getNodeGrid()[i][j].getValue().equals("pursuer")){
 	            		int delta = graph.getNodeGrid()[i][j].rectangle.height/5;
 	            		g.setColor(Color.blue);
-//	            		for(Entity e:graph.getEntities()){
-//	            			if(e.getNode()==graph.getNodeGrid()[i][j] && e instanceof Pursuer && e.getAlgorithm() instanceof BeliefUpdater){
-//	            				if(e.getAlgorithm().getPathFind())
-//	            					g.setColor(new Color((float)0,(float)0.8,(float)0.8));
-//	            			}
-//	            		}
+	            		for(Entity e:graph.getEntities()){
+	            			if(e.getNode()==graph.getNodeGrid()[i][j] && e instanceof Pursuer && e.getAlgorithm() instanceof BeliefUpdater){
+	            				if(e.getAlgorithm().getPathFind())
+	            					g.setColor(new Color((float)0,(float)0.8,(float)0.8));
+	            			}
+            		}
 	            		g.fillOval(graph.getNodeGrid()[i][j].rectangle.x+delta/2, graph.getNodeGrid()[i][j].rectangle.y+delta/2, graph.getNodeGrid()[i][j].rectangle.width-delta, graph.getNodeGrid()[i][j].rectangle.height-delta);
 	            		g.setColor(Color.gray);
 	            		

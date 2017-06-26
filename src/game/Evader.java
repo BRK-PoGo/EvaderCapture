@@ -1,6 +1,5 @@
 package game;
 
-import AI.SetEvaluator;
 import AI.VisibilityChecker;
 
 public class Evader implements Entity {

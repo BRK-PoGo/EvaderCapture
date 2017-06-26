@@ -25,7 +25,7 @@ public class BeliefUpdater implements Algorithm {
     private PathFinding pf;
 
     VisibilityChecker toCompare;
-    SetEvaluator evaluator;
+    ProbSetEvaluator evaluator;
     int depth;
 
     public BeliefUpdater(Graph g, int depth){

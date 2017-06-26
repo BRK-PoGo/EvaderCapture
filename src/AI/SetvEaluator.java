@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by Alexander on 30/05/2017.
  */
-public class SetEvaluator {
+public class SetvEaluator {
 
     /* Modifiy this whole thing tos pass these into the entities. Entities would have belief system*/
 
@@ -16,7 +16,7 @@ public class SetEvaluator {
     private double [][] dirtyClean;
     private double sumOfDirtyClean;
 
-    public SetEvaluator (VisibilityChecker future){
+    public SetvEaluator (VisibilityChecker future){
         futureVisibility = future;
     }
 

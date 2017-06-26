@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class SaverGraph implements Serializable{
 	
 	private String[][] copyGrid;
-	private int nodeSize;
+	//private int nodeSize;
 	
 	public SaverGraph(Graph graph) {
 		//nodeSize = graph.size;
@@ -22,7 +22,7 @@ public class SaverGraph implements Serializable{
 		return copyGrid;
 	}
 	
-	public int getSize() {
-		return nodeSize;
-	}
+	//public int getSize() {
+		//return nodeSize;
+	//}
 }

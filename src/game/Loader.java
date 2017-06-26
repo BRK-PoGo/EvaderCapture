@@ -33,7 +33,7 @@ public class Loader {
 	private Graph createGraph(SaverGraph saverGraph) {
 		if (saverGraph == null) return null;
 		String[][] copyGrid = saverGraph.getGrid();
-		Graph graph = new Graph(copyGrid.length, copyGrid[0].length, saverGraph.getSize());
+		Graph graph = new Graph(copyGrid.length, copyGrid[0].length, 20);
 		for (int x = 0; x < copyGrid.length; x++) {
 			for (int y = 0; y < copyGrid[0].length; y++) {
 				if (copyGrid[x][y].equals("wall")) graph.addWall(x, y);

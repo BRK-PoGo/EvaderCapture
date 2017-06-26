@@ -156,6 +156,22 @@ public class BeliefUpdater implements Algorithm {
       	}
        
         	/*
+=======
+//        	if(!pathFind){
+//        		//find node to visit
+//        		VisibilityMap map = currentState.getVisibilityMap();
+//        		int[] worst = map.getWorst(entity);
+//        		pathFind=true;
+//        		pf = new PathFinding(entity, currentState,worst);
+//        	}else{
+//        		if(pf.hasNextNod()){// && Pursuer.getDirtyClean()[pf.eNode.getY()][pf.eNode.getX()]<0.1){
+//        			entity.moveToNode(pf.removeNextNode(), currentState, entity.getDir());
+//        		}else{
+//        			pathFind = false;
+//        		}
+//        	}
+//        	  	
+>>>>>>> branch 'master' of https://github.com/BRK-PoGo/EvaderCapture.git
             Node temp = entity.getNode();
             Random r = new Random(currentState);
             r.move(entity,previousMove);

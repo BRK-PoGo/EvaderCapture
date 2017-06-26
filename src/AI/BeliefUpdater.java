@@ -138,7 +138,7 @@ public class BeliefUpdater implements Algorithm {
         	pastDir = entity.getDir();
         	entity.moveToNode(bestMove,currentState, bestDir);
         }
-        else{
+        else{w
 //        	if(!pathFind){
 //        		//find node to visit
 //        		VisibilityMap map = currentState.getVisibilityMap();
@@ -152,7 +152,7 @@ public class BeliefUpdater implements Algorithm {
 //        			pathFind = false;
 //        		}
 //        	}
-////        	  	
+//        	  	
             Node temp = entity.getNode();
             Random r = new Random(currentState);
             r.move(entity,previousMove);

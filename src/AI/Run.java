@@ -12,7 +12,7 @@ public class Run implements Algorithm {
 	private Graph graph;
 	private VisibilityMap visibilityMap;
 	private Random random;
-	private  int mod = 22;
+	private  int mod = 17;
 	private int counter =mod;
 
 	private int[][] bestNode;

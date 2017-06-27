@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by Alexander on 30/05/2017.
  */
-public class SetvEaluator {
+public class SetEvaluator {
 
     /* Modifiy this whole thing tos pass these into the entities. Entities would have belief system*/
 
@@ -16,7 +16,7 @@ public class SetvEaluator {
     private double [][] dirtyClean;
     private double sumOfDirtyClean;
 
-    public SetvEaluator (VisibilityChecker future){
+    public SetEvaluator (VisibilityChecker future){
         futureVisibility = future;
     }
 
@@ -35,7 +35,7 @@ public class SetvEaluator {
     public void masterEvaluator(double[][]toEvaluate){
     	for (int i=0; i<toEvaluate.length; i++){
             for (int j=0; j <toEvaluate[0].length;j++){
-                if (false && toEvaluate[i][j] == 1){  //TODO change false, to disable dirtying, true to enable.
+                if (true && toEvaluate[i][j] == 1){  //TODO change false, to disable dirtying, true to enable.
                 	if (i+1<toEvaluate.length && toEvaluate [i+1][j]==0){
                         toEvaluate[i][j]=0;
                         recurrentEvaluator(toEvaluate, i,j);

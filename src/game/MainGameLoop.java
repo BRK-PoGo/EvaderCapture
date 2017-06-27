@@ -11,7 +11,7 @@ import logic.RadiusChecker;
 
 
 public class MainGameLoop{
-	private static int BASE_FPS=4;
+	private static int BASE_FPS=8;
 	private  int fps= BASE_FPS;
 	private double multiplyer = 100;
 	private java.util.Timer timer;

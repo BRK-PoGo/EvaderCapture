@@ -24,5 +24,6 @@ public class SaverGraph implements Serializable{
 	
 	//public int getSize() {
 		//return nodeSize;
+		//return 0;
 	//}
 }

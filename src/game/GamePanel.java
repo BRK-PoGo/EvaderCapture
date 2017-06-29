@@ -99,7 +99,7 @@ public class GamePanel extends JPanel {
 
             		}
 
-	            		}
+	            		
 
 	            		g.fillOval(graph.getNodeGrid()[i][j].rectangle.x+delta/2, graph.getNodeGrid()[i][j].rectangle.y+delta/2, graph.getNodeGrid()[i][j].rectangle.width-delta, graph.getNodeGrid()[i][j].rectangle.height-delta);
 	            		g.setColor(Color.gray);
@@ -119,6 +119,7 @@ public class GamePanel extends JPanel {
   					//g.drawString(Double.toString(graph.getNodeGrid()[i][j].getDirtyCleanValue()), graph.getNodeGrid()[i][j].rectangle.x, graph.getNodeGrid()[i][j].rectangle.y+15);
 	            	
 	            }
+				
 			}
 		}
 	}

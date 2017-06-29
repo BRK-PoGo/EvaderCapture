@@ -7,6 +7,7 @@ import logic.AngleChecker;
 import logic.RadiusChecker;
 import logic.RayTracer;
 import AI.ProbSetEvaluator;
+import AI.SetEvaluator;
 import AI.VisibilityChecker;
 
 
